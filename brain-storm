@@ -16,5 +16,27 @@ Authorization
 	- CanCan
 QR Code
 	- RQRcode gem - generate [https://www.youtube.com/watch?v=xhWGY_JCUOs]
-	- ZXing-js JS library
+	- ZXing-js JS library - [https://github.com/zxing-js/library]
 	- Active Storage
+	
+Persons: Lecturer
+	 Student
+	 Admin
+	 Courses
+Lecturer Details
+	- School/orgnization email
+	- Name
+	- Service/Work Number
+	- Topics teaching
+	- phone
+	- Session QRCODE - img(use active storage)
+Student Details
+	- Name 
+	- Email
+	- Phone
+	- Service Number/ Registration Number
+	- Units taking/topics enroll
+	- 
+Course Details
+	course_name
+	course_code
