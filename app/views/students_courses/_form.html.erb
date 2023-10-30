@@ -1,0 +1,27 @@
+<%= form_with(model: students_course) do |form| %>
+  <% if students_course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(students_course.errors.count, "error") %> prohibited this students_course from being saved:</h2>
+
+      <ul>
+        <% students_course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :student_id, style: "display: block" %>
+    <%= form.text_field :student_id %>
+  </div>
+
+  <div>
+    <%= form.label :course_id, style: "display: block" %>
+    <%= form.text_field :course_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
