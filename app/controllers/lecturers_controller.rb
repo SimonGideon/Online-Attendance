@@ -1,5 +1,5 @@
 class LecturersController < ApplicationController
-  before_action :set_lecturer, only: %i[ show edit update destroy ]
+  before_action :authenticate_lecturer!, only: %i[ show edit update destroy ]
 
   # GET /lecturers or /lecturers.json
   def index
@@ -8,6 +8,7 @@ class LecturersController < ApplicationController
 
   # GET /lecturers/1 or /lecturers/1.json
   def show
+    @lecturer = Lecturer.find(params[:id])
   end
 
   # GET /lecturers/new
@@ -58,13 +59,17 @@ class LecturersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lecturer
-      @lecturer = Lecturer.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lecturer_params
-      params.require(:lecturer).permit(:name, :service_number, :phone, :work_email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lecturer
+    @lecturer = Lecturer.find(params[:id])
+  end
+
+  # if something_is_not_kosher
+  #   redirect_to sign_out_path and return
+  # end
+  # Only allow a list of trusted parameters through.
+  def lecturer_params
+    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email)
+  end
 end

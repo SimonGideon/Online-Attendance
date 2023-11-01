@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :lecturers
+  devise_for :students
   root "home#index"
   resources :students_courses
   resources :courses
