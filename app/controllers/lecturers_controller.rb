@@ -1,5 +1,5 @@
 class LecturersController < ApplicationController
-  before_action :authenticate_lecturer!, only: %i[ show edit update destroy ]
+  before_action :set_lecturer, :authenticate_lecturer!, only: %i[ show edit update destroy ]
 
   # GET /lecturers or /lecturers.json
   def index
