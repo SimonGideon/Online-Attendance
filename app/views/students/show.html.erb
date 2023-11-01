@@ -9,6 +9,7 @@
   <%= button_to "Destroy this student", @student, method: :delete %>
 </div>
 
-<% if student_signed_in? %>
-  <%= link_to "Sign Out", destroy_student_session_path, method: :delete %>
+<% if lecturer_signed_in? %>
+<%= button_to "Logout", 
+ destroy_student_session_path, method: :delete, data: { turbo_method: :delete } %>
 <% end %>
