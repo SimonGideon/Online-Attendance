@@ -8,3 +8,6 @@
 
   <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
 </div>
+<% if lecturer_signed_in? %>
+  <%= link_to 'Sign Out', destroy_lecturer_session_path, method: :delete %>
+<% end %>
