@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root "home#index"
   resources :students_courses
   resources :courses
-  resources :lecturers
+  resources :lecturers do
+    post "generate_qr_code", on: :member
+  end
   resources :students
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

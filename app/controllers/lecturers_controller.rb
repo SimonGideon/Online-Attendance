@@ -58,6 +58,22 @@ class LecturersController < ApplicationController
     end
   end
 
+  # Define the "generate_qr_code" action as a public method
+  def generate_qr_code
+    @lecturer = Lecturer.find(params[:id])
+    qr = RQRCode::QRCode.new(@lecturer.id.to_s, size: 4, level: :h)
+    puts "Generated!"
+
+    # Generate the QR code image and save it as a file
+    qr_code = qr.as_png(size: 300)
+
+    # Save the QR code image to a temporary file
+    Tempfile.create(["qr_code", ".png"]) do |file|
+      qr_code.save(file.path)
+      @qr_code_image_url = file.path
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +85,7 @@ class LecturersController < ApplicationController
   #   redirect_to sign_out_path and return
   # end
   # Only allow a list of trusted parameters through.
+
   def lecturer_params
     params.require(:lecturer).permit(:name, :service_number, :phone, :work_email)
   end
