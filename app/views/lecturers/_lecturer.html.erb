@@ -1,4 +1,6 @@
 <div id="<%= dom_id lecturer %>">
+
+<%= image_tag @lecturer.avatar if @lecturer.avatar.attached? %> <br>
   <p>
     <strong>Name:</strong>
     <%= lecturer.name %>

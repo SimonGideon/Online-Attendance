@@ -1,4 +1,4 @@
-<%= form_with(model: lecturer) do |form| %>
+<%= form_with(model: lecturer,  local: true) do |form| %>
   <% if lecturer.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(lecturer.errors.count, "error") %> prohibited this lecturer from being saved:</h2>
@@ -10,6 +10,11 @@
       </ul>
     </div>
   <% end %>
+
+   <div class="field">
+    <%= form.label :avatar, "Attach File" %>
+    <%= form.file_field :avatar, class: "file-input" %>
+  </div>
 
   <div>
     <%= form.label :name, style: "display: block" %>

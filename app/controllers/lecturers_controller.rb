@@ -92,6 +92,6 @@ class LecturersController < ApplicationController
   # Only allow a list of trusted parameters through.
 
   def lecturer_params
-    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email)
+    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar, :qr_code)
   end
 end
