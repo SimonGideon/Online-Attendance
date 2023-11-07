@@ -5,6 +5,8 @@
 <div>
   <%= link_to "Edit this lecturer", edit_lecturer_path(@lecturer) %> |
   <%= link_to "Back to lecturers", lecturers_path %>
+  <p>  <%= @lecturer.name %></p>
+
 
   <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
 </div>
