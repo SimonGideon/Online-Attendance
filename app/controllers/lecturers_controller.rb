@@ -62,16 +62,21 @@ class LecturersController < ApplicationController
   def generate_qr_code
     @lecturer = Lecturer.find(params[:id])
     qr = RQRCode::QRCode.new(@lecturer.id.to_s, size: 4, level: :h)
-    puts "Generated!"
+    puts qr.to_s
 
     # Generate the QR code image and save it as a file
-    qr_code = qr.as_png(size: 300)
-
-    # Save the QR code image to a temporary file
-    Tempfile.create(["qr_code", ".png"]) do |file|
-      qr_code.save(file.path)
-      @qr_code_image_url = file.path
-    end
+    qr_code = qr.as_png(
+      bit_depth: 1,
+      border_modules: 4,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      color: "black",
+      file: nil,
+      fill: "white",
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 120,
+    )
   end
 
   private
