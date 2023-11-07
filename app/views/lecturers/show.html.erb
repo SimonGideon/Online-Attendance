@@ -7,11 +7,6 @@
   <%= link_to "Back to lecturers", lecturers_path %>
   <p>  <%= @lecturer.name %></p>
 <%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
-<% if @qr_code_image_url.present? %>
-  <h2>QR Code</h2>
-  <%= image_tag @qr_code_image_url %>
-<% end %>
-
 
   <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
 </div>

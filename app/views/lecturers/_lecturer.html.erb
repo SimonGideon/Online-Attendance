@@ -1,5 +1,6 @@
 <div id="<%= dom_id lecturer %>">
-
+  <h2>QR Code</h2>
+<%= image_tag @lecturer.qr_code if @lecturer.qr_code.attached? %>
 <%= image_tag @lecturer.avatar if @lecturer.avatar.attached? %> <br>
   <p>
     <strong>Name:</strong>

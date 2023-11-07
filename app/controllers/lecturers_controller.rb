@@ -9,6 +9,7 @@ class LecturersController < ApplicationController
   # GET /lecturers/1 or /lecturers/1.json
   def show
     @lecturer = Lecturer.find(params[:id])
+    puts @lecturer.qr_code.attached?
   end
 
   # GET /lecturers/new
@@ -66,17 +67,15 @@ class LecturersController < ApplicationController
 
     # Generate the QR code image and save it as a file
     qr_code = qr.as_png(
-      bit_depth: 1,
-      border_modules: 4,
-      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
-      color: "black",
-      file: nil,
-      fill: "white",
+      resize_exactly_to: 120,
       module_px_size: 6,
-      resize_exactly_to: false,
-      resize_gte_to: false,
-      size: 120,
+      file: nil,
     )
+
+    # Attach the QR code to the active storage
+    @lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
+                             filename: "qrcode.png",
+                             content_type: "image/png")
   end
 
   private
