@@ -5,4 +5,5 @@ class Student < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_and_belongs_to_many :courses
   has_many :lecturers, through: :courses
+  has_many :attendances
 end
