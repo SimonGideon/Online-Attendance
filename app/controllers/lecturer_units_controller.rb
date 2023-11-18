@@ -1,9 +1,23 @@
 class LecturerUnitsController < ApplicationController
   before_action :set_lecturer_unit, only: %i[ show edit update destroy ]
 
+  def current_lec_units
+    lecturer_id = current_lecturer.id
+    @lecturer_units = LecturerUnit.where(lecturer_id: lecturer_id)
+  end
+
   # GET /lecturer_units or /lecturer_units.json
   def index
     @lecturer_units = LecturerUnit.all
+    render json: @lecturer_units
+  end
+
+  def generate_token
+    lecturer_unit_id = @lecturer_units.id
+    secret_key = Rails.application.secrets.secret_key_base
+
+    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
+    render json: { token: token }
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json
@@ -58,13 +72,14 @@ class LecturerUnitsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lecturer_unit
-      @lecturer_unit = LecturerUnit.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lecturer_unit_params
-      params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :created_at, :updated_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lecturer_unit
+    @lecturer_unit = LecturerUnit.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def lecturer_unit_params
+    params.require(:lecturer_unit).permit(:lecturer_id, :course_id)
+  end
 end
