@@ -16,8 +16,25 @@ class LecturerUnitsController < ApplicationController
     lecturer_unit_id = @lecturer_units.id
     secret_key = Rails.application.secrets.secret_key_base
 
-    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
+    @token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
     render json: { token: token }
+  end
+
+  # generate QR code with token
+  def generate_qr_code
+    qr = RQRCode::QRCode.new(@token, size: 4, level: :h)
+
+    # Generate the QR code image and save it as a file
+    qr_code = qr.as_png(
+      resize_exactly_to: 120,
+      module_px_size: 6,
+      file: nil,
+    )
+
+    # Attach the QR code to the active storage
+    @lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
+                             filename: "qrcode.png",
+                             content_type: "image/png")
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json
@@ -80,6 +97,6 @@ class LecturerUnitsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lecturer_unit_params
-    params.require(:lecturer_unit).permit(:lecturer_id, :course_id)
+    params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :qr_code)
   end
 end
