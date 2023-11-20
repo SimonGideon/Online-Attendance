@@ -1,28 +1,28 @@
 class LecturerUnitsController < ApplicationController
-  before_action :set_lecturer_unit, only: %i[ show edit update destroy ]
+  before_action :set_lecturer_unit, only: %i[ show edit update destroy generate_qr_code ]
 
   def current_lec_units
     lecturer_id = current_lecturer.id
     @lecturer_units = LecturerUnit.where(lecturer_id: lecturer_id)
+    render json: @lecturer_units
   end
 
   # GET /lecturer_units or /lecturer_units.json
   def index
     @lecturer_units = LecturerUnit.all
-    render json: @lecturer_units
   end
 
   def generate_token
-    lecturer_unit_id = @lecturer_units.id
+    lecturer_unit_id = current_lecturer.id
     secret_key = Rails.application.secrets.secret_key_base
 
-    @token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
-    render json: { token: token }
+    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
+    return token
   end
 
   # generate QR code with token
   def generate_qr_code
-    qr = RQRCode::QRCode.new(@token, size: 4, level: :h)
+    qr = RQRCode::QRCode.new(generate_token, size: 10, level: :h)
 
     # Generate the QR code image and save it as a file
     qr_code = qr.as_png(
@@ -32,9 +32,9 @@ class LecturerUnitsController < ApplicationController
     )
 
     # Attach the QR code to the active storage
-    @lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
-                             filename: "qrcode.png",
-                             content_type: "image/png")
+    @lecturer_unit.qr_code.attach(io: StringIO.new(qr_code.to_s),
+                                  filename: "qrcode.png",
+                                  content_type: "image/png")
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json
