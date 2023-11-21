@@ -36,7 +36,13 @@ class AttendancesController < ApplicationController
       lecturer_unit = LecturerUnit.find_by(id: lecturer_unit_id)
 
       if lecturer_unit
-        Attendance.create(student_id: current_student.id, ecturer_unit_id: lecturer_unit_id)
+        Attendance.find_or_create_by(
+          student_id: current_student.id,
+          lecturer_unit_id: lecturer_unit_id,
+          attendance_date: Date.today,
+        ) do |attendance|
+          attendance.present = true
+        end
         render json: { message: "Attendance marked successfully" }
       else
         render json: { error: "Invalid lecturer_unit_id" }, status: :unprocessable_entity
@@ -48,7 +54,12 @@ class AttendancesController < ApplicationController
 
   # POST /attendances or /attendances.json
   def create
-    @attendance = Attendance.new(attendance_params)
+    @attendance = Attendance.new(
+      student_id: attendance_params[:student_id],
+      lecturer_unit_id: attendance_params[:lecturer_unit_id],
+      attendance_date: Date.today,
+      present: true,
+    )
 
     respond_to do |format|
       if @attendance.save
