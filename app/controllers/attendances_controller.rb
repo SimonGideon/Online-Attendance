@@ -21,7 +21,7 @@ class AttendancesController < ApplicationController
 
   # mark attendance decode
   def mark_attendance
-    token = params[:token]
+    token = "encoded JWT token from scanning qr code"
 
     # Ensure the token is provided
     if token.blank?
