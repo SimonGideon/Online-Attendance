@@ -9,7 +9,7 @@ function domReady(fn) {
   } 
 }
 
-function sendPostRequest(encodedToken) {
+function sendPostRequest(encodedToken, csrfToken) {
   // You can use the Fetch API or any other AJAX method to send a POST request
   fetch('/attendances/mark_attendance', {
     method: 'POST',
@@ -33,7 +33,11 @@ domReady(function () {
   // If found your QR code 
   function onScanSuccess(decodeText, decodeResult) { 
     alert("Your QR code is: " + decodeText, decodeResult); 
-    sendPostRequest(decodeText);
+    // Fetch CSRF token from the meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    // Send a POST request to create attendance
+    sendPostRequest(decodeText, csrfToken);
   } 
 
   let htmlscanner = new Html5QrcodeScanner( 

@@ -34,8 +34,9 @@ class AttendancesController < ApplicationController
 
     begin
       #decode jwt token
-      payload = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: "HS256")[0]
+      payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: "HS256")[0]
       lecturer_unit_id = payload["lecturer_unit_id"]
+      puts lecturer_unit_id
       lecturer_unit = LecturerUnit.find_by(id: lecturer_unit_id)
 
       if lecturer_unit
