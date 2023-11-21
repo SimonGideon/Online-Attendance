@@ -59,25 +59,6 @@ class LecturersController < ApplicationController
     end
   end
 
-  # Define the "generate_qr_code" action as a public method
-  def generate_qr_code
-    @lecturer = Lecturer.find(params[:id])
-    qr = RQRCode::QRCode.new(@lecturer.id.to_s, size: 4, level: :h)
-    puts qr.to_s
-
-    # Generate the QR code image and save it as a file
-    qr_code = qr.as_png(
-      resize_exactly_to: 120,
-      module_px_size: 6,
-      file: nil,
-    )
-
-    # Attach the QR code to the active storage
-    @lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
-                             filename: "qrcode.png",
-                             content_type: "image/png")
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -91,6 +72,6 @@ class LecturersController < ApplicationController
   # Only allow a list of trusted parameters through.
 
   def lecturer_params
-    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar, :qr_code)
+    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar)
   end
 end

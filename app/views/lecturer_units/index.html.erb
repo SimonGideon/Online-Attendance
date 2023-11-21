@@ -4,7 +4,18 @@
 
 <div id="lecturer_units">
   <% @lecturer_units.each do |lecturer_unit| %>
-    <%= render lecturer_unit %>
+    <div id="<%= dom_id lecturer_unit %>">
+  <p>
+    <strong>Lecturer:</strong>
+    <%= lecturer_unit.lecturer_id %>
+  </p>
+
+  <p>
+    <strong>Course:</strong>
+    <%= lecturer_unit.course_id %>
+  </p>
+
+</div>
     <p>
       <%= link_to "Show this lecturer unit", lecturer_unit %>
     </p>
