@@ -19,6 +19,33 @@ class AttendancesController < ApplicationController
   def edit
   end
 
+  # mark attendance decode
+  def mark_attendance
+    token = params[:token]
+
+    # Ensure the token is provided
+    if token.blank?
+      render json: { error: "Token is missing" }, status: :unprocessable_entity
+      return
+    end
+
+    begin
+      #decode jwt token
+      payload = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: "HS256")[0]
+      lecturer_unit_id = payload["lecturer_unit_id"]
+      lecturer_unit = LecturerUnit.find_by(id: lecturer_unit_id)
+
+      if lecturer_unit
+        Attendance.create(user_id: current_user.id, teacher_id: lecturer_unit.teacher_id)
+        render json: { message: "Attendance marked successfully" }
+      else
+        render json: { error: "Invalid lecturer_unit_id" }, status: :unprocessable_entity
+      end
+    rescue JWT::DecodeError
+      render json: { error: "Invalid token format" }, status: :unprocessable_entity
+    end
+  end
+
   # POST /attendances or /attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
@@ -58,13 +85,14 @@ class AttendancesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_attendance
-      @attendance = Attendance.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def attendance_params
-      params.require(:attendance).permit(:student_id, :lecturer_unit_id, :attendance_date, :present)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_attendance
+    @attendance = Attendance.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def attendance_params
+    params.require(:attendance).permit(:student_id, :lecturer_unit_id, :attendance_date, :present)
+  end
 end
