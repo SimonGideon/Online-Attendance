@@ -36,7 +36,7 @@ class AttendancesController < ApplicationController
       lecturer_unit = LecturerUnit.find_by(id: lecturer_unit_id)
 
       if lecturer_unit
-        Attendance.create(user_id: current_user.id, teacher_id: lecturer_unit.teacher_id)
+        Attendance.create(student_id: current_student.id, ecturer_unit_id: lecturer_unit_id)
         render json: { message: "Attendance marked successfully" }
       else
         render json: { error: "Invalid lecturer_unit_id" }, status: :unprocessable_entity
