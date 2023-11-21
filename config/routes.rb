@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :attendances
+  resources :attendances do
+    collection do
+      get "scan"
+      post "mark_attendance"
+    end
+  end
   resources :lecturer_units do
     post "generate_token", on: :member
     post "generate_qr_code", on: :member

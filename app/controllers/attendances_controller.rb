@@ -19,6 +19,9 @@ class AttendancesController < ApplicationController
   def edit
   end
 
+  def scan
+  end
+
   # mark attendance decode
   def mark_attendance
     token = "encoded JWT token from scanning qr code"
