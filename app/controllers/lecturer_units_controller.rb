@@ -14,12 +14,11 @@ class LecturerUnitsController < ApplicationController
 
   def generate_token
     lecturer_unit_id = current_lecturer.id
-    secret_key = Rails.application.secrets.secret_key_base
-
-    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
+    secret_key = Rails.application.credentials.secret_key_base
+    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, 'HS256')
     return token
   end
-
+  
   # generate QR code with token
   def generate_qr_code
     qr = RQRCode::QRCode.new(generate_token, size: 10, level: :h)
