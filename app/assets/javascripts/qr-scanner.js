@@ -1,4 +1,4 @@
-const  domReady= (fn)=> { 
+function domReady(fn) { 
   if (
     document.readyState === "complete" || 
     document.readyState === "interactive"
@@ -9,7 +9,7 @@ const  domReady= (fn)=> {
   } 
 }
 
-const sendPostRequest = (encodedToken, csrfToken) => {
+function sendPostRequest(encodedToken, csrfToken) {
   // You can use the Fetch API or any other AJAX method to send a POST request
   fetch('/attendances/mark_attendance', {
     method: 'POST',
@@ -29,7 +29,7 @@ const sendPostRequest = (encodedToken, csrfToken) => {
     });
 }
 
-domReady(() => { 
+domReady(function () { 
   // If found your QR code 
   function onScanSuccess(decodeText, decodeResult) { 
     alert("Your QR code is: " + decodeText, decodeResult); 

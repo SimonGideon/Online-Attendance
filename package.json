@@ -16,5 +16,8 @@
   "dependencies": {
     "instascan": "^1.0.0",
     "qrcode-decoder": "^0.3.3"
+  },
+  "devDependencies": {
+    "html5-qrcode": "^2.3.8"
   }
 }
