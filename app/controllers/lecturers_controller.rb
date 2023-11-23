@@ -1,4 +1,5 @@
 class LecturersController < ApplicationController
+  load_and_authorize_resource
   before_action :set_lecturer, :authenticate_lecturer!, only: %i[ show edit update destroy ]
 
   # GET /lecturers or /lecturers.json

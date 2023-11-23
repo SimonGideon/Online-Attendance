@@ -2,7 +2,6 @@
 
 class Ability
   include CanCan::Ability
-
   def initialize(user)
     # Define abilities for the user here. For example:
     #
@@ -28,5 +27,24 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
+    # Default abilities for all users
+    can :read, :all
+
+    # Abilities for Lecturer
+    if user.is_a?(Lecturer)
+      can :manage, LecturerUnit, lecturer_id: user.id
+      can :manage, Attendance, lecturer_unit: { lecturer_id: user.id }
+    end
+
+    # Abilities for Student
+    if user.is_a?(Student)
+      can :manage, StudentCourse, student_id: user.id
+      can :read, Course # Assuming students can view courses
+    end
+
+    # Abilities for Admin
+    if user.is_a?(Admin)
+      can :manage, :all
+    end
   end
 end

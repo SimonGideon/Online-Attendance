@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_lecturer!, :authenticate_student!, :authenticate_admin!
   protect_from_forgery with: :exception
   require "jwt"
 
