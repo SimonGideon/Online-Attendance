@@ -1,4 +1,4 @@
-function domReady(fn) { 
+const  domReady= (fn)=> { 
   if (
     document.readyState === "complete" || 
     document.readyState === "interactive"
@@ -29,7 +29,7 @@ const sendPostRequest = (encodedToken, csrfToken) => {
     });
 }
 
-domReady(function () { 
+domReady(() => { 
   // If found your QR code 
   function onScanSuccess(decodeText, decodeResult) { 
     alert("Your QR code is: " + decodeText, decodeResult); 
