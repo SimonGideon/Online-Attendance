@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_lecturer!, :authenticate_student!, :authenticate_admin!
+  before_action :authenticate_student!, :authenticate_lecturer!, :authenticate_admin!
   protect_from_forgery with: :exception
   require "jwt"
 
@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
     elsif resource.is_a?(Lecturer)
       # If it's a lecturer, redirect to their own profile (show) page.
       lecturer_path(resource)
+    elsif resource.is_a?(Admin)
+      admin_path(resource)
     else
       # Handle other user types or roles as needed.
       root_path
