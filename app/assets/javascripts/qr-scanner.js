@@ -9,7 +9,7 @@ function domReady(fn) {
   } 
 }
 
-function sendPostRequest(encodedToken, csrfToken) {
+const sendPostRequest = (encodedToken, csrfToken) => {
   // You can use the Fetch API or any other AJAX method to send a POST request
   fetch('/attendances/mark_attendance', {
     method: 'POST',
