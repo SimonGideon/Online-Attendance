@@ -35,14 +35,16 @@ domReady(function () {
     alert("Your QR code is: " + decodeText, decodeResult); 
     // Fetch CSRF token from the meta tag
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
+    
     // Send a POST request to create attendance
     sendPostRequest(decodeText, csrfToken);
   } 
 
   let htmlscanner = new Html5QrcodeScanner( 
     "my-qr-reader", 
-    { fps: 10, qrbos: 250 } 
+    { fps: 10, qrbos: 250,
+      qrbox: {width: 100, height: 100},
+      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA] } 
   ); 
   htmlscanner.render(onScanSuccess); 
 });
