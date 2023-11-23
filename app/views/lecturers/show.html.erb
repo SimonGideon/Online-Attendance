@@ -6,7 +6,7 @@
   <%= link_to "Edit this lecturer", edit_lecturer_path(@lecturer) %> |
   <%= link_to "Back to lecturers", lecturers_path %>
   <p>  <%= @lecturer.name %></p>
-
+<%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
 
   <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
 </div>

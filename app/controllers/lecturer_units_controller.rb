@@ -1,9 +1,39 @@
 class LecturerUnitsController < ApplicationController
-  before_action :set_lecturer_unit, only: %i[ show edit update destroy ]
+  before_action :set_lecturer_unit, only: %i[ show edit update destroy generate_qr_code ]
+
+  def current_lec_units
+    lecturer_id = current_lecturer.id
+    @lecturer_units = LecturerUnit.where(lecturer_id: lecturer_id)
+    render json: @lecturer_units
+  end
 
   # GET /lecturer_units or /lecturer_units.json
   def index
     @lecturer_units = LecturerUnit.all
+  end
+
+  def generate_token
+    lecturer_unit_id = current_lecturer.id
+    secret_key = Rails.application.credentials.secret_key_base
+    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, 'HS256')
+    return token
+  end
+  
+  # generate QR code with token
+  def generate_qr_code
+    qr = RQRCode::QRCode.new(generate_token, size: 10, level: :h)
+
+    # Generate the QR code image and save it as a file
+    qr_code = qr.as_png(
+      resize_exactly_to: 120,
+      module_px_size: 6,
+      file: nil,
+    )
+
+    # Attach the QR code to the active storage
+    @lecturer_unit.qr_code.attach(io: StringIO.new(qr_code.to_s),
+                                  filename: "qrcode.png",
+                                  content_type: "image/png")
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json
@@ -58,13 +88,14 @@ class LecturerUnitsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lecturer_unit
-      @lecturer_unit = LecturerUnit.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lecturer_unit_params
-      params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :created_at, :updated_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lecturer_unit
+    @lecturer_unit = LecturerUnit.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def lecturer_unit_params
+    params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :qr_code)
+  end
 end

@@ -69,7 +69,8 @@ class LecturersController < ApplicationController
   #   redirect_to sign_out_path and return
   # end
   # Only allow a list of trusted parameters through.
+
   def lecturer_params
-    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email)
+    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar)
   end
 end
