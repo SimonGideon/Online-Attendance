@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_student, :authenticate_student!, only: %i[ show edit update destroy ]
 
   # GET /students or /students.json

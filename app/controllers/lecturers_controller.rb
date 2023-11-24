@@ -65,7 +65,6 @@ class LecturersController < ApplicationController
   def set_lecturer
     @lecturer = Lecturer.find(params[:id])
   end
-
   # if something_is_not_kosher
   #   redirect_to sign_out_path and return
   # end

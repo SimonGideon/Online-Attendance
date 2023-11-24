@@ -12,7 +12,7 @@ class Ability
 
     # Abilities for Student
     if user.is_a?(Student)
-      can :manage, StudentCourse, student_id: user.id
+      can :manage, StudentsCourse, student_id: user.id
       can :read, Course
       can :manage, Attendance, student_course: { student_id: user.id }
     end
