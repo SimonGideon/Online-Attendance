@@ -1,6 +1,6 @@
 class LecturersController < ApplicationController
-  load_and_authorize_resource
-  before_action :set_lecturer, :authenticate_lecturer!, only: %i[ show edit update destroy ]
+  # load_and_authorize_resource
+  before_action :set_lecturer, only: %i[ show edit update destroy ]
 
   # GET /lecturers or /lecturers.json
   def index
@@ -10,6 +10,7 @@ class LecturersController < ApplicationController
   # GET /lecturers/1 or /lecturers/1.json
   def show
     @lecturer = Lecturer.find(params[:id])
+    authorize! :read, @lecturer
   end
 
   # GET /lecturers/new
@@ -65,6 +66,7 @@ class LecturersController < ApplicationController
   def set_lecturer
     @lecturer = Lecturer.find(params[:id])
   end
+
   # if something_is_not_kosher
   #   redirect_to sign_out_path and return
   # end

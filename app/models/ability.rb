@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     if user.is_a?(Lecturer)
-      can :manage, LecturerUnit, lecturer_id: user.id
+      can :read, Lecturer
       can :read, Course
       can :read, Attendance, lecturer_unit: { lecturer_id: user.id }
     end
