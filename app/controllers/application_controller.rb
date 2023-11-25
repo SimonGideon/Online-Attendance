@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # load_and_authorize_resource
   include CanCan::ControllerAdditions
-  before_action :authenticate_student!, :authenticate_lecturer!, :authenticate_admin!, except: :root
+  # before_action :authenticate_student!, :authenticate_lecturer!, :authenticate_admin!, except: :root
   protect_from_forgery with: :exception
   require "jwt"
 

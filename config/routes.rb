@@ -1,16 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admins
   resources :admins
-  resources :attendances do
-    collection do
-      get "scan"
-      post "mark_attendance"
-    end
-  end
-  resources :lecturer_units do
-    post "generate_token", on: :member
-    post "generate_qr_code", on: :member
-  end
+  # resources :attendances do
+  #   collection do
+  #     get "scan"
+  #     post "mark_attendance"
+  #   end
+  # end
   devise_for :lecturers
   devise_for :students
   root "home#index"
@@ -18,8 +14,19 @@ Rails.application.routes.draw do
   resources :courses
   resources :lecturers do
     post "generate_qr_code", on: :member
+    resources :lecturer_units do
+      post "generate_token", on: :member
+      post "generate_qr_code", on: :member
+    end
   end
-  resources :students
+  resources :students do
+    resources :attendances do
+      collection do
+        get "scan"
+        post "mark_attendance"
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
