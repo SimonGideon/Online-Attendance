@@ -7,7 +7,8 @@ class Ability
     if user.is_a?(Lecturer)
       can :read, Lecturer
       can :read, Course
-      can :read, Attendance, lecturer_unit: { lecturer_id: user.id }
+      can :read, Attendance
+      can :manage, LecturerUnit
     end
 
     # Abilities for Student
