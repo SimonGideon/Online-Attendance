@@ -14,7 +14,7 @@ class LecturerUnitsController < ApplicationController
   end
 
   def generate_token
-    lecturer_unit_id = current_lecturer.id
+    lecturer_unit_id = current_lec_units.id
     secret_key = Rails.application.credentials.secret_key_base
     token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
     return token
@@ -92,7 +92,7 @@ class LecturerUnitsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lecturer_unit
-    @lecturer_unit = LecturerUnit.find(params[:id])
+    @lecturer_unit = LecturerUnit.find(current_lecturer.id)
   end
 
   # Only allow a list of trusted parameters through.
