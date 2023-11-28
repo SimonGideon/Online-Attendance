@@ -1,4 +1,4 @@
-<%= form_with(model: course) do |form| %>
+<%= form_with(url: admin_courses_path, model: course) do |form| %>
   <% if course.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
