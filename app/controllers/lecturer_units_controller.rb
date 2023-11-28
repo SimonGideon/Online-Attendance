@@ -97,6 +97,6 @@ class LecturerUnitsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lecturer_unit_params
-    params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :qr_code)
+    params.require(:lecturer_unit).permit(:lecturer_id , :course_id, :qr_code).merge(lecturer_id: current_lecturer.id)
   end
 end
