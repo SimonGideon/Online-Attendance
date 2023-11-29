@@ -11,7 +11,12 @@ class LecturersController < ApplicationController
   def show
     @lecturer = Lecturer.find(params[:id])
     authorize! :read, @lecturer
-    puts current_lecturer.id
+    if @lecturer.qr_code.attached?
+      puts "QR code attached"
+    else
+      # Handle the case where qr_code is not attached
+      puts "QR code not attached"
+    end
   end
 
   # GET /lecturers/new
@@ -59,6 +64,31 @@ class LecturersController < ApplicationController
       format.html { redirect_to lecturers_url, notice: "Lecturer was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def generate_token
+    secret_key = Rails.application.credentials.secret_key_base
+    token = JWT.encode({ lecturer_id: current_lecturer.id }, secret_key, "HS256")
+    puts "THis is ====================", token
+    return token
+  end
+
+  # generate QR code with token
+  def generate_qr_code
+    qr = RQRCode::QRCode.new(generate_token, size: 12, level: :h)
+    @lecturer = current_lecturer
+
+    # Generate the QR code image and save it as a file
+    qr_code = qr.as_png(
+      resize_exactly_to: 120,
+      module_px_size: 6,
+      file: nil,
+    )
+
+    # Attach the QR code to the active storage
+    @lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
+                             filename: "qrcode.png",
+                             content_type: "image/png")
   end
 
   private

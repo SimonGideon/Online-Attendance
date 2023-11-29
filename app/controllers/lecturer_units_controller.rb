@@ -2,11 +2,16 @@ class LecturerUnitsController < ApplicationController
   load_and_authorize_resource
   before_action :set_lecturer_unit, only: %i[ show edit update destroy generate_qr_code ]
 
-  def current_lec_units
-    lecturer_id = current_lecturer.id
-    @lecturer_units = LecturerUnit.where(lecturer_id: lecturer_id)
-    render json: @lecturer_units
-  end
+  # def current_lec_units
+  #   lecturer_id = current_lecturer.id
+  #   @lecturer_units = params[:id]
+
+  #   if @lecturer_units
+  #     render json: @lecturer_units
+  #   else
+  #     render json: { error: "No lecturer units found for the current lecturer" }, status: :not_found
+  #   end
+  # end
 
   # GET /lecturer_units or /lecturer_units.json
   def index
@@ -14,7 +19,7 @@ class LecturerUnitsController < ApplicationController
   end
 
   def generate_token
-    lecturer_unit_id = current_lec_units.id
+    lecturer_unit_id = params[:id]
     secret_key = Rails.application.credentials.secret_key_base
     token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
     return token
@@ -22,7 +27,7 @@ class LecturerUnitsController < ApplicationController
 
   # generate QR code with token
   def generate_qr_code
-    qr = RQRCode::QRCode.new(generate_token, size: 10, level: :h)
+    qr = RQRCode::QRCode.new(generate_token, size: 15, level: :h)
 
     # Generate the QR code image and save it as a file
     qr_code = qr.as_png(
@@ -92,7 +97,7 @@ class LecturerUnitsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lecturer_unit
-    @lecturer_unit = LecturerUnit.find(current_lecturer.id)
+    @lecturer_unit = LecturerUnit.first
   end
 
   # Only allow a list of trusted parameters through.
