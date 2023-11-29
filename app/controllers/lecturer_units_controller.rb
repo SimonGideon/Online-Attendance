@@ -56,7 +56,7 @@ class LecturerUnitsController < ApplicationController
 
     respond_to do |format|
       if @lecturer_unit.save
-        format.html { redirect_to lecturer_unit_url(@lecturer_unit), notice: "Lecturer unit was successfully created." }
+        format.html { redirect_to lecturer_lecturer_units_url(@lecturer_unit), notice: "Lecturer unit was successfully created." }
         format.json { render :show, status: :created, location: @lecturer_unit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -97,6 +97,6 @@ class LecturerUnitsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lecturer_unit_params
-    params.require(:lecturer_unit).permit(:lecturer_id , :course_id, :qr_code).merge(lecturer_id: current_lecturer.id)
+    params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :qr_code).merge(lecturer_id: current_lecturer.id)
   end
 end

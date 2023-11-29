@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  include CoursesHelper
   load_and_authorize_resource
   protect_from_forgery
   before_action :set_course, only: %i[ show edit update destroy ]
@@ -6,6 +7,11 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @courses = Course.all
+  end
+
+  def lec_name(id)
+    lecturer = Lecturer.find(id)
+    lecturer.name
   end
 
   # GET /courses/1 or /courses/1.json
@@ -68,6 +74,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:course_name, :corse_code, :lec_id)
+    params.require(:course).permit(:course_name, :course_code, :lecturer_id)
   end
 end

@@ -72,8 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_194308) do
 
   create_table "courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "course_name"
-    t.string "corse_code"
-    t.bigint "lec_id"
+    t.string "course_code"
+    t.uuid "lecturer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
