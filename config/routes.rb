@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   root "home#index"
   resources :students_courses
   resources :lecturers do
-    post "generate_qr_code", on: :member
     post "generate_token", on: :member
+    post "generate_qr_code", on: :member
     resources :lecturer_units do
       post "generate_token", on: :member
       post "generate_qr_code", on: :member

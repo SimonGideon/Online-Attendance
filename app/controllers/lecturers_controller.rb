@@ -1,6 +1,8 @@
 class LecturersController < ApplicationController
   # load_and_authorize_resource
-  before_action :authenticate_lecturer!, :set_lecturer, only: %i[ show edit update destroy ]
+  before_action :authenticate_lecturer!, only: %i[show edit update destroy]
+  before_action :set_lecturer, only: %i[show edit update destroy]
+  before_action :authenticate_lecturer!, only: [:generate_qr_code]
 
   # GET /lecturers or /lecturers.json
   def index
@@ -70,26 +72,73 @@ class LecturersController < ApplicationController
     secret_key = Rails.application.credentials.secret_key_base
     token = JWT.encode({ lecturer_id: current_lecturer.id }, secret_key, "HS256")
     puts "THis is ====================", token
+    puts "Current User:", current_lecturer.id
     return token
   end
 
   # generate QR code with token
   def generate_qr_code
-    qr = RQRCode::QRCode.new(generate_token, size: 12, level: :h)
-    @lecturer = current_lecturer
+    # Ensure current_lecturer is present
+    unless current_lecturer
+      flash[:error] = "Lecturer not found. Please make sure you are logged in."
+      redirect_to root_path and return
+    end
 
-    # Generate the QR code image and save it as a file
+    qr = RQRCode::QRCode.new(generate_token, size: 10, level: :l)
+
+    # Generate the QR code image
     qr_code = qr.as_png(
-      resize_exactly_to: 120,
-      module_px_size: 6,
+      bit_depth: 1,
+      border_modules: 4,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      color: "black",
       file: nil,
+      fill: "white",
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 150,
     )
 
-    # Attach the QR code to the active storage
-    @lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
-                             filename: "qrcode.png",
-                             content_type: "image/png")
+    # Check if the lecturer already has a QR code attached
+    if current_lecturer.qr_code.attached?
+      # If it does, delete the existing QR code
+      current_lecturer.qr_code.purge
+    end
+
+    # Attach the new QR code to the active storage
+    current_lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
+                                    filename: "qrcode.png",
+                                    content_type: "image/png")
   end
+
+  # # generate QR code with token
+
+  # def generate_qr_code
+  #   # Ensure current_lecturer is present
+  #   return unless current_lecturer
+  #   qr = RQRCode::QRCode.new(generate_token, size: 10, level: :l)
+  #   @lecturer = current_lecturer.id
+  #   puts qr
+  #   # Generate the QR code image and save it as a file
+  #   qr_code = qr.as_svg(
+  #     offset: 0,
+  #     color: "000",
+  #     shape_rendering: "crispEdges",
+  #     module_px_size: 6,
+  #   )
+
+  #   # Attach the QR code to the active storage
+  #   puts "Attachment started.....": current_lecturer
+  #   current_lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
+  #                                   filename: "qrcode.svg",
+  #                                   content_type: "image/svg+xml")
+  #   if current_lecturer.qr_code.attached?
+  #     puts "QR code attached successfully"
+  #   else
+  #     puts "Failed to attach QR code"
+  #   end
+  # end
 
   private
 
