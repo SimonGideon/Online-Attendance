@@ -14,7 +14,7 @@ class LecturerUnitsController < ApplicationController
 
   # GET /lecturer_units or /lecturer_units.json
   def index
-    @lecturer_units = LecturerUnit.all
+    @lecturer_units = LecturerUnit.where(lecturer_id: current_lecturer.id)
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json
