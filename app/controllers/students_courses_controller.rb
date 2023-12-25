@@ -1,4 +1,5 @@
 class StudentsCoursesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_students_course, only: %i[ show edit update destroy ]
 
   # GET /students_courses or /students_courses.json
@@ -58,13 +59,14 @@ class StudentsCoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_students_course
-      @students_course = StudentsCourse.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def students_course_params
-      params.require(:students_course).permit(:student_id, :course_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_students_course
+    @students_course = StudentsCourse.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def students_course_params
+    params.require(:students_course).permit(:student_id, :course_id)
+  end
 end

@@ -1,4 +1,4 @@
-<%= form_with(model: course) do |form| %>
+<%= form_with(url: admin_courses_path, model: course) do |form| %>
   <% if course.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
@@ -17,13 +17,13 @@
   </div>
 
   <div>
-    <%= form.label :corse_code, style: "display: block" %>
-    <%= form.text_field :corse_code %>
+    <%= form.label :course_code, style: "display: block" %>
+    <%= form.text_field :course_code %>
   </div>
 
-  <div>
-    <%= form.label :lec_id, style: "display: block" %>
-    <%= form.text_field :lec_id %>
+ <div class="field">
+    <%= form.label :lecturer_id %>
+    <%= form.collection_select :lecturer_id, Lecturer.all, :id, :name, { prompt: 'Select a lecturer' } %>
   </div>
 
   <div>

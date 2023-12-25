@@ -8,4 +8,5 @@ class Lecturer < ApplicationRecord
   has_many :lecturer_courses
   has_many :attendances
   has_one_attached :avatar
+  has_one_attached :qr_code
 end
