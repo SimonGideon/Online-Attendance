@@ -21,9 +21,9 @@
     <%= form.text_field :course_code %>
   </div>
 
-  <div>
-    <%= form.label :lecturer_id, style: "display: block" %>
-    <%= form.text_field :lecturer_id %>
+ <div class="field">
+    <%= form.label :lecturer_id %>
+    <%= form.collection_select :lecturer_id, Lecturer.all, :id, :name, { prompt: 'Select a lecturer' } %>
   </div>
 
   <div>

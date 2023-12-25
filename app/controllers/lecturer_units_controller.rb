@@ -1,7 +1,6 @@
 class LecturerUnitsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_lecturer_unit, only: %i[ show edit update destroy generate_qr_code ]
-
+  before_action :set_lecturer_unit
   # def current_lec_units
   #   lecturer_id = current_lecturer.id
   #   @lecturer_units = params[:id]
@@ -16,30 +15,6 @@ class LecturerUnitsController < ApplicationController
   # GET /lecturer_units or /lecturer_units.json
   def index
     @lecturer_units = LecturerUnit.all
-  end
-
-  def generate_token
-    lecturer_unit_id = params[:id]
-    secret_key = Rails.application.credentials.secret_key_base
-    token = JWT.encode({ lecturer_unit_id: lecturer_unit_id }, secret_key, "HS256")
-    return token
-  end
-
-  # generate QR code with token
-  def generate_qr_code
-    qr = RQRCode::QRCode.new(generate_token, size: 15, level: :h)
-
-    # Generate the QR code image and save it as a file
-    qr_code = qr.as_png(
-      resize_exactly_to: 120,
-      module_px_size: 6,
-      file: nil,
-    )
-
-    # Attach the QR code to the active storage
-    @lecturer_unit.qr_code.attach(io: StringIO.new(qr_code.to_s),
-                                  filename: "qrcode.png",
-                                  content_type: "image/png")
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json
@@ -102,6 +77,6 @@ class LecturerUnitsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lecturer_unit_params
-    params.require(:lecturer_unit).permit(:lecturer_id, :course_id, :qr_code).merge(lecturer_id: current_lecturer.id)
+    params.require(:lecturer_unit).permit(:lecturer_id, :course_id).merge(lecturer_id: current_lecturer.id)
   end
 end

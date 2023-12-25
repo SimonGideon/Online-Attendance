@@ -10,10 +10,7 @@ Rails.application.routes.draw do
   resources :lecturers do
     post "generate_token", on: :member
     post "generate_qr_code", on: :member
-    resources :lecturer_units do
-      post "generate_token", on: :member
-      post "generate_qr_code", on: :member
-    end
+    resources :lecturer_units
   end
   resources :students do
     resources :attendances do
