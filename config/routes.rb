@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :admins do
     resources :courses
+    
   end
   devise_for :lecturers
   devise_for :students
   root "home#index"
-  resources :students_courses
   resources :lecturers do
     post "generate_token", on: :member
     post "generate_qr_code", on: :member
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         post "mark_attendance"
       end
     end
+    resources :students_courses
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
