@@ -4,7 +4,7 @@ class StudentsCoursesController < ApplicationController
 
   # GET /students_courses or /students_courses.json
   def index
-    @students_courses = StudentsCourse.all
+    @students_courses = StudentsCourse.where(student_id: current_student.id)
   end
 
   # GET /students_courses/1 or /students_courses/1.json

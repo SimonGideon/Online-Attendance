@@ -24,6 +24,7 @@ class LecturerUnitsController < ApplicationController
   # GET /lecturer_units/new
   def new
     @lecturer_unit = LecturerUnit.new
+    @available_courses = available_courses_for_current_lecturer
   end
 
   # GET /lecturer_units/1/edit
@@ -73,6 +74,11 @@ class LecturerUnitsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_lecturer_unit
     @lecturer_unit = LecturerUnit.first
+  end
+
+  def available_courses_for_current_lecturer
+    current_lecturer_course_ids = current_lecturer.courses.pluck(:id)
+    Course.where(id: current_lecturer_course_ids)
   end
 
   # Only allow a list of trusted parameters through.
