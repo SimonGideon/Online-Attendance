@@ -78,7 +78,7 @@ class LecturerUnitsController < ApplicationController
 
   def available_courses_for_current_lecturer
     current_lecturer_course_ids = current_lecturer.courses.pluck(:id)
-    Course.where(id: current_lecturer_course_ids)
+    Course.where.not(id: current_lecturer_course_ids)
   end
 
   # Only allow a list of trusted parameters through.
