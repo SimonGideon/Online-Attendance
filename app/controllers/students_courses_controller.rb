@@ -5,6 +5,7 @@ class StudentsCoursesController < ApplicationController
   # GET /students_courses or /students_courses.json
   def index
     @students_courses = StudentsCourse.where(student_id: current_student.id)
+    @logged_in_student = current_student
   end
 
   # GET /students_courses/1 or /students_courses/1.json

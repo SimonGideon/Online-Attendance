@@ -1,6 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Students courses</h1>
+ <p>
+    <strong>Loggen In as:</strong>
+    <%= @logged_in_student.name %>
+  </p>
 
 <div id="students_courses">
   <% @students_courses.each do |students_course| %>
