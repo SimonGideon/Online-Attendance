@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_205327) do
   end
 
   create_table "attendances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "students_course_id", null: false
     t.uuid "student_id", null: false
     t.uuid "lecturer_unit_id", null: false
     t.date "attendance_date"
@@ -128,6 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_205327) do
 
   create_table "students_courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "student_id", null: false
+    t.uuid "lecturer_unit_id", null: false
     t.uuid "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -137,10 +139,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_205327) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attendances", "students_courses"
   add_foreign_key "attendances", "lecturer_units"
   add_foreign_key "attendances", "students"
   add_foreign_key "lecturer_units", "courses"
   add_foreign_key "lecturer_units", "lecturers"
   add_foreign_key "students_courses", "courses"
+  add_foreign_key "students_courses", "lecturer_units"
   add_foreign_key "students_courses", "students"
 end
