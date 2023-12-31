@@ -5,7 +5,7 @@ class Lecturer < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :courses
   has_many :students, through: :courses
-  has_many :lecturer_courses
+  has_many :lecturer_units
   has_many :attendances
   has_one_attached :avatar
   has_one_attached :qr_code
