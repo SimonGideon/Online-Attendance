@@ -61,9 +61,12 @@ class StudentsCoursesController < ApplicationController
   end
 
   private
+
   def available_courses_for_current_student
-    current_student_course_ids = current_student.courses.pluck(:id)
-    Course.where.not(id: current_student_course_ids)
+    lecturer_units_for_student = current_student.lecturer_units
+    course_ids_for_student = lecturer_units_for_student.pluck(:course_id)
+    courses_not_taken_by_student = Course.where.not(id: course_ids_for_student)
+    courses_not_taken_by_student
   end
   
 
@@ -75,6 +78,6 @@ class StudentsCoursesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def students_course_params
     student_id = current_student.id if current_student
-    params.require(:students_course).permit(:course_id).merge(student_id: student_id)
+    params.require(:students_course).permit(:lecturer_unit_id).merge(student_id: student_id)
   end
 end

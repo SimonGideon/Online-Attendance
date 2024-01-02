@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         get "scan"
         post "mark_attendance"
+        post "assign_lecturer_unit"
       end
     end
     resources :students_courses

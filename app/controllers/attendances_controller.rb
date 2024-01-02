@@ -35,14 +35,22 @@ class AttendancesController < ApplicationController
     begin
       #decode jwt token
       payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: "HS256")[0]
-      lecturer_id= payload["lecturer_id"]
-      lecturer_unit_id = LecturerUnit.find_by(lecturer_id: lecturer_id).id
-      puts lecturer_unit_id
-      lecturer_unit = LecturerUnit.find_by(id: lecturer_unit_id)
+      lecturer_id = payload["lecturer_id"]
+      lecturer_units = LecturerUnit.find_by(lecturer_id: lecturer_id)
+      # puts lecturer_unit_id
+      # lecturer_units = LecturerUnit.where(id: lecturer_unit_id)
+      if lecturer_units.count > 1
+        # Render a pop-up page with a list of results and radio buttons for selection
+        render "attendance/multiple_results", locals: { lecturer_units: lecturer_units }
+      else
+        # If there is only one result or none, proceed with the first result
+        lecturer_unit_id = lecturer_units.first&.id
+      end
 
       if lecturer_unit
         Attendance.find_or_create_by(
-          student_id: current_student.id,
+          # students_course_id
+          # student_id: current_student.id,
           lecturer_unit_id: lecturer_unit_id,
           attendance_date: Date.today,
         ) do |attendance|
@@ -60,8 +68,7 @@ class AttendancesController < ApplicationController
   # POST /attendances or /attendances.json
   def create
     @attendance = Attendance.new(
-      student_id: attendance_params[:student_id],
-      lecturer_unit_id: attendance_params[:lecturer_unit_id],
+      students_course_id: attendance_params[:student_id],
       attendance_date: Date.today,
       present: true,
     )
@@ -102,6 +109,18 @@ class AttendancesController < ApplicationController
 
   private
 
+  # assign lecturer unit
+  def assign_lecturer_unit
+    selected_lecturer_unit_id = params[:lecturer_unit_id]
+
+    if selected_lecturer_unit_id
+      lecturer_unit_id = LecturerUnit.find(selected_lecturer_unit_id).id
+      puts "Selected LecturerUnit ID: #{lecturer_unit.id}"
+    else
+      puts "No LecturerUnit selected."
+    end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_attendance
     @attendance = Attendance.find(params[:id])
@@ -109,6 +128,6 @@ class AttendancesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def attendance_params
-    params.require(:attendance).permit(:student_id, :lecturer_unit_id, :attendance_date, :present)
+    params.require(:attendance).permit(:students_course_id, :attendance_date, :present)
   end
 end
