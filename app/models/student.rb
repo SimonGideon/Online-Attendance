@@ -7,4 +7,5 @@ class Student < ApplicationRecord
   has_many :lecturers, through: :courses
   has_many :attendances
   has_one_attached :avatar
+  has_many :students_courses
 end

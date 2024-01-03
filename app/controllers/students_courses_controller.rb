@@ -14,8 +14,9 @@ class StudentsCoursesController < ApplicationController
 
   # GET /students_courses/new
   def new
-    @students_course = StudentsCourse.new
     @available_courses = available_courses_for_current_student
+    puts "Available courses: #{@available_courses}"
+    @students_course = StudentsCourse.new
   end
 
   # GET /students_courses/1/edit
@@ -63,12 +64,16 @@ class StudentsCoursesController < ApplicationController
   private
 
   def available_courses_for_current_student
-    lecturer_units_for_student = current_student.lecturer_units
-    course_ids_for_student = lecturer_units_for_student.pluck(:course_id)
-    courses_not_taken_by_student = Course.where.not(id: course_ids_for_student)
-    courses_not_taken_by_student
+    current_student_lecturer_units = current_student&.students_courses&.pluck(:lecturer_unit_id) || []
+    all_lecturer_units = LecturerUnit.all
+
+    if current_student_lecturer_units.empty?
+      all_lecturer_units
+    else
+      lecturer_units_not_taken_by_student = all_lecturer_units.where.not(id: current_student_lecturer_units)
+      lecturer_units_not_taken_by_student
+    end
   end
-  
 
   # Use callbacks to share common setup or constraints between actions.
   def set_students_course

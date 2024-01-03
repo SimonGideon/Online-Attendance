@@ -10,11 +10,10 @@
       </ul>
     </div>
   <% end %>
-<div class="field">
-  <%= form.label :course_id, style: "display: block" %>
-  <%= form.collection_select :course_id, @available_courses, :id, :course_name, { prompt: 'Select a Course' } %>
-</div>
-
+  <div class="field">
+    <%= form.label :lecturer_unit_id, style: "display: block" %>
+    <%= form.collection_select :lecturer_unit_id, @available_courses, :id, :course_name_from_lecturer_unit, { prompt: 'Select a Course' } %>
+  </div>
 
 
   <div>
