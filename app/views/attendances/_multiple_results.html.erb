@@ -1,0 +1,13 @@
+<%= form_tag('/assign_lecturer_unit', method: :post) do %>
+  <h2>Select Lecturer Unit:</h2>
+
+  <% lecturer_units.each do |lecturer_unit| %>
+    <label>
+      <%= radio_button_tag('lecturer_unit_id', lecturer_unit.id) %>
+      <%= lecturer_unit.name %> <!-- Change this to the appropriate attribute for display -->
+    </label>
+    <br>
+  <% end %>
+
+  <%= submit_tag('Select') %>
+<% end %>

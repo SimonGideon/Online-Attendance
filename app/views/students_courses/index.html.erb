@@ -1,14 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Students courses</h1>
+ <p>
+    <strong>Loggen In as:</strong>
+    <%= @logged_in_student.name %>
+  </p>
 
 <div id="students_courses">
   <% @students_courses.each do |students_course| %>
     <%= render students_course %>
-    <p>
-      <%= link_to "Show this students course", students_course %>
-    </p>
+    <%# <p>
+      <%= link_to "Show this students course", student_students_course %>
+    <%# </p> %>
   <% end %>
 </div>
 
-<%= link_to "New students course", new_students_course_path %>
+<%= link_to "New students course", new_student_students_course_path %>

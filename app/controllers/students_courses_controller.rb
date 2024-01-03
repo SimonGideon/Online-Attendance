@@ -4,7 +4,8 @@ class StudentsCoursesController < ApplicationController
 
   # GET /students_courses or /students_courses.json
   def index
-    @students_courses = StudentsCourse.all
+    @students_courses = StudentsCourse.where(student_id: current_student.id)
+    @logged_in_student = current_student
   end
 
   # GET /students_courses/1 or /students_courses/1.json
@@ -13,6 +14,8 @@ class StudentsCoursesController < ApplicationController
 
   # GET /students_courses/new
   def new
+    @available_courses = available_courses_for_current_student
+    puts "Available courses: #{@available_courses}"
     @students_course = StudentsCourse.new
   end
 
@@ -26,7 +29,7 @@ class StudentsCoursesController < ApplicationController
 
     respond_to do |format|
       if @students_course.save
-        format.html { redirect_to students_course_url(@students_course), notice: "Students course was successfully created." }
+        format.html { redirect_to student_students_courses_url(@students_course), notice: "Students course was successfully created." }
         format.json { render :show, status: :created, location: @students_course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +42,7 @@ class StudentsCoursesController < ApplicationController
   def update
     respond_to do |format|
       if @students_course.update(students_course_params)
-        format.html { redirect_to students_course_url(@students_course), notice: "Students course was successfully updated." }
+        format.html { redirect_to student_students_courses_url(@students_course), notice: "Students course was successfully updated." }
         format.json { render :show, status: :ok, location: @students_course }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,6 +63,18 @@ class StudentsCoursesController < ApplicationController
 
   private
 
+  def available_courses_for_current_student
+    current_student_lecturer_units = current_student&.students_courses&.pluck(:lecturer_unit_id) || []
+    all_lecturer_units = LecturerUnit.all
+
+    if current_student_lecturer_units.empty?
+      all_lecturer_units
+    else
+      lecturer_units_not_taken_by_student = all_lecturer_units.where.not(id: current_student_lecturer_units)
+      lecturer_units_not_taken_by_student
+    end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_students_course
     @students_course = StudentsCourse.find(params[:id])
@@ -67,6 +82,7 @@ class StudentsCoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def students_course_params
-    params.require(:students_course).permit(:student_id, :course_id)
+    student_id = current_student.id if current_student
+    params.require(:students_course).permit(:lecturer_unit_id).merge(student_id: student_id)
   end
 end

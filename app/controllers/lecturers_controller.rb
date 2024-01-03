@@ -1,8 +1,8 @@
 class LecturersController < ApplicationController
   # load_and_authorize_resource
-  before_action :authenticate_lecturer!, only: %i[show edit update destroy]
   before_action :set_lecturer, only: %i[show edit update destroy]
-  before_action :authenticate_lecturer!, only: [:generate_qr_code]
+  before_action :authenticate_lecturer!, only: %i[show edit update destroy generate_qr_code]
+
 
   # GET /lecturers or /lecturers.json
   def index
@@ -11,7 +11,6 @@ class LecturersController < ApplicationController
 
   # GET /lecturers/1 or /lecturers/1.json
   def show
-    @lecturer = Lecturer.find(params[:id])
     authorize! :read, @lecturer
     if @lecturer.qr_code.attached?
       puts "QR code attached"
@@ -100,10 +99,13 @@ class LecturersController < ApplicationController
       size: 150,
     )
 
+    puts "QR Code:", qr_code
+
     # Check if the lecturer already has a QR code attached
     if current_lecturer.qr_code.attached?
       # If it does, delete the existing QR code
       current_lecturer.qr_code.purge
+      puts "QR code purged!!!+==========="
     end
 
     # Attach the new QR code to the active storage
@@ -111,34 +113,6 @@ class LecturersController < ApplicationController
                                     filename: "qrcode.png",
                                     content_type: "image/png")
   end
-
-  # # generate QR code with token
-
-  # def generate_qr_code
-  #   # Ensure current_lecturer is present
-  #   return unless current_lecturer
-  #   qr = RQRCode::QRCode.new(generate_token, size: 10, level: :l)
-  #   @lecturer = current_lecturer.id
-  #   puts qr
-  #   # Generate the QR code image and save it as a file
-  #   qr_code = qr.as_svg(
-  #     offset: 0,
-  #     color: "000",
-  #     shape_rendering: "crispEdges",
-  #     module_px_size: 6,
-  #   )
-
-  #   # Attach the QR code to the active storage
-  #   puts "Attachment started.....": current_lecturer
-  #   current_lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
-  #                                   filename: "qrcode.svg",
-  #                                   content_type: "image/svg+xml")
-  #   if current_lecturer.qr_code.attached?
-  #     puts "QR code attached successfully"
-  #   else
-  #     puts "Failed to attach QR code"
-  #   end
-  # end
 
   private
 
