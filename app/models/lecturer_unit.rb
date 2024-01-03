@@ -6,4 +6,5 @@ class LecturerUnit < ApplicationRecord
   def course_name_from_lecturer_unit
     course.course_name
   end
+  has_many :attendances
 end
