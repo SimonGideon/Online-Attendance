@@ -39,15 +39,20 @@ class AttendancesController < ApplicationController
       lecturer = Lecturer.find_by(id: lecturer_id)
       if lecturer
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.find_by(student_id: current_student.id)
+        if my_student_course.size > 1
+          # Render a pop-up page with a list of results and radio buttons for selection
+          render "attendance/multiple_results", locals: { my_student_course: my_student_course }
+        else
+          # If there is only one result or none, proceed with the first result
+          my_student_course_id = my_student_course.first&.id
+        end
       else
         render json: { error: "Lecturer not found for the given lecturer_id" }, status: :not_found
       end
 
       if lecturer_unit
         Attendance.find_or_create_by(
-          # students_course_id
-          # student_id: current_student.id,
-          lecturer_unit_id: lecturer_unit_id,
+          students_course_id: my_student_course_id,
           attendance_date: Date.today,
         ) do |attendance|
           attendance.present = true
