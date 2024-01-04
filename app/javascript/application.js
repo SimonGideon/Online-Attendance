@@ -4,3 +4,6 @@ import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
 import "../assets/javascripts/qr-scanner"
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets

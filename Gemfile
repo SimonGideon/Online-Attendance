@@ -44,7 +44,16 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # add bootsrap
-gem "bootstrap"
+gem "bootstrap", "~> 5.3.2"
+
+# sas engine for bootsrap
+gem "dartsass-sprockets"
+
+# add jquery
+gem "jquery-rails"
+
+# popover
+gem "popper_js", "~> 2.11.8"
 
 gem "jwt"
 
@@ -83,3 +92,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "jsbundling-rails", "~> 1.2"

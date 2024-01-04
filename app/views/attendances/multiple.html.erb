@@ -1,15 +1,16 @@
-<div id="multipleResultsModal" class="modal">
-  <div class="modal-content">
-    <h4>Select a Student Course</h4>
-    <%= form_tag(update_student_course_path, method: :patch, remote: true) do %>
-      <% my_student_course.each do |student_course| %>
-        <label>
-          <%= radio_button_tag('student_course_id', student_course.id) %>
-          <%= student_course.course_name %> - <%= student_course.student_name %>
-        </label>
-        <br>
-      <% end %>
-      <%= submit_tag 'Select', class: 'btn' %>
-    <% end %>
+<div class="modal fade" id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4" id="exampleModalXlLabel">Extra large modal</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+    </div>
   </div>
 </div>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button>
