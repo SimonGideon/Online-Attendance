@@ -18,6 +18,7 @@ class LecturersController < ApplicationController
       # Handle the case where qr_code is not attached
       puts "QR code not attached"
     end
+    puts "This is the current: #{current_lecturer.id}"
   end
 
   # GET /lecturers/new

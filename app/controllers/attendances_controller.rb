@@ -1,3 +1,4 @@
+
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: %i[ show edit update destroy ]
 
@@ -36,16 +37,7 @@ class AttendancesController < ApplicationController
       #decode jwt token
       payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: "HS256")[0]
       lecturer_id = payload["lecturer_id"]
-      lecturer_units = LecturerUnit.find_by(lecturer_id: lecturer_id)
-      # puts lecturer_unit_id
-      # lecturer_units = LecturerUnit.where(id: lecturer_unit_id)
-      if lecturer_units.count > 1
-        # Render a pop-up page with a list of results and radio buttons for selection
-        render "attendance/multiple_results", locals: { lecturer_units: lecturer_units }
-      else
-        # If there is only one result or none, proceed with the first result
-        lecturer_unit_id = lecturer_units.first&.id
-      end
+      lecturer = Lecturer.find_by(id: lecturer_id)
 
       if lecturer_unit
         Attendance.find_or_create_by(
@@ -108,18 +100,6 @@ class AttendancesController < ApplicationController
   end
 
   private
-
-  # assign lecturer unit
-  def assign_lecturer_unit
-    selected_lecturer_unit_id = params[:lecturer_unit_id]
-
-    if selected_lecturer_unit_id
-      lecturer_unit_id = LecturerUnit.find(selected_lecturer_unit_id).id
-      puts "Selected LecturerUnit ID: #{lecturer_unit.id}"
-    else
-      puts "No LecturerUnit selected."
-    end
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_attendance
