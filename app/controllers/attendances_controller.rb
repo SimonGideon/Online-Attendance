@@ -22,6 +22,9 @@ class AttendancesController < ApplicationController
   def scan
   end
 
+  def multiple
+  end
+
   # mark attendance decode
   def mark_attendance
     token = params[:encoded_token]
@@ -35,13 +38,16 @@ class AttendancesController < ApplicationController
     begin
       #decode jwt token
       payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: "HS256")[0]
-      lecturer_id = payload["lecturer_id"]
+      # lecturer_id = payload["lecturer_id"]
+      lecturer_id = "8c7e2c84-06b0-45a2-b100-9c9189b1d82d"
       lecturer = Lecturer.find_by(id: lecturer_id)
       if lecturer
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.find_by(student_id: current_student.id)
         if my_student_course.size > 1
+          @students_attendace_courses = my_student_course
+          puts
           # Render a pop-up page with a list of results and radio buttons for selection
-          render "attendance/multiple_results", locals: { my_student_course: my_student_course }
+          # render "attendance/multiple_results", locals: { my_student_course: my_student_course }
         else
           # If there is only one result or none, proceed with the first result
           my_student_course_id = my_student_course.first&.id

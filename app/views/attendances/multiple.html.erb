@@ -1,0 +1,15 @@
+<div id="multipleResultsModal" class="modal">
+  <div class="modal-content">
+    <h4>Select a Student Course</h4>
+    <%= form_tag(update_student_course_path, method: :patch, remote: true) do %>
+      <% my_student_course.each do |student_course| %>
+        <label>
+          <%= radio_button_tag('student_course_id', student_course.id) %>
+          <%= student_course.course_name %> - <%= student_course.student_name %>
+        </label>
+        <br>
+      <% end %>
+      <%= submit_tag 'Select', class: 'btn' %>
+    <% end %>
+  </div>
+</div>
