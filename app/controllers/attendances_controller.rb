@@ -1,4 +1,3 @@
-
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: %i[ show edit update destroy ]
 
@@ -38,6 +37,11 @@ class AttendancesController < ApplicationController
       payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: "HS256")[0]
       lecturer_id = payload["lecturer_id"]
       lecturer = Lecturer.find_by(id: lecturer_id)
+      if lecturer
+        my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.find_by(student_id: current_student.id)
+      else
+        render json: { error: "Lecturer not found for the given lecturer_id" }, status: :not_found
+      end
 
       if lecturer_unit
         Attendance.find_or_create_by(
