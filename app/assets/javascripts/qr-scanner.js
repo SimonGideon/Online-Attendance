@@ -9,9 +9,17 @@ function domReady(fn) {
   } 
 }
 
+const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+// Get the current URL
+const currentUrl = window.location.href;
+
+// Replace "/scan" with "/mark_attendance" in the URL
+const newUrl = currentUrl.replace('/scan', '/mark_attendance');
+
 function sendPostRequest(encodedToken, csrfToken) {
   // You can use the Fetch API or any other AJAX method to send a POST request
-  fetch('/attendances/mark_attendance', {
+  fetch(newUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,7 +52,7 @@ domReady(function () {
     "my-qr-reader", 
     { fps: 10,
       qrbox: { width: 250, height: 250 },
-      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA] } 
+      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA, Html5QrcodeScanType.SCAN_TYPE_FILE] } 
   ); 
   htmlscanner.render(onScanSuccess); 
 });

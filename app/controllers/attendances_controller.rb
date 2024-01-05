@@ -37,31 +37,45 @@ class AttendancesController < ApplicationController
 
     begin
       #decode jwt token
-      payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: "HS256")[0]
+      secret_key = Rails.application.credentials.secret_key_base
+      payload = JWT.decode(token, secret_key, true, algorithm: "HS256")[0]
       lecturer_id = payload["lecturer_id"]
-      # lecturer_id = "8c7e2c84-06b0-45a2-b100-9c9189b1d82d"
       lecturer = Lecturer.find_by(id: lecturer_id)
       if lecturer
-        my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == student_id }
+        my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
         if my_student_course.size > 1
-          @students_attendace_courses = my_student_course
+          @show_course_modal = true
+          @students_attendance_courses = my_student_course
           # Render a pop-up page with a list of results and radio buttons for selection
-
+          render :scan
         else
           # If there is only one result or none, proceed with the first result
           my_student_course_id = my_student_course.first&.id
+
+          students_course = StudentsCourse.find_by(id: my_student_course_id)
+
+          if students_course
+            attendance = Attendance.find_or_create_by(
+              students_course: students_course,
+              attendance_date: Date.today,
+            ) do |attendance|
+              attendance.present = true
+            end
+
+            if attendance.persisted?
+              puts "Attendance marked successfully"
+              render json: { message: "Attendance marked successfully" }
+            else
+              render json: { error: "Error saving attendance" }, status: :unprocessable_entity
+            end
+          else
+            render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
+          end
         end
-        Attendance.find_or_create_by(
-          students_course_id: my_student_course_id,
-          attendance_date: Date.today,
-        ) do |attendance|
-          attendance.present = true
-        end
-        render json: { message: "Attendance marked successfully" }
       else
         render json: { error: "Lecturer not found for the given lecturer_id" }, status: :unprocessable_entity
       end
-    rescue JWT::DecodeError
+    rescue JWT::DecodeError => e
       render json: { error: "Invalid token format" }, status: :unprocessable_entity
     end
   end
