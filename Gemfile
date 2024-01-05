@@ -53,7 +53,7 @@ gem "dartsass-sprockets"
 gem "jquery-rails"
 
 # popover
-gem "popper_js", "~> 2.11.8"
+gem 'popper_js', '~> 2.11.8'
 
 gem "jwt"
 
