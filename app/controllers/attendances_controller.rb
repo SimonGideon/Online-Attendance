@@ -44,10 +44,8 @@ class AttendancesController < ApplicationController
       if lecturer
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
         if my_student_course.size > 1
-          @show_course_modal = true
           @students_attendance_courses = my_student_course
           # Render a pop-up page with a list of results and radio buttons for selection
-          render :scan
         else
           # If there is only one result or none, proceed with the first result
           my_student_course_id = my_student_course.first&.id
@@ -78,6 +76,9 @@ class AttendancesController < ApplicationController
     rescue JWT::DecodeError => e
       render json: { error: "Invalid token format" }, status: :unprocessable_entity
     end
+  end
+
+  def multiple
   end
 
   # POST /attendances or /attendances.json

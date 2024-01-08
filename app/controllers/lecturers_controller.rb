@@ -3,7 +3,6 @@ class LecturersController < ApplicationController
   before_action :set_lecturer, only: %i[show edit update destroy]
   before_action :authenticate_lecturer!, only: %i[show edit update destroy generate_qr_code]
 
-
   # GET /lecturers or /lecturers.json
   def index
     @lecturers = Lecturer.all
@@ -97,7 +96,7 @@ class LecturersController < ApplicationController
       module_px_size: 6,
       resize_exactly_to: false,
       resize_gte_to: false,
-      size: 150,
+      size: 200,
     )
 
     puts "QR Code:", qr_code

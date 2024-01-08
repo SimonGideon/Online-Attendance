@@ -54,5 +54,5 @@ domReady(function () {
       qrbox: { width: 250, height: 250 },
       supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA, Html5QrcodeScanType.SCAN_TYPE_FILE] } 
   ); 
-  htmlscanner.render(onScanSuccess); 
+  htmlscanner.render(onScanSuccess);
 });

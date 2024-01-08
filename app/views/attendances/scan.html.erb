@@ -1,46 +1,21 @@
-
-  <div class="container"> 
+  <%= render 'select_course_modal' %>
     <h1>Scan QR Codes</h1> 
     <div class="section"> 
       <div id="my-qr-reader"></div> 
     </div> 
   </div> 
-
-<% if @students_attendace_courses.present? %>
-  <div class="modal fade" id="selectCourseModal" tabindex="-1" aria-labelledby="selectCourseModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="selectCourseModalLabel">Select Course</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Add the content you want in the modal body here -->
-          <!-- For example, a list of radio buttons for each course -->
-          <% @students_attendace_courses.each do |course| %>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="selectedCourse" value="<%= course.id %>">
-              <label class="form-check-label">
-                <%= course.student_id %> <!-- Replace with the actual attribute you want to display -->
-              </label>
-            </div>
-          <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="selectCourse()">Select</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
     <%= javascript_include_tag 'https://unpkg.com/html5-qrcode' %>
   <%= javascript_include_tag 'html5-qrcode.min' %>
   <%= javascript_include_tag 'qr-scanner' %>
-  <script>
-  $(document).ready(function() {
-    <% if @show_course_modal %>
-      $('#selectCourseModal').modal('show');
-    <% end %>
-  });
-</script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+      myModal.show();
+    });
+    </script>
+
+
+
+
+
+
