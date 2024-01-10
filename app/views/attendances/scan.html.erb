@@ -1,21 +1,11 @@
-  <%= render 'select_course_modal' %>
-    <h1>Scan QR Codes</h1> 
-    <div class="section"> 
-      <div id="my-qr-reader"></div> 
-    </div> 
-  </div> 
-    <%= javascript_include_tag 'https://unpkg.com/html5-qrcode' %>
-  <%= javascript_include_tag 'html5-qrcode.min' %>
-  <%= javascript_include_tag 'qr-scanner' %>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-      myModal.show();
-    });
-    </script>
+<%= render 'modal' if @show_modal %>
+<div id="scanQrCodeModal">
+  <h1>Scan QR Codes</h1>
+  <div class="section">
+    <div id="my-qr-reader"></div>
+  </div>
+</div>
 
-
-
-
-
-
+<%= javascript_include_tag 'https://unpkg.com/html5-qrcode' %>
+<%= javascript_include_tag 'html5-qrcode.min' %>
+<%= javascript_include_tag 'qr-scanner' %>

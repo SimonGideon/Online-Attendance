@@ -44,6 +44,8 @@ class AttendancesController < ApplicationController
       if lecturer
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
         if my_student_course.size > 1
+          @show_modal = true
+          puts "Modal will be shown"
           @students_attendance_courses = my_student_course
           # Render a pop-up page with a list of results and radio buttons for selection
         else
