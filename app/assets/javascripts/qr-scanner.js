@@ -1,3 +1,4 @@
+
 function domReady(fn) { 
   if (
     document.readyState === "complete" || 
@@ -11,14 +12,14 @@ function domReady(fn) {
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-// Get the current URL
+
+
+function sendPostRequest(encodedToken, csrfToken) {
+  // Get the current URL
 const currentUrl = window.location.href;
 
 // Replace "/scan" with "/mark_attendance" in the URL
 const newUrl = currentUrl.replace('/scan', '/mark_attendance');
-
-function sendPostRequest(encodedToken, csrfToken) {
-  // You can use the Fetch API or any other AJAX method to send a POST request
   fetch(newUrl, {
     method: 'POST',
     headers: {
@@ -27,11 +28,14 @@ function sendPostRequest(encodedToken, csrfToken) {
     },
     body: JSON.stringify({ encoded_token: encodedToken }),
   })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      // Handle the server response as needed
-    })
+  .then(response => {
+    if (response.redirected) {
+      // Handle redirect manually
+      window.location.href = response.url;
+    } else {
+      return response.json();
+    }
+  })
     .catch(error => {
       console.error('Error:', error);
     });

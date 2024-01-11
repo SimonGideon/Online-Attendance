@@ -1,4 +1,4 @@
-<!-- Button trigger modal -->
+<%# <!-- Button trigger modal -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -23,4 +23,24 @@
       var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
       myModal.show();
     });
-    </script>
+    </script> %>
+
+<h1>Multiple View</h1>
+
+<% if @show_modal %>
+  <p>Show Modal: <%= @show_modal %></p>
+  <!-- Display other content based on the variables -->
+  <% if @students_attendance_courses.present? %>
+    <ul>
+      <% @students_attendance_courses.each do |course| %>
+        <li>hello</li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No courses available.</p>
+  <% end %>
+<% else %>
+  <p>Show Modal is false.</p>
+<% end %>
+
+    

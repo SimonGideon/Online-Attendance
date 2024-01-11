@@ -1,4 +1,8 @@
-<%= render 'modal' if @show_modal %>
+<% if !@show_modal %>
+  <%= render 'modal' %>
+<% end %>
+
+
 <div id="scanQrCodeModal">
   <h1>Scan QR Codes</h1>
   <div class="section">
@@ -6,6 +10,4 @@
   </div>
 </div>
 
-<%= javascript_include_tag 'https://unpkg.com/html5-qrcode' %>
-<%= javascript_include_tag 'html5-qrcode.min' %>
-<%= javascript_include_tag 'qr-scanner' %>
+

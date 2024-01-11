@@ -45,42 +45,23 @@ class AttendancesController < ApplicationController
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
         if my_student_course.size > 1
           @show_modal = true
-          puts "Modal will be shown"
           @students_attendance_courses = my_student_course
+          puts @students_attendance_courses
+          puts "Render multiple"
+
           # Render a pop-up page with a list of results and radio buttons for selection
         else
           # If there is only one result or none, proceed with the first result
-          my_student_course_id = my_student_course.first&.id
-
-          students_course = StudentsCourse.find_by(id: my_student_course_id)
-
-          if students_course
-            attendance = Attendance.find_or_create_by(
-              students_course: students_course,
-              attendance_date: Date.today,
-            ) do |attendance|
-              attendance.present = true
-            end
-
-            if attendance.persisted?
-              puts "Attendance marked successfully"
-              render json: { message: "Attendance marked successfully" }
-            else
-              render json: { error: "Error saving attendance" }, status: :unprocessable_entity
-            end
-          else
-            render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
-          end
+          @student_course = my_student_course
+          my_student_course_id = @student_course.first&.id
         end
+        create_attendance(my_student_course_id)
       else
         render json: { error: "Lecturer not found for the given lecturer_id" }, status: :unprocessable_entity
       end
     rescue JWT::DecodeError => e
       render json: { error: "Invalid token format" }, status: :unprocessable_entity
     end
-  end
-
-  def multiple
   end
 
   # POST /attendances or /attendances.json
@@ -126,6 +107,27 @@ class AttendancesController < ApplicationController
   end
 
   private
+
+  def create_attendance(my_student_course_id)
+    students_course = StudentsCourse.find_by(id: my_student_course_id)
+        if students_course
+          attendance = Attendance.find_or_create_by(
+            students_course: students_course,
+            attendance_date: Date.today,
+          ) do |attendance|
+            attendance.present = true
+          end
+
+          if attendance.persisted?
+            puts "Attendance marked successfully"
+            render json: { message: "Attendance marked successfully" }
+          else
+            render json: { error: "Error saving attendance" }, status: :unprocessable_entity
+          end
+        else
+          render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
+        end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_attendance
