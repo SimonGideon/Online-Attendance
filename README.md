@@ -1,7 +1,6 @@
 <a name="readme-top"></a>
 
 <div align="center">
- <img src="https://github.com/SimonGideon/money-order-app/assets/61404403/2cf28045-3ca6-4e92-b85f-cee42520fb17" alt="logo" width="140"  height="auto" />
   <h2><b>Online Mark Attendance</b></h2>
 
 
@@ -35,7 +34,7 @@
 
 # 📖 ONLINE ATTENDANCE <a name="about-project"></a>
 
-> 
+> The Online Attendance System with QR Code Integration is designed to streamline the process of marking attendance for learners in educational settings. This system leverages QR codes to provide a quick and efficient method for both lecturers and learners to manage attendance records.
 
 ## 🛠 Built With <a name="built-with"></a>
 
