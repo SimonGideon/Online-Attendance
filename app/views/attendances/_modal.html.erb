@@ -8,7 +8,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <% if @show_modal %>
+  <!-- Display modal with attendance courses -->
+  <div id="modal">
+    <!-- Use @students_attendance_courses to render the list -->
+    <% @students_attendance_courses.each do |course| %>
+      <!-- Render course details as needed -->
+      <%= course.id %>
+    <% end %>
+  </div>
+<% else %>
+  <!-- Render content for cases where @show_modal is false -->
+  <%= "No details to show" %>
+<% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -48,7 +48,6 @@ class AttendancesController < ApplicationController
           @students_attendance_courses = my_student_course
           puts @students_attendance_courses
           puts "Render multiple"
-
           # Render a pop-up page with a list of results and radio buttons for selection
         else
           # If there is only one result or none, proceed with the first result
@@ -110,23 +109,23 @@ class AttendancesController < ApplicationController
 
   def create_attendance(my_student_course_id)
     students_course = StudentsCourse.find_by(id: my_student_course_id)
-        if students_course
-          attendance = Attendance.find_or_create_by(
-            students_course: students_course,
-            attendance_date: Date.today,
-          ) do |attendance|
-            attendance.present = true
-          end
+    if students_course
+      attendance = Attendance.find_or_create_by(
+        students_course: students_course,
+        attendance_date: Date.today,
+      ) do |attendance|
+        attendance.present = true
+      end
 
-          if attendance.persisted?
-            puts "Attendance marked successfully"
-            render json: { message: "Attendance marked successfully" }
-          else
-            render json: { error: "Error saving attendance" }, status: :unprocessable_entity
-          end
-        else
-          render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
-        end
+      if attendance.persisted?
+        puts "Attendance marked successfully"
+        render json: { message: "Attendance marked successfully" }
+      else
+        render json: { error: "Error saving attendance" }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
