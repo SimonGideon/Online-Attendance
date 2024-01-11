@@ -2,11 +2,7 @@
 
 <div align="center">
   <h2><b>Online Mark Attendance</b></h2>
-
-
 </div>
-
-
 <!-- TABLE OF CONTENTS -->
 
 # 📗 Table of Contents
@@ -68,7 +64,8 @@
 
 > The project has the following features.
 
-- **Login page and registration page**
+- **Lecturer Performance rating**
+- **Attendance Analytics**
 - **QR code to mark attendance**
 - **Lesson sessions for lecturer**
 - **Admin Privilege to create courses and manage lecturers**
@@ -76,7 +73,7 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-1. ### [Demo Video](https://youtu.be/001trgndMac)
+1. ### [Demo Video](https://)
 <!-- LIVE 
 > Add a link to your deployed project.
 
@@ -111,7 +108,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone git@github.com:SimonGideon/money-oder-app.git
+  git clone git@github.com:SimonGideon/Online-Attendance.git
 ```
 
 ### Install
@@ -120,7 +117,7 @@ Install this project with:
 
 
 ```sh
-  cd money-oder-app
+  cd Online-Attendance
   gem install
 ```
 
@@ -159,9 +156,9 @@ To run tests, run the following command:
 
 > The following will be implemented on future updates.
 
--  **Generate statement for transaction**
--  **Follow users**
-- **Enable users to add their credit card**
+-  **Attebdace Analytics**
+-  **Report Mailings**
+- **Lecturer Performance tracking**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
