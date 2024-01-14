@@ -12,10 +12,7 @@ function domReady(fn) {
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-
-
 function sendPostRequest(encodedToken, csrfToken) {
-  // Get the current URL
 const currentUrl = window.location.href;
 
 // Replace "/scan" with "/mark_attendance" in the URL
@@ -30,7 +27,7 @@ const newUrl = currentUrl.replace('/scan', '/mark_attendance');
   })
   .then(response => {
     if (response.redirected) {
-      // Handle redirect manually
+      // Handling redirect manually
       window.location.href = response.url;
     } else {
       return response.json();

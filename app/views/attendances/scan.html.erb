@@ -1,11 +1,10 @@
-<% if @show_modal %>
-  <%= render 'modal' %>
+<% if flash[:show_modal] %>
+  <%= render 'modal', students_attendance_courses: flash[:students_attendance_courses] %>
 <% end %>
+
 <div id="scanQrCodeModal">
   <h1>Scan QR Codes</h1>
   <div class="section">
     <div id="my-qr-reader"></div>
   </div>
 </div>
-
-

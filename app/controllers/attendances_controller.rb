@@ -23,6 +23,21 @@ class AttendancesController < ApplicationController
   end
 
   def multiple
+    @students_attendance_courses = session[:students_attendance_courses]
+    puts @students_attendance_courses
+  end
+
+  def submit_attendance
+    selected_id = params[:selected_id]
+  
+    if selected_id.blank?
+      redirect_to multiple_student_attendances_path, alert: "Please select a valid ID"
+      return
+    end
+  
+    create_attendance(selected_id)
+  
+    redirect_to attendances_path, notice: "Attendance marked successfully"
   end
 
   # mark attendance decode
@@ -44,11 +59,12 @@ class AttendancesController < ApplicationController
       if lecturer
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
         if my_student_course.size > 1
-          @show_modal = true
           @students_attendance_courses = my_student_course
           puts @students_attendance_courses
           puts "Render multiple"
-          # Render a pop-up page with a list of results and radio buttons for selection
+          session[:students_attendance_courses] = @students_attendance_courses
+          redirect_to multiple_student_attendances_path
+          return
         else
           # If there is only one result or none, proceed with the first result
           @student_course = my_student_course

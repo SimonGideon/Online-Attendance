@@ -15,11 +15,13 @@ Rails.application.routes.draw do
     post "generate_qr_code", on: :member
     resources :lecturer_units
   end
+
   resources :students do
     resources :attendances do
       collection do
         get "scan"
         post "mark_attendance"
+        post "/submit_attendance", to: "attendances#submit_attendance"
         get "multiple"
       end
     end
