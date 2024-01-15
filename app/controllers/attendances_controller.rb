@@ -29,16 +29,22 @@ class AttendancesController < ApplicationController
 
   def submit_attendance
     selected_id = params[:selected_id]
+  
     if selected_id.blank?
       redirect_to multiple_student_attendances_path, alert: "Please select a valid ID"
       return
     end
-
-    create_attendance(selected_id)
-    session.delete(:students_attendance_courses)
+  
+    result = Attendance.create_attendance(selected_id)
+  
+    if result[:success]
+      session.delete(:students_attendance_courses)
+      redirect_to root_path, notice: result[:success]
+    else
+      render json: { error: result[:error] }, status: :unprocessable_entity
+    end
   end
 
-  # mark attendance decode
   def mark_attendance
     token = params[:encoded_token]
 
@@ -49,32 +55,20 @@ class AttendancesController < ApplicationController
     end
 
     begin
-      #decode jwt token
+      # Decode jwt token
       decoded_payload = Attendance.decode_and_verify_token(token)
       lecturer_id = decoded_payload["lecturer_id"]
-      lecturer = Lecturer.find_by(id: lecturer_id)
-      if lecturer
-        my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
-        if my_student_course.size > 1
-          @students_attendance_courses = my_student_course
-          puts @students_attendance_courses
-          puts "Render multiple"
-          session[:students_attendance_courses] = @students_attendance_courses
-          redirect_to multiple_student_attendances_path
-          return
-        else
-          # If there is only one result or none, proceed with the first result
-          @student_course = my_student_course
-          my_student_course_id = @student_course.first&.id
-        end
-        result = Attendance.create_attendance(my_student_course_id)
-        if result[:success]
-          redirect_to root_path, notice: result[:success]
-        else
-          render json: { error: result[:error] }, status: :unprocessable_entity
-        end
+
+      result = Attendance.mark_attendance(lecturer_id, current_student)
+
+      if result[:multiple_courses]
+        @students_attendance_courses = result[:multiple_courses]
+        session[:students_attendance_courses] = @students_attendance_courses
+        redirect_to multiple_student_attendances_path
+      elsif result[:success]
+        redirect_to root_path, notice: result[:success]
       else
-        render json: { error: "Lecturer not found for the given lecturer_id" }, status: :unprocessable_entity
+        render json: { error: result[:error] }, status: :unprocessable_entity
       end
     rescue JWT::DecodeError => e
       render json: { error: "Invalid token format" }, status: :unprocessable_entity
