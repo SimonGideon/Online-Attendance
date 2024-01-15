@@ -29,15 +29,13 @@ class AttendancesController < ApplicationController
 
   def submit_attendance
     selected_id = params[:selected_id]
-  
     if selected_id.blank?
       redirect_to multiple_student_attendances_path, alert: "Please select a valid ID"
       return
     end
-  
+
     create_attendance(selected_id)
-  
-    redirect_to attendances_path, notice: "Attendance marked successfully"
+    session.delete(:students_attendance_courses)
   end
 
   # mark attendance decode
@@ -70,7 +68,7 @@ class AttendancesController < ApplicationController
           @student_course = my_student_course
           my_student_course_id = @student_course.first&.id
         end
-        create_attendance(my_student_course_id)
+        Attendance.create_attendance(my_student_course_id)
       else
         render json: { error: "Lecturer not found for the given lecturer_id" }, status: :unprocessable_entity
       end
@@ -122,27 +120,6 @@ class AttendancesController < ApplicationController
   end
 
   private
-
-  def create_attendance(my_student_course_id)
-    students_course = StudentsCourse.find_by(id: my_student_course_id)
-    if students_course
-      attendance = Attendance.find_or_create_by(
-        students_course: students_course,
-        attendance_date: Date.today,
-      ) do |attendance|
-        attendance.present = true
-      end
-
-      if attendance.persisted?
-        puts "Attendance marked successfully"
-        render json: { message: "Attendance marked successfully" }
-      else
-        render json: { error: "Error saving attendance" }, status: :unprocessable_entity
-      end
-    else
-      render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
-    end
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_attendance
