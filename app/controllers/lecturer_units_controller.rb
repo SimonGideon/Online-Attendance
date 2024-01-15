@@ -1,16 +1,6 @@
 class LecturerUnitsController < ApplicationController
   load_and_authorize_resource
   before_action :set_lecturer_unit
-  # def current_lec_units
-  #   lecturer_id = current_lecturer.id
-  #   @lecturer_units = params[:id]
-
-  #   if @lecturer_units
-  #     render json: @lecturer_units
-  #   else
-  #     render json: { error: "No lecturer units found for the current lecturer" }, status: :not_found
-  #   end
-  # end
 
   # GET /lecturer_units or /lecturer_units.json
   def index

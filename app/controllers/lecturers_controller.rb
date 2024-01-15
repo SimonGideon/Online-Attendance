@@ -77,41 +77,15 @@ class LecturersController < ApplicationController
 
   # generate QR code with token
   def generate_qr_code
-    # Ensure current_lecturer is present
-    unless current_lecturer
-      flash[:error] = "Lecturer not found. Please make sure you are logged in."
-      redirect_to root_path and return
+    result = current_lecturer.generate_qr_code
+
+    if result[:error]
+      flash[:error] = result[:error]
+    else
+      flash[:notice] = result[:success]
     end
 
-    qr = RQRCode::QRCode.new(generate_token, size: 10, level: :l)
-
-    # Generate the QR code image
-    qr_code = qr.as_png(
-      bit_depth: 1,
-      border_modules: 4,
-      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
-      color: "black",
-      file: nil,
-      fill: "white",
-      module_px_size: 6,
-      resize_exactly_to: false,
-      resize_gte_to: false,
-      size: 200,
-    )
-
-    puts "QR Code:", qr_code
-
-    # Check if the lecturer already has a QR code attached
-    if current_lecturer.qr_code.attached?
-      # If it does, delete the existing QR code
-      current_lecturer.qr_code.purge
-      puts "QR code purged!!!+==========="
-    end
-
-    # Attach the new QR code to the active storage
-    current_lecturer.qr_code.attach(io: StringIO.new(qr_code.to_s),
-                                    filename: "qrcode.png",
-                                    content_type: "image/png")
+    redirect_to root_path
   end
 
   private
@@ -119,14 +93,5 @@ class LecturersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_lecturer
     @lecturer = Lecturer.find(params[:id])
-  end
-
-  # if something_is_not_kosher
-  #   redirect_to sign_out_path and return
-  # end
-  # Only allow a list of trusted parameters through.
-
-  def lecturer_params
-    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar)
   end
 end
