@@ -12,15 +12,20 @@ class Attendance < ApplicationRecord
       ) do |attendance|
         attendance.present = true
       end
-
       if attendance.persisted?
         puts "Attendance marked successfully"
-        render json: { message: "Attendance marked successfully" }
+        return { success: "Attendance marked successfully" }
       else
-        render json: { error: "Error saving attendance" }, status: :unprocessable_entity
+        return { error: "Error saving attendance" }
       end
     else
-      render json: { error: "StudentsCourse not found for the given students_course_id" }, status: :unprocessable_entity
+      return { error: "StudentsCourse not found for the given students_course_id" }
     end
+  end
+
+  def self.decode_and_verify_token(token)
+    secret_key = Rails.application.credentials.secret_key_base
+    payload = JWT.decode(token, secret_key, true, algorithm: "HS256")[0]
+    payload
   end
 end

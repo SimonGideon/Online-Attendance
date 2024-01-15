@@ -50,9 +50,8 @@ class AttendancesController < ApplicationController
 
     begin
       #decode jwt token
-      secret_key = Rails.application.credentials.secret_key_base
-      payload = JWT.decode(token, secret_key, true, algorithm: "HS256")[0]
-      lecturer_id = payload["lecturer_id"]
+      decoded_payload = Attendance.decode_and_verify_token(token)
+      lecturer_id = decoded_payload["lecturer_id"]
       lecturer = Lecturer.find_by(id: lecturer_id)
       if lecturer
         my_student_course = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
@@ -68,54 +67,17 @@ class AttendancesController < ApplicationController
           @student_course = my_student_course
           my_student_course_id = @student_course.first&.id
         end
-        Attendance.create_attendance(my_student_course_id)
+        result = Attendance.create_attendance(my_student_course_id)
+        if result[:success]
+          redirect_to root_path, notice: result[:success]
+        else
+          render json: { error: result[:error] }, status: :unprocessable_entity
+        end
       else
         render json: { error: "Lecturer not found for the given lecturer_id" }, status: :unprocessable_entity
       end
     rescue JWT::DecodeError => e
       render json: { error: "Invalid token format" }, status: :unprocessable_entity
-    end
-  end
-
-  # POST /attendances or /attendances.json
-  def create
-    @attendance = Attendance.new(
-      students_course_id: attendance_params[:student_id],
-      attendance_date: Date.today,
-      present: true,
-    )
-
-    respond_to do |format|
-      if @attendance.save
-        format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully created." }
-        format.json { render :show, status: :created, location: @attendance }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /attendances/1 or /attendances/1.json
-  def update
-    respond_to do |format|
-      if @attendance.update(attendance_params)
-        format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully updated." }
-        format.json { render :show, status: :ok, location: @attendance }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /attendances/1 or /attendances/1.json
-  def destroy
-    @attendance.destroy
-
-    respond_to do |format|
-      format.html { redirect_to attendances_url, notice: "Attendance was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
