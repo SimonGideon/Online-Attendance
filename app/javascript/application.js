@@ -2,3 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "../assets/javascripts/qr-scanner"
+import "popper"
+// import "../assets/javascripts/pop"
+import * as bootstrap from "bootstrap"
+//= require bootstrap-sprockets

@@ -8,6 +8,9 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  config.serve_static_assets = false
+
   # Do not eager load code on boot.
   config.eager_load = false
 
