@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h2><b>Online Mark Attendance</b></h2>
+  <h2><b>Online Mark Attendance   </b></h2>
 </div>
 <!-- TABLE OF CONTENTS -->
 
