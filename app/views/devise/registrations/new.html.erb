@@ -1,8 +1,13 @@
-<%= image_tag("logo.png") %>
+
+<%=stylesheet_link_tag 'page-auth', media: 'all' %>
+<div class="form-container">
+<div class="form-header">
+<%= image_tag "logo.png", class: "logo" %>
 <h2>Sign up</h2>
+</div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "lecturers/shared/error_messages", resource: resource %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -26,5 +31,7 @@
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
+<%= render "devise/shared/links" %>
+</div>
 
-<%= render "lecturers/shared/links" %>
+
