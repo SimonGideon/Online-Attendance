@@ -1,0 +1,44 @@
+body {
+    background: #f8f9fa; /* Light gray background */
+  }
+
+  .landing-page {
+    height: 100vh;
+    width: 100vw;
+    background: image-url('banner2.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.603); /* Semi-transparent white background */
+    backdrop-filter: blur(5px); /* Blur effect */
+  }
+
+  .heading {
+    font-weight: 900;
+  }
+
+
+  /* Add animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+
+  .fade-in-up {
+    animation-name: fadeInUp;
+  }
