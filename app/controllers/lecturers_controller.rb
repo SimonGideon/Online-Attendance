@@ -84,8 +84,6 @@ class LecturersController < ApplicationController
     else
       flash[:notice] = result[:success]
     end
-
-    redirect_to root_path
   end
 
   private
@@ -93,5 +91,8 @@ class LecturersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_lecturer
     @lecturer = Lecturer.find(params[:id])
+  end
+  def lecturer_params
+    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar)
   end
 end
