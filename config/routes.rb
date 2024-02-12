@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  resources :admins do
-    resources :courses
-    resources :lecturer_units
-    resources :students_courses
-    resources :lecturers
-    resources :students
-  end
   devise_for :lecturers
   devise_for :students
   root "home#index"

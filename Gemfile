@@ -26,6 +26,9 @@ gem "stimulus-rails"
 
 gem 'trestle'
 
+# auth
+gem 'trestle-auth'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
