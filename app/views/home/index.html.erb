@@ -10,25 +10,12 @@
         <div class="card p-4 rounded shadow-lg animated py-20 fade-in-up">
           <h2 class="card-title text-center mb-4">Sign Up</h2>
           <div class="d-grid gap-3">
-            <%= link_to 'Sign up as a Lecturer', new_lecturer_registration_path, class: "btn btn-primary btn-lg" %>
-            <%= link_to 'Sign up as a Student', new_student_registration_path, class: "btn btn-secondary btn-lg" %>
+            <%= link_to 'Sign up as a Lecturer', new_lecturer_registration_path, class: "btn button1 btn-lg" %>
+            <%= link_to 'Sign up as a Student', new_student_registration_path, class: "btn button2 btn-lg" %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var alertParagraph = document.querySelector('.alert');
-    var noticeParagraph = document.querySelector('.notice');
 
-    if (alertParagraph && alertParagraph.innerHTML.trim() === '') {
-      alertParagraph.closest('.alert').style.display = 'none';
-    }
-
-    if (noticeParagraph && noticeParagraph.innerHTML.trim() === '') {
-      noticeParagraph.closest('.notice').style.display = 'none';
-    }
-  });
-</script>
