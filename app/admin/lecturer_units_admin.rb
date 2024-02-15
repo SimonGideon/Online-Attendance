@@ -6,11 +6,6 @@ Trestle.resource(:lecturer_units) do
   # column :lecturer
 
   table do
-    row_count = 0
-    column "NO" do
-      row_count += 1
-      row_count
-    end
     column :id
     column :lecturer
     column :course_id, ->(lecturer_unit) {lecturer_unit.course.course_name}
