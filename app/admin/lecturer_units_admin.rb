@@ -26,14 +26,19 @@ Trestle.resource(:lecturer_units) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |lecturer_unit|
-  #   text_field :name
-  #
-  #   row do
-  #     col { datetime_field :updated_at }
-  #     col { datetime_field :created_at }
-  #   end
-  # end
+  form do |lecturer_unit|
+    select :lecturer_id, options_for_select(Lecturer.all.map { |lecturer| [lecturer.name, lecturer.id] }), label: "Lecturer"
+    select :course_id, options_for_select(Course.all.map { |course| [course.course_name, course.id] }), label: "Course"
+    concat(content_tag(:ol) do
+      lecturer_unit.students_courses.each do |students_course|
+        student = students_course.student # Assuming there is a student association
+        concat(content_tag(:li) do
+          concat(content_tag(:span, student.name)) # Assuming the student has a name attribute
+          concat(button_to("Delete", "/students/#{student.id}/students_courses/#{students_course.id}", method: :delete, data: { confirm: "Are you sure you want to delete this student?" }))
+        end)
+      end
+    end)
+  end
 
   # By default, all parameters passed to the update and create actions will be
   # permitted. If you do not have full trust in your users, you should explicitly
