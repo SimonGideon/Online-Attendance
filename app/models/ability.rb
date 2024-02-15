@@ -17,10 +17,5 @@ class Ability
       can :read, Course
       can :manage, Attendance, student_course: { student_id: user.id }
     end
-
-    # Abilities for Admin
-    if user.is_a?(Admin)
-      can :manage, :all
-    end
   end
 end

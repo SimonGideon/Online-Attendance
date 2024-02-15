@@ -47,9 +47,11 @@ class AttendancesController < ApplicationController
 
   def mark_attendance
     token = params[:encoded_token]
+    puts "=======Token: #{token}"
 
     # Ensure the token is provided
     if token.blank?
+      puts "=======Token is missing"
       render json: { error: "Token is missing" }, status: :unprocessable_entity
       return
     end

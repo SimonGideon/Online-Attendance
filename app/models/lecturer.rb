@@ -1,7 +1,7 @@
 class Lecturer < ApplicationRecord
   # Associations
-  has_many :courses
-  has_many :lecturer_units
+  has_many :courses, dependent: :destroy
+  has_many :lecturer_units, dependent: :destroy
   has_many :attendances
   has_many :students_courses, through: :lecturer_units
   has_one_attached :avatar
