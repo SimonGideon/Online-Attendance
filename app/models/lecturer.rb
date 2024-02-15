@@ -19,6 +19,6 @@ class Lecturer < ApplicationRecord
 
   # Strong parameters for lecturer
   def lecturer_params
-    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar)
+    params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar, :qr_code)
   end
 end

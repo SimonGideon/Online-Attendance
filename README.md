@@ -118,7 +118,11 @@ Install this project with:
 
 ```sh
   cd Online-Attendance
-  gem install
+  bundle install
+```
+Run the followig comand to generate your own secrete key.
+```sh
+rails credentials:edit
 ```
 
 ### Usage

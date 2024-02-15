@@ -69,10 +69,10 @@ class LecturersController < ApplicationController
 
   def generate_token
     secret_key = Rails.application.credentials.secret_key_base
-    return JWT.encode({ lecturer_id: current_lecturer.id }, secret_key, "HS256")
-  rescue => e
-    puts "Error generating token: #{e.message}"
-    return nil
+    token = JWT.encode({ lecturer_id: current_lecturer.id }, secret_key, "HS256")
+    puts "THis is ====================", token
+    puts "Current User:", current_lecturer.id
+    return token
   end
 
   # generate QR code with token
