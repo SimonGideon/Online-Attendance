@@ -1,6 +1,6 @@
 Trestle.resource(:lecturers) do
   menu do
-    item :lecturers, icon: "fa fa-star"
+    item :lecturers, icon: "fas fa-user-tie"
   end
 
   # Customize the table columns shown on the index view.

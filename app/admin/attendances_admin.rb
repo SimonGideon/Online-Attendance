@@ -1,6 +1,6 @@
 Trestle.resource(:attendances) do
   menu do
-    item :attendances, icon: "fa fa-star"
+    item :attendances, icon: "fas fa-chalkboard-teacher"
   end
 
   # Customize the table columns shown on the index view.
