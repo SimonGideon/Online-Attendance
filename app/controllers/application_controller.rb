@@ -37,4 +37,8 @@ class ApplicationController < ActionController::Base
     # For example, you might want to render a public landing page.
     # Adjust this based on your application's requirements.
   end
+
+  def render_404
+    render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+  end
 end
