@@ -113,6 +113,7 @@
   
   .company-name {
     white-space: nowrap;
+    font-size: 0.9em;
   }
   
   /*? menu links */
@@ -219,6 +220,7 @@
     overflow: hidden;
     min-height: 4rem;
     margin-top: auto;
+    padding-left: 0;
   }
   
   .avatar__wrapper {
@@ -231,7 +233,9 @@
     min-height: 3rem;
     cursor: pointer;
     border-radius: 50%;
+    background-color: rgb(87, 160, 87);
     transition: all 0.2s ease-in-out;
+    padding: 0.3rem;
   }
   
   .avatar__name {
@@ -309,3 +313,21 @@
   .sidebar-links li a  {
     color: var(--headline-text) !important;
   }
+
+  li a .ico path {
+    color: var(--headline-text) !important;
+  }
+
+  li a .ico path {
+    stroke: var(--headline-text) !important;
+  }
+
+  .dot-dot {
+    fill: var(--text-link);
+    width: 50% !important;
+  } 
+
+  .sidebar-links-wrapper ul {
+    padding-left: 0;
+  }
+  
