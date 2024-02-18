@@ -23,6 +23,8 @@
     height: 100%;
     background: var(--bg);
   }
+
+
   
   html {
     height: 100%;
@@ -302,4 +304,8 @@
       opacity: 1;
       width: 100%;
     }
+  }
+
+  .sidebar-links li a  {
+    color: var(--headline-text) !important;
   }

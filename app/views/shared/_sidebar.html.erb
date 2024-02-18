@@ -4,9 +4,9 @@
     <div class="sidebar-top-wrapper">
       <div class="sidebar-top">
         <a href="#" class="logo__wrapper">
-          <img src="assets/logo.svg" alt="Logo" class="logo-small">
+        <%= image_tag "logo.png", alt: "Logo", class: "logo-small" %>
           <span class="hide company-name">
-            HUGE iCONS
+            Online <br> Attendance
           </span>
         </a>
       </div>
@@ -21,8 +21,8 @@
       <div class="sidebar-links">
         <ul>
           <li>
-            <a href="#dashboard" title="Dashboard" class="tooltip">
-              <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <a href="#dashboard" title="Dashboard">
+            <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M1.82764 11.8634C1.82764 8.49248 1.82764 6.80699 2.57126 5.61223C2.84639 5.17021 3.18813 4.78574 3.58105 4.47623C4.64306 3.63965 6.14126 3.63965 9.13767 3.63965H12.7927C15.7891 3.63965 17.2873 3.63965 18.3493 4.47623C18.7422 4.78574 19.084 5.17021 19.3591 5.61223C20.1027 6.80699 20.1027 8.49248 20.1027 11.8634C20.1027 15.2344 20.1027 16.9199 19.3591 18.1146C19.084 18.5567 18.7422 18.9411 18.3493 19.2506C17.2873 20.0872 15.7891 20.0872 12.7927 20.0872H9.13767C6.14126 20.0872 4.64306 20.0872 3.58105 19.2506C3.18813 18.9411 2.84639 18.5567 2.57126 18.1146C1.82764 16.9199 1.82764 15.2344 1.82764 11.8634Z"
                   stroke="#141B34" stroke-width="1.4" />
@@ -31,7 +31,6 @@
                 <path d="M4.56885 7.29492H5.4826M4.56885 10.0362H5.4826" stroke="#141B34" stroke-width="1.4"
                   stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-
               <span class="link hide">Dashboard</span>
             </a>
           </li>
@@ -39,9 +38,8 @@
         <h2>People</h2>
         <div class="divider"></div>
         <ul>
-
           <li>
-            <a href="#team" title="Team" class="tooltip">
+            <a href="#team" title="Team">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_15_5297)">
                   <path
@@ -63,13 +61,13 @@
                   </clipPath>
                 </defs>
               </svg>
-              <span class="link hide">Team</span>
+              <span class="link hide">Attendance</span>
               <div class="tag hide">New</div>
 
             </a>
           </li>
           <li>
-            <a href="#onboarding" class="tooltip">
+            <a href="#onboarding">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.8789 14.5088C9.78491 19.9913 3.92166 14.5088 1.82764 19.9913" stroke="#141B34"
                   stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
@@ -81,11 +79,11 @@
                 <path d="M10.9653 7.19922L16.4479 7.19922M16.4479 10.8542L13.7066 10.8542" stroke="#141B34"
                   stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              <span class="link hide">Onboarding</span>
+              <span class="link hide">My Courses</span>
             </a>
           </li>
           <li>
-            <a href="#talent" title="Talent" class="tooltip">
+            <a href="#talent" title="Talent">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M2.74121 10.7832L2.8809 13.7318C3.031 16.8766 3.10604 18.449 4.16561 19.4133C5.22519 20.3776 6.87792 20.3776 10.1834 20.3776H11.7466C15.0521 20.3776 16.7048 20.3776 17.7644 19.4133C18.824 18.449 18.899 16.8766 19.0491 13.7318L19.1888 10.7832"
@@ -108,7 +106,7 @@
         <ul>
 
           <li>
-            <a href="#time-tracking" title="Time Tracking" class="tooltip">
+            <a href="#time-tracking" title="Time Tracking">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.4475 2.49023V4.31774M5.48242 2.49023V4.31774" stroke="#141B34" stroke-width="1.4"
                   stroke-linecap="round" stroke-linejoin="round" />
@@ -127,7 +125,7 @@
             </a>
           </li>
           <li>
-            <a href="#time-tracking" title="Time Tracking" class="tooltip">
+            <a href="#time-tracking" title="Time Tracking">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M3.65479 10.4346V14.0896C3.65479 17.1048 3.65479 18.6124 4.5915 19.5492C5.52821 20.4859 7.03583 20.4859 10.0511 20.4859H11.8786C14.8938 20.4859 16.4014 20.4859 17.3381 19.5492C18.2749 18.6124 18.2749 17.1048 18.2749 14.0896V10.4346"
@@ -149,7 +147,7 @@
             </a>
           </li>
           <li>
-            <a href="#expenses" title="Expenses" class="tooltip">
+            <a href="#expenses" title="Expenses">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M1.82764 11.8539C1.82764 9.0971 1.82764 7.71871 2.6923 6.86228C3.55695 6.00586 4.9486 6.00586 7.73189 6.00586H8.71594C11.4992 6.00586 12.8909 6.00586 13.7555 6.86228C14.6202 7.71871 14.6202 9.0971 14.6202 11.8539V14.7779C14.6202 17.5347 14.6202 18.9131 13.7555 19.7695C12.8909 20.6259 11.4992 20.6259 8.71594 20.6259H7.73189C4.9486 20.6259 3.55695 20.6259 2.6923 19.7695C1.82764 18.9131 1.82764 17.5347 1.82764 14.7779V11.8539Z"
@@ -166,7 +164,7 @@
             </a>
           </li>
           <li>
-            <a href="#incentives" title="Incentives" class="tooltip">
+            <a href="#incentives" title="Incentives">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M18.4561 3.19434L3.47422 3.19434C2.78842 3.19434 2.44551 3.19434 2.2081 3.35631C2.0905 3.43653 1.99333 3.54256 1.92419 3.66608C1.7846 3.91548 1.81872 4.2524 1.88696 4.92624C2.00086 6.05095 2.05781 6.61331 2.35599 7.01537C2.50458 7.21572 2.69297 7.38407 2.90965 7.51013C3.34446 7.76311 3.9168 7.76311 5.06148 7.76311L16.8689 7.76311C18.0136 7.76311 18.5859 7.76311 19.0207 7.51013C19.2374 7.38407 19.4258 7.21572 19.5744 7.01537C19.8725 6.61331 19.9295 6.05095 20.0434 4.92624C20.1116 4.2524 20.1458 3.91548 20.0062 3.66608C19.937 3.54256 19.8399 3.43653 19.7223 3.35631C19.4848 3.19434 19.1419 3.19434 18.4561 3.19434Z"
@@ -180,7 +178,7 @@
             </a>
           </li>
           <li>
-            <a href="#compensation" title="Compensation" class="tooltip">
+            <a href="#compensation" title="Compensation">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M3.65479 10.4346V14.0896C3.65479 17.1048 3.65479 18.6124 4.5915 19.5492C5.52821 20.4859 7.03583 20.4859 10.0511 20.4859H11.8786C14.8938 20.4859 16.4014 20.4859 17.3381 19.5492C18.2749 18.6124 18.2749 17.1048 18.2749 14.0896V10.4346"
@@ -203,7 +201,7 @@
             </a>
           </li>
           <li>
-            <a href="#compensation" title="Compensation" class="tooltip">
+            <a href="#compensation" title="Compensation">
               <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M19.1027 10.3234C19.1027 5.27687 15.0117 1.18585 9.96518 1.18585C4.91865 1.18585 0.827637 5.27687 0.827637 10.3234C0.827637 15.3699 4.91865 19.4609 9.96518 19.4609C15.0117 19.4609 19.1027 15.3699 19.1027 10.3234Z"
@@ -217,7 +215,7 @@
             </a>
           </li>
           <li>
-            <a href="#cost-calculator" title="Cost Calculator" class="tooltip">
+            <a href="#cost-calculator" title="Cost Calculator">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.74121 9.4248H19.1888" stroke="#141B34" stroke-width="1.4" stroke-linejoin="round" />
                 <path d="M13.7061 5.77051L15.5336 5.77051" stroke="#141B34" stroke-width="1.4" stroke-linecap="round"
@@ -234,7 +232,7 @@
             </a>
           </li>
           <li>
-            <a href="#feedback" title="Feedback" class="tooltip">
+            <a href="#feedback" title="Feedback">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M20.1027 10.7875C20.1027 15.615 16.0111 19.5292 10.9652 19.5292C10.3719 19.5299 9.78026 19.4751 9.19744 19.3656C8.77795 19.2868 8.5682 19.2474 8.42177 19.2698C8.27534 19.2922 8.06783 19.4025 7.65281 19.6232C6.47877 20.2476 5.1098 20.4681 3.79322 20.2232C4.29362 19.6077 4.63537 18.8692 4.78617 18.0775C4.87754 17.5933 4.65114 17.1228 4.31203 16.7785C2.77185 15.2145 1.82764 13.107 1.82764 10.7875C1.82764 5.96003 5.91923 2.0459 10.9652 2.0459C16.0111 2.0459 20.1027 5.96003 20.1027 10.7875Z"
@@ -253,7 +251,7 @@
         <ul>
 
           <li>
-            <a href="#payroll" title="Payroll" class="tooltip">
+            <a href="#payroll" title="Payroll">
               <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M20.1027 11.158C20.1027 16.2046 16.0117 20.2956 10.9652 20.2956C5.91865 20.2956 1.82764 16.2046 1.82764 11.158C1.82764 6.11152 5.91865 2.02051 10.9652 2.02051C16.0117 2.02051 20.1027 6.11152 20.1027 11.158Z"
@@ -271,7 +269,7 @@
     </div>
     <div class="sidebar__profile">
       <div class="avatar__wrapper">
-        <img class="avatar" src="assets/logo.svg" alt="Joe Doe Picture">
+      <%= image_tag "logo.svg", class: "avatar", alt: "Joe Doe Picture" %>
         <div class="online__status"></div>
       </div>
       <div class="avatar__name hide">
@@ -291,32 +289,4 @@
       </svg>
     </div>
   </nav>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const expand_btn = document.querySelector(".expand-btn");
-
-let activeIndex;
-
-expand_btn.addEventListener("click", () => {
-  document.body.classList.toggle("collapsed");
-});
-
-const current = window.location.href;
-
-const allLinks = document.querySelectorAll(".sidebar-links a");
-
-allLinks.forEach((elem) => {
-  elem.addEventListener("click", function () {
-    const hrefLinkClick = elem.href;
-
-    allLinks.forEach((link) => {
-      if (link.href == hrefLinkClick) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    });
-  });
-});
-  }
-  </script>
+  <%= javascript_include_tag 'sidebar' %>
