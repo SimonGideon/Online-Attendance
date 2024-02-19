@@ -8,11 +8,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(Student)
-      student_path(resource)
+      dashboard_student_path(current_student)
     elsif resource.is_a?(Lecturer)
       lecturer_path(resource)
-    elsif resource.is_a?(Admin)
-      admin_path(resource)
     else
       root_path
     end
@@ -39,6 +37,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+    render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
   end
 end

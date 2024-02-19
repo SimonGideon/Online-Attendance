@@ -1,5 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-3">
+    <%= render partial: 'shared/sidebar', locals: { student_id: params[:student_id] } %>
+    </div>
+    <div class="col-md-9">
+
 <h1>Students courses</h1>
  <p>
     <strong>Loggen In as:</strong>
@@ -16,3 +23,8 @@
 </div>
 
 <%= link_to "New students course", new_student_students_course_path %>
+</div>
+</div>
+</div>
+</div>
+

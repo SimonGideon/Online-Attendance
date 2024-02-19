@@ -75,6 +75,11 @@ class StudentsCoursesController < ApplicationController
     end
   end
 
+  def set_student
+    @student = current_student
+  end
+
+
   # Use callbacks to share common setup or constraints between actions.
   def set_students_course
     @students_course = StudentsCourse.find(params[:id])

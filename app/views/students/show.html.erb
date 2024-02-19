@@ -1,15 +1,20 @@
-<p style="color: green"><%= notice %></p>
-<%= render partial: 'shared/sidebar' %>
-<%= render @student %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-3">
+    <%= render partial: 'shared/sidebar', locals: { student: @student } %>
 
-<div>
-  <%= link_to "Edit this student", edit_student_path(@student) %> |
-  <%= link_to "Back to students", students_path %>
-
-  <%= button_to "Destroy this student", @student, method: :delete %>
+    </div>
+    <div class="col-md-9">
+      <%= render @student %>
+      <div>
+        <%= link_to "Edit this student", edit_student_path(@student) %> |
+        <%= link_to "Back to students", students_path %>
+        <%= button_to "Destroy this student", @student, method: :delete %>
+      </div>
+      
+      <% if student_signed_in? %>
+        <%= button_to "Logout", destroy_student_session_path, method: :delete, data: { turbo_method: :delete } %>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<% if student_signed_in? %>
-<%= button_to "Logout", 
- destroy_student_session_path, method: :delete, data: { turbo_method: :delete } %>
-<% end %>

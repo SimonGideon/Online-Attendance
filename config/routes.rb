@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     resources :lecturer_units
   end
 
+  
+
   resources :students do
+    # get 'dashboard', on: :member
+    get '/dashboard', to: 'students#dashboard', as: 'dashboard'
     resources :attendances do
       collection do
         get "scan"
@@ -19,9 +23,11 @@ Rails.application.routes.draw do
     end
     resources :students_courses
   end
+
+ 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  match "*path", to: "application#render_404", via: :all
+  # match "*path", to: "application#render_404", via: :all
 end

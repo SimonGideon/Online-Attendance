@@ -3,6 +3,7 @@ class AttendancesController < ApplicationController
 
   # GET /attendances or /attendances.json
   def index
+    @student = current_student
     @attendances = Attendance.all
   end
 
