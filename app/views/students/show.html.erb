@@ -1,9 +1,9 @@
 <div class="main-container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-auto">
       <%= render partial: 'shared/studentsidebar', locals: { student_id: @student.id } %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-auto body-container">
       <%= render @student %>
       <div>
         <%= link_to "Edit this student", edit_student_path(@student) %> |

@@ -254,6 +254,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_calendar (3.0.2)
+      rails (>= 6.1)
     spring (4.1.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -322,6 +324,7 @@ DEPENDENCIES
   rails_live_reload
   rqrcode
   selenium-webdriver
+  simple_calendar
   spring
   sprockets-rails
   stimulus-rails

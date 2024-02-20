@@ -1,10 +1,10 @@
 <p style="color: green"><%= notice %></p>
 <div class="main-container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-auto">
       <%= render 'shared/sidebar', student: @student %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-auto body-container">
       <%= render @students_course %>
       <div>
         <%= link_to "Edit this students course", edit_students_course_path(@students_course) %> |

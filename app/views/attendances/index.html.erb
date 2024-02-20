@@ -2,10 +2,10 @@
 <p style="color: red"><%= alert %></p>
 <div class="main-container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-auto">
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-auto body-container">
       <h1>Attendances</h1>
       <div id="attendances">
         <% @attendances.each do |attendance| %>

@@ -1,9 +1,9 @@
 <div class="main-container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-auto">
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-auto body-container">
       <p style="color: green"><%= notice %></p>
       <h1>New students course</h1>
       <%= render "form", students_course: @students_course %>

@@ -8,6 +8,8 @@ class StudentsController < ApplicationController
   end
 
   def dashboard
+    @students_courses = current_student.students_courses.includes(:lecturer_unit)
+    @attendances = Attendance.joins(students_course: { lecturer_unit: :course }).where(students_courses: { student_id: current_student.id })
   end
   # GET /students/1 or /students/1.json
   def show
