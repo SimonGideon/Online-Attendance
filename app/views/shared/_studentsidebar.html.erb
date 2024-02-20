@@ -117,14 +117,23 @@
     </div>
     <div class="sidebar__profile">
       <div class="avatar__wrapper">
-      <%= image_tag "user.png", class: "avatar", alt: "Joe Doe Picture" %>
+      <% if current_student.avatar.attached? %>
+  <%= image_tag current_student.avatar, class: "personal-img"  %>
+<% else %>
+  <%= image_tag "user.png", class: "avatar", alt: "Joe Doe Picture" %>
+<% end %>
+
         <div class="online__status"></div>
       </div>
       <div class="avatar__name hide">
-        <div class="user-name">Hugeicons Pro</div>
-        <div class="email">@huge_icons</div>
+        <div class="user-name">
+          <%= current_student.name %>
+        </div>
+        <div class="email">
+          <%= current_student.email %>
+        </div>
       </div>
-      <i class="fas fa-ellipsis-h"></i>
+      <i class="fas hide fa-ellipsis-h"></i>
     </div>
   </nav>
   <%= javascript_include_tag 'sidebar' %>
