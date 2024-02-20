@@ -1,6 +1,6 @@
-<%= form_with(url: student_students_courses_path, model: students_course) do |form| %>
+<%= form_with(url: student_students_courses_path, model: students_course, class: "needs-validation", novalidate: true) do |form| %>
   <% if students_course.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(students_course.errors.count, "error") %> prohibited this students_course from being saved:</h2>
 
       <ul>
@@ -10,13 +10,12 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label :lecturer_unit_id, style: "display: block" %>
-    <%= form.collection_select :lecturer_unit_id, @available_courses, :id, :course_name_from_lecturer_unit, { prompt: 'Select a Course' } %>
+  <div class="form-group">
+    <%= form.label :lecturer_unit_id, class: "d-block" %>
+    <%= form.collection_select :lecturer_unit_id, @available_courses, :id, :course_name_from_lecturer_unit, { prompt: 'Select a Course' }, class: "form-control" %>
   </div>
 
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

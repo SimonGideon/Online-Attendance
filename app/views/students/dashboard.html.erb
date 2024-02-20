@@ -14,8 +14,8 @@
             <div class="ic-content">
               <i class="fas fa-user-graduate i-1"></i>
               <div class="dash-more">
-                <p class="dash-item"><%= @students_courses.size %></p>
                 <p class="card-description">Total Courses</p>
+                <p class="dash-item"><%= @students_courses.size %></p>
               </div>
             </div>
             <div class="card-footer">
@@ -27,8 +27,8 @@
             <div class="ic-content">
               <i class="fas fa-book-reader i-2"></i>
               <div class="dash-more">
-                <p class="dash-item"><%= @students_courses.map(&:lecturer_unit).uniq.size %></p>
                 <p class="card-description">Registered Units</p>
+                <p class="dash-item"><%= @students_courses.map(&:lecturer_unit).uniq.size %></p>
               </div>
             </div>
             <div class="card-footer">
@@ -40,6 +40,7 @@
             <div class="ic-content">
               <i class="fas fa-chalkboard-teacher i-3"></i>
               <div class="dash-more">
+                <p class="card-description">Attendance</p>
                 <% if @students_courses.any? %>
                   <% students_course = @students_courses.first %>
                   <p class="dash-item">
@@ -47,7 +48,6 @@
                     <span>%</span>
                   </p>
                 <% end %>
-                <p>Attendance</p>
               </div>
             </div>
             <div class="card-footer">

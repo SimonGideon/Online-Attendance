@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-<p style="color: red"><%= alert %></p>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto">
@@ -7,12 +5,25 @@
     </div>
     <div class="col-md-auto body-container">
       <h1>Attendances</h1>
-      <div id="attendances">
-        <% @attendances.each do |attendance| %>
-          <%= render attendance %>
-        <% end %>
+      <%= link_to "New attendance", scan_student_attendances_path, class: "btn btn-primary mb-3" %>
+      <div id="attendances" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Present</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @attendances.each do |attendance| %>
+              <tr>
+                <td><%= attendance.attendance_date %></td>
+                <td><%= attendance.present ? 'Yes' : 'No' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-      <%= link_to "New attendance", scan_student_attendances_path %>
     </div>
   </div>
 </div>

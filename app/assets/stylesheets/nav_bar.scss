@@ -1,6 +1,6 @@
 :root {
   --primary-color: #191919;
-  --primary: #408CF9;
+  --primary: #408CF8;
   --white: #FFFFFF;
   --sidebar-hover: #F5F5F5;
   --sidebar-bg: #FFFFFF;
@@ -364,6 +364,10 @@ li a .ico path {
     position: relative;
     border: 0 none;
     transition: transform .3s cubic-bezier(.34,2,.6,1),box-shadow .2s ease;
+    .card-description {
+      color: var(--text-link);
+      opacity: 0.5;
+    }
   }
 
   .ic-content {
@@ -434,4 +438,3 @@ li a .ico path {
     height: 1rem;
   }
 }
-

@@ -1,25 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<%= stylesheet_link_tag 'student-courses', media: 'all' %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto">
+      <!-- Assuming your partial is rendering a sidebar for students -->
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
     <div class="col-md-auto body-container">
-      <h1>Students courses</h1>
-      <p>
-        <strong>Loggen In as:</strong>
-        <%= @logged_in_student.name %>
-      </p>
-      <div id="students_courses">
-        <% @students_courses.each do |students_course| %>
-          <%= render students_course %>
-          <%# <p>
-      <%= link_to "Show this students course", student_students_course %>
-          <%# </p> %>
-        <% end %>
+      <div class="student-course-head">
+        <h1>Students Courses</h1>
+        <%= link_to "Register Unit", new_student_students_course_path, class: "btn" %>
       </div>
-      <%= link_to "New students course", new_student_students_course_path %>
+      <div class="students_courses">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Unit Name</th>
+              <th>Unit Code</th>
+              <th>Lecturer</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @students_courses.each do |students_course| %>
+              <tr>
+                <td><%= students_course.lecturer_unit.course.course_name %></td>
+                <td><%= students_course.lecturer_unit.course.course_code %></td>
+                <td><%= students_course.lecturer_unit.lecturer.name %></td>
+                <td>
+                  <%= button_to "Delete", student_students_course_path(current_student, students_course), method: :delete, data: { confirm: "Are you sure you want to delete this course?" }, class: "btn btn-danger btn-sm" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
 </div>
