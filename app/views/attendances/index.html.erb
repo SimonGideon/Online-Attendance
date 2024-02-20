@@ -1,26 +1,18 @@
 <p style="color: green"><%= notice %></p>
 <p style="color: red"><%= alert %></p>
-
 <div class="main-container">
   <div class="row">
     <div class="col-md-3">
-    <%= render partial: 'shared/sidebar', locals: { student_id: params[:student_id] } %>
-
+      <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
     <div class="col-md-9">
-
-<h1>Attendances</h1>
-
-<div id="attendances">
-  <% @attendances.each do |attendance| %>
-    <%= render attendance %>
-
-  <% end %>
+      <h1>Attendances</h1>
+      <div id="attendances">
+        <% @attendances.each do |attendance| %>
+          <%= render attendance %>
+        <% end %>
+      </div>
+      <%= link_to "New attendance", scan_student_attendances_path %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New attendance", scan_student_attendances_path %>
-    </div>
-    </div>
-    </div>
-    </div>
-
