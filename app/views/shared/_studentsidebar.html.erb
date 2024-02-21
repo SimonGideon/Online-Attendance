@@ -133,7 +133,41 @@
           <%= current_student.email %>
         </div>
       </div>
-      <i class="fas hide fa-ellipsis-h"></i>
+      <!-- Button with Icon -->
+<button id="popover-btn" type="button" class="btn btn-link">
+  <i class="fas hide fa-ellipsis-h"></i>
+</button>
+
+<!-- Hidden Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to logout?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <% if student_signed_in? %>
+          <%= button_to "Logout", destroy_student_session_path, method: :delete, class: "btn btn-danger", data: { turbo_method: :delete } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
   </nav>
   <%= javascript_include_tag 'sidebar' %>
+<script>
+  $(document).ready(function(){
+    $('#popover-btn').click(function(){
+      $('#logoutModal').modal('show');
+    });
+  });
+</script>

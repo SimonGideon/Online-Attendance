@@ -1,10 +1,11 @@
+<%= stylesheet_link_tag 'dashboard', media: 'all' %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto">
       <!-- Sidebar -->
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
-    <div class="col-md-auto body-container">
+    <div class="col-lg-auto body-container">
       <!-- Dashboard Header -->
       <h1 class="mb-4">Dashboard</h1>
       <!-- Course Overview -->
