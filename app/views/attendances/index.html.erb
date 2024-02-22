@@ -1,16 +1,19 @@
+<%= stylesheet_link_tag 'attendace', media: 'all' %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto">
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
     <div class="col-md-auto body-container">
-      <h1>Attendances</h1>
-      <%= link_to "New attendance", scan_student_attendances_path, class: "btn btn-primary mb-3" %>
-      <div id="attendances" class="table-responsive">
-        <table class="table table-striped">
-          <thead>
+      <div class="att-btn">
+        <%= link_to "New attendance", scan_student_attendances_path, class: "btn btn-primary mb-3" %>
+      </div>
+      <div id="attendances" class="table table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="thead-dark">
             <tr>
               <th scope="col">Date</th>
+              <th scope="col">Unit</th>
               <th scope="col">Present</th>
             </tr>
           </thead>
@@ -18,6 +21,7 @@
             <% @attendances.each do |attendance| %>
               <tr>
                 <td><%= attendance.attendance_date %></td>
+                <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
                 <td><%= attendance.present ? 'Yes' : 'No' %></td>
               </tr>
             <% end %>
