@@ -1,0 +1,33 @@
+.body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    height: fit-content;
+    padding: 1rem;
+
+    .show-btn {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        width: 100%;
+        justify-content: right;
+    }
+
+}
+
+.show-container {
+    margin: 1.5rem;
+    width: 50vw;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    .input-field {
+        color: #141B34;
+        border: 2px solid #408df92c;
+        padding: 3px 5px;
+        border-radius: 5px;
+        min-height: 2.5rem;
+        width: 20rem;
+    }
+}

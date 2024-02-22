@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'student-account', media: 'all' %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-auto">
@@ -5,12 +6,14 @@
     </div>
     <div class="col-md-auto body-container">
       <%= render @student %>
-      <div class="mt-3">
-        <%= link_to "Edit this student", edit_student_path(@student), class: "btn btn-primary mr-2" %>
+      <div class="show-btn">
+        <div class="mt-3">
+          <%= link_to "Edit this student", edit_student_path(@student), class: "btn btn-primary mr-2" %>
+        </div>
+        <% if student_signed_in? %>
+          <%= button_to "Logout", destroy_student_session_path, method: :delete, class: "btn btn-danger mt-3", data: { turbo_method: :delete } %>
+        <% end %>
       </div>
-      <% if student_signed_in? %>
-        <%= button_to "Logout", destroy_student_session_path, method: :delete, class: "btn btn-danger mt-3", data: { turbo_method: :delete } %>
-      <% end %>
     </div>
   </div>
 </div>
