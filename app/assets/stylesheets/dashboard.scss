@@ -20,7 +20,7 @@
     .card {
       padding: 1rem 2rem;
       margin: 1rem;
-      width: 20rem;
+      width: 15rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -95,7 +95,7 @@
   .body-container {
     display: flex;
     flex-direction: column;
-  
+    width: 70vw;
     .table-span {
       background-color: green;
       opacity: 0.5;

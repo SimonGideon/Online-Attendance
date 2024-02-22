@@ -28,6 +28,21 @@
         padding: 3px 5px;
         border-radius: 5px;
         min-height: 2.5rem;
-        width: 20rem;
+        min-width: 20rem;
     }
+}
+
+.show-form {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+input#file-upload-button {
+    background: rgba(255, 166, 0, 0.411);
+    color: #000;
+}
+
+.save-btn {
+    text-align: right !important;
 }
