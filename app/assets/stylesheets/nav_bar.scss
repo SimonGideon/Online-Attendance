@@ -441,6 +441,10 @@ li a .ico path {
 
 
 @media (max-width: 768px) {
-  
+  .sidebar {
+    z-index: 100;
+    position: relative;
+  }
+
 }
 
