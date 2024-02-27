@@ -439,14 +439,42 @@ li a .ico path {
   }
 }
 
+.mobile-nav {
+  display: none;
+}
+
 
 @media (max-width: 768px) {
+
+  .mobile-nav {
+    display: flex;
+  }
+
+
+
+
+
+  .close-menu {
+    display: none;
+  }
+
+  .open-menu {
+    width: 17%;
+  }
+
   .nav-container {
 
   }
 
   .body-container {
 
+  }
+  // this should remain at the bottom
+  .show {
+    display: flex;
+  }
+  .hide-menu-btn {
+    display: none;
   }
 
 }

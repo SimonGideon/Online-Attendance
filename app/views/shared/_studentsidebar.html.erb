@@ -1,5 +1,10 @@
  
 <%= stylesheet_link_tag 'nav_bar', media: 'all' %>
+<div class="mobile-nav">
+  <%=image_tag "fried_chips", class: "open-menu" %>
+  <%=image_tag "close", class: "close-menu"%>
+</div>
+
  <nav class="sidebar">
     <div class="sidebar-top-wrapper">
       <div class="sidebar-top">
@@ -164,10 +169,3 @@
     </div>
   </nav>
   <%= javascript_include_tag 'sidebar' %>
-<script>
-  $(document).ready(function(){
-    $('#popover-btn').click(function(){
-      $('#logoutModal').modal('show');
-    });
-  });
-</script>
