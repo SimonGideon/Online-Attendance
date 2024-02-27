@@ -447,26 +447,45 @@ li a .ico path {
 @media (max-width: 768px) {
 
   .mobile-nav {
-    display: flex;
+    display: block;
   }
 
-
-
-
+  .sidebar {
+    display: none;
+  }
 
   .close-menu {
     display: none;
   }
 
-  .open-menu {
-    width: 17%;
+  .menu-control-btn {
+    width: 3.3rem;
+    height: 3rem;
   }
 
   .nav-container {
-
+    width: fit-content;
+    z-index: 1;
   }
 
   .body-container {
+    position: absolute;
+    margin-top: 3rem;
+    margin-left: 1rem;
+    z-index: -2;
+
+  }
+
+  .overview-body {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+    width: fit-content;
+
+    .card {
+      width: 20rem;
+      margin: 1rem 0;
+    }
 
   }
   // this should remain at the bottom
