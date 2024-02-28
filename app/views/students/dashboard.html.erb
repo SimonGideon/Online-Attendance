@@ -57,7 +57,7 @@
         </div>
       </div>
       <!-- Your Courses -->
-      <div class="card mb-4">
+      <div class="card mb-4 course-sam">
         <div class="card-body">
           <h2 class="card-title">Your Courses</h2>
           <ul class="list-unstyled">
@@ -68,7 +68,7 @@
         </div>
       </div>
       <!-- Attendance Summary -->
-      <div class="card mb-4">
+      <div class="card mb-4 course-sam">
         <div class="card-body">
           <h2 class="card-title">Attendance Summary</h2>
           <div class="table-responsive">
@@ -76,7 +76,7 @@
               <thead>
                 <tr>
                   <th>Course</th>
-                  <th>Attendance Date</th>
+                  <th class="sieze">Attendance Date</th>
                   <th>Present</th>
                 </tr>
               </thead>
@@ -84,7 +84,7 @@
                 <% @attendances.each do |attendance| %>
                   <tr>
                     <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
-                    <td><%= attendance.attendance_date %></td>
+                    <td class="sieze"><%= attendance.attendance_date %></td>
                     <td> <span class="table-span"><%= attendance.present ? 'Yes' : 'No' %></span> </td>
                   </tr>
                 <% end %>

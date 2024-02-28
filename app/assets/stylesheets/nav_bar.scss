@@ -448,10 +448,20 @@ li a .ico path {
 
   .mobile-nav {
     display: block;
+    position: fixed;
+  }
+  
+  .sieze {
+    display: none;
+  }
+
+  .course-sam {
+    width: 44vh;
   }
 
   .sidebar {
     display: none;
+    top: 5rem;
   }
 
   .close-menu {
@@ -486,15 +496,18 @@ li a .ico path {
       width: 20rem;
       margin: 1rem 0;
     }
+  }
 
+  .att-btn {
+    padding-right: 1rem;
   }
   // this should remain at the bottom
   .show {
     display: flex;
+    position: fixed;
   }
   .hide-menu-btn {
     display: none;
   }
-
 }
 
