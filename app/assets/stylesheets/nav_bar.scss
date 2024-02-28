@@ -443,6 +443,17 @@ li a .ico path {
   display: none;
 }
 
+#html5-qrcode-button-camera-stop {
+  box-shadow: none;
+  border: none;
+  background-color: #408CF9;
+  color: #FFFFFF;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-weight: 300;
+
+}
+
 
 @media (max-width: 768px) {
 
@@ -484,6 +495,17 @@ li a .ico path {
     margin-left: 1rem;
     z-index: -2;
 
+
+
+  }
+
+  #scanQrCodeModal {
+    width: 85vw;
+  }
+
+  .scan {
+    margin: 3rem;
+    margin-left: 1rem;
   }
 
   .overview-body {
@@ -498,8 +520,17 @@ li a .ico path {
     }
   }
 
-  .att-btn {
-    padding-right: 1rem;
+  .body-fix {
+    border: 2px solid red;
+    width: 90vw;
+
+    .att-btn {
+      z-index: 1;
+    }
+
+    .table {
+      width: 100%;
+    }
   }
   // this should remain at the bottom
   .show {

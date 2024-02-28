@@ -4,7 +4,7 @@
     <div class="col-md-auto">
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
-    <div class="col-md-auto body-container">
+    <div class="col-md-auto body-container body-fix">
       <div class="att-btn">
         <%= link_to "New attendance", scan_student_attendances_path, class: "btn btn-primary mb-3" %>
       </div>
