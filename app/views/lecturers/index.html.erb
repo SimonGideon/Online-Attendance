@@ -1,14 +1,22 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Lecturers</h1>
-
-<div id="lecturers">
-  <% @lecturers.each do |lecturer| %>
-    <%= render lecturer %>
-    <p>
-      <%= link_to "Show this lecturer", lecturer %>
-    </p>
-  <% end %>
+<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
+    </div>
+    <div class="col-lg-auto body-container">
+      <h1>Lecturers</h1>
+      <div id="lecturers">
+        <% @lecturers.each do |lecturer| %>
+          <%= render lecturer %>
+          <p>
+            <%= link_to "Show this lecturer", lecturer %>
+          </p>
+        <% end %>
+      </div>
+      <%= link_to "New lecturer", new_lecturer_path %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New lecturer", new_lecturer_path %>
