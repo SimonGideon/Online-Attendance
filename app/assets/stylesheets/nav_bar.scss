@@ -227,7 +227,14 @@ body.collapsed .divider {
 .avatar__wrapper {
   position: relative;
   display: flex;
+
+  img {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+  }
 }
+
 
 .avatar {
   display: block;
