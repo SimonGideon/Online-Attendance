@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Student)
       student_dashboard_path(current_student)
     elsif resource.is_a?(Lecturer)
-      lecturer_path(resource)
+      lecturer_dashboard_path(current_lecturer)
     else
       root_path
     end

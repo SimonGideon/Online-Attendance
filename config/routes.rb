@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :students
   root "home#index"
   resources :lecturers do
+    get '/dashboard', to: 'lecturers#dashboard', as: 'dashboard'
     post "generate_token", on: :member
     post "generate_qr_code", on: :member
     resources :lecturer_units
