@@ -1,40 +1,48 @@
-<!-- app/views/lecturers/dashboard.html.erb -->
 <%= stylesheet_link_tag 'dashboard', media: 'all' %>
-
-<div class="container mt-5">
+<div class="main-container">
   <div class="row">
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-header">Profile</div>
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item"><%= current_lecturer.name %></li>
-            <li class="list-group-item"><%= current_lecturer.service_number %></li>
-            <li class="list-group-item"><%= current_lecturer.work_email %></li>
-          </ul>
-        </div>
-      </div>
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: 'shared/lecturersidebar', locals: { student_id: params[:student_id] } %>
     </div>
-    <div class="col-md-9">
-      <div class="card">
-        <div class="card-header">Courses</div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Course Name</th>
-                <th>Course Code</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% current_lecturer.courses.each do |course| %>
-                <tr>
-                  <td><%= course.course_name %></td>
-                  <td><%= course.course_code %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+    <div class="col-lg-auto body-container">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">Profile</div>
+              <div class="card-body">
+                <ul class="list-group">
+                  <li class="list-group-item"><%= current_lecturer.name %></li>
+                  <li class="list-group-item"><%= current_lecturer.service_number %></li>
+                  <li class="list-group-item"><%= current_lecturer.work_email %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header">Courses</div>
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Course Name</th>
+                      <th>Course Code</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% current_lecturer.courses.each do |course| %>
+                      <tr>
+                        <td><%= course.course_name %></td>
+                        <td><%= course.course_code %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

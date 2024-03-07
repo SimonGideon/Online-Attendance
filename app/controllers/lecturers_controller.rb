@@ -8,6 +8,12 @@ class LecturersController < ApplicationController
     @lecturers = Lecturer.all
   end
 
+
+  def dashboard
+    @lecturer_units = current_lecturer.lecturer_units
+    @courses = current_lecturer.courses
+  end
+
   # GET /lecturers/1 or /lecturers/1.json
   def show
     authorize! :read, @lecturer

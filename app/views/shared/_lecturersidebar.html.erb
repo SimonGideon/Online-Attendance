@@ -123,7 +123,7 @@
     <div class="sidebar__profile">
       <div class="avatar__wrapper">
       <% if current_lecturer.avatar.attached? %>
-  <%= image_tag @lecturer.avatar if @lecturer.avatar.attached? %> <br>
+  <%= image_tag current_lecturer.avatar if current_lecturer.avatar.attached? %> <br>
 <% else %>
   <%= image_tag "user.png", class: "avatar", alt: "Joe Doe Picture" %>
 <% end %>
