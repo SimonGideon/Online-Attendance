@@ -40,7 +40,7 @@ class AttendancesController < ApplicationController
 
     if result[:success]
       session.delete(:students_attendance_courses)
-      redirect_to students_path, notice: result[:success]
+      redirect_to student_dashboard_path(current_student), notice: result[:success]
     else
       redirect_to multiple_student_attendances_path, alert: result[:error]
     end

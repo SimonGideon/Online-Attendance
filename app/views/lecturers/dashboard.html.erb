@@ -3,11 +3,14 @@
   <div class="row">
     <div class="col-md-auto nav-container">
       <!-- Sidebar -->
-      <%= render partial: 'shared/lecturersidebar', locals: { student_id: params[:student_id] } %>
+      <%= render partial: 'shared/lecturersidebar', locals: { lecturer_id: @lecturer } %>
     </div>
     <div class="col-lg-auto body-container">
       <div class="container mt-5">
         <div class="row">
+          <div class="col">
+            <%= image_tag current_lecturer.qr_code if current_lecturer.qr_code.attached? %> <br>
+          </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">Profile</div>
@@ -44,7 +47,38 @@
             </div>
           </div>
         </div>
+        <div class="attendanceChart">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var labels = <%= raw @attendance_data.keys.to_json %>;
+    var data = <%= raw @attendance_data.values.to_json %>;
+
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Attendance',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+</script>
