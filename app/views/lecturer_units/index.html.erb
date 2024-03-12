@@ -1,21 +1,50 @@
+<%= stylesheet_link_tag 'lecture-unit', media: 'all' %>
 <p style="color: green"><%= notice %></p>
-
-<h1>Lecturer units</h1>
-
-<div id="lecturer_units">
-  <% @lecturer_units.each do |lecturer_unit| %>
-    <div id="<%= dom_id lecturer_unit %>">
-      <p>
-        <strong>Course:</strong>
-        <%= Course.find_by(id: lecturer_unit.course_id)&.course_name || 'N/A' %>
-      </p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: 'shared/lecturersidebar', locals: { student_id: params[:student_id] } %>
     </div>
-
-    <%# Example link, uncomment if needed %>
-    <%# <p>
-    <%#   <%= link_to "Show this lecturer unit", lecturer_lecturer_units %>
-    <%# </p> %>
-  <% end %>
+    <div class="col lec-body-container">
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col">
+            <h1>My Units</h1>
+            <div id="lecturer_units" class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @lecturer_units.each do |lecturer_unit| %>
+                    <tr>
+                      <td><%= Course.find_by(id: lecturer_unit.course_id)&.course_name || 'N/A' %></td>
+                      <td>
+                        <span class="badge badge-success" style="background-color: #28a745; color: #fff;">Active</span>
+                      </td>
+                    </tr>
+                  <% end %>
+                  <% @available_courses.each do |course| %>
+                    <tr>
+                      <td><%= course.course_name %></td>
+                      <td>
+                        <%= form_with(url: lecturer_lecturer_units_path, model: LecturerUnit.new, html: { class: "form-inline" }) do |form| %>
+                          <%= form.hidden_field :course_id, value: course.id %>
+                          <%= form.submit "Accept", class: "btn btn-outline-danger accept-button" %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New lecturer unit", new_lecturer_lecturer_unit_path %>

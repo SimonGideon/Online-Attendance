@@ -1,8 +1,7 @@
-<%= form_with(url: lecturer_lecturer_units_path, model: lecturer_unit) do |form| %>
+<%= form_with(url: lecturer_lecturer_units_path, model: lecturer_unit, html: { class: "form" }) do |form| %>
   <% if lecturer_unit.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(lecturer_unit.errors.count, "error") %> prohibited this lecturer_unit from being saved:</h2>
-
       <ul>
         <% lecturer_unit.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,12 +9,28 @@
       </ul>
     </div>
   <% end %>
-<div class="field">
-  <%= form.label :course_id %>
-  <%= form.collection_select :course_id, @available_courses, :id, :course_name, { prompt: 'Select a Course' } %>
-</div>
-
-  <div>
-    <%= form.submit %>
+  <div class="table-responsive">
+    <h2>Allocated Courses</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @available_courses.each do |course| %>
+          <tr>
+            <td><%= course.course_name %></td>
+            <td>
+              <%= form_with(url: lecturer_lecturer_units_path, model: LecturerUnit.new, html: { class: "form-inline" }) do |form| %>
+                <%= form.hidden_field :course_id, value: course.id %>
+                <%= form.submit "Accept", class: "btn btn-primary" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 <% end %>

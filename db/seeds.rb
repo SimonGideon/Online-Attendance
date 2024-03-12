@@ -6,9 +6,4 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 # db/seeds.rb
-super_admin = Admin.find_or_initialize_by(email: 'superadmin@elimu.com')
-super_admin.names = 'Otto_Admin'
-super_admin.super_admin = true
-super_admin.password = '123456'
-super_admin.password_confirmation = '123456'
-super_admin.save!
+Administrator.create(email: "admin@example.com", password: "password", first_name: "Admin", last_name: "User")

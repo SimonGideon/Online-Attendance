@@ -54,12 +54,16 @@ class StudentsCoursesController < ApplicationController
   # DELETE /students_courses/1 or /students_courses/1.json
   def destroy
     @students_course.destroy
-
+  
     respond_to do |format|
       format.html { redirect_to students_courses_url, notice: "Students course was successfully destroyed." }
       format.json { head :no_content }
+    rescue ActiveRecord::InvalidForeignKey
+      format.html { redirect_to students_courses_url, alert: "Cannot delete the students course because it is still referenced by attendances." }
+      format.json { render json: { error: "Cannot delete the students course because it is still referenced by attendances." }, status: :unprocessable_entity }
     end
   end
+  
 
   private
 
@@ -74,6 +78,11 @@ class StudentsCoursesController < ApplicationController
       lecturer_units_not_taken_by_student
     end
   end
+
+  def set_student
+    @student = current_student
+  end
+
 
   # Use callbacks to share common setup or constraints between actions.
   def set_students_course

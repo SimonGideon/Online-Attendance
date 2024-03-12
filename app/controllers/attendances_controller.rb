@@ -3,6 +3,7 @@ class AttendancesController < ApplicationController
 
   # GET /attendances or /attendances.json
   def index
+    @student = current_student
     @attendances = Attendance.all
   end
 
@@ -29,19 +30,19 @@ class AttendancesController < ApplicationController
 
   def submit_attendance
     selected_id = params[:selected_id]
-  
+
     if selected_id.blank?
       redirect_to multiple_student_attendances_path, alert: "Please select a valid ID"
       return
     end
-  
+
     result = Attendance.create_attendance(selected_id)
-  
+
     if result[:success]
       session.delete(:students_attendance_courses)
-      redirect_to root_path, notice: result[:success]
+      redirect_to student_dashboard_path(current_student), notice: result[:success]
     else
-      render json: { error: result[:error] }, status: :unprocessable_entity
+      redirect_to multiple_student_attendances_path, alert: result[:error]
     end
   end
 
@@ -50,7 +51,7 @@ class AttendancesController < ApplicationController
 
     # Ensure the token is provided
     if token.blank?
-      render json: { error: "Token is missing" }, status: :unprocessable_entity
+      redirect_to students_path, alert: "Invalid Lecturer token provided. Please try again."
       return
     end
 
@@ -66,12 +67,12 @@ class AttendancesController < ApplicationController
         session[:students_attendance_courses] = @students_attendance_courses
         redirect_to multiple_student_attendances_path
       elsif result[:success]
-        redirect_to root_path, notice: result[:success]
+        redirect_to students_path, notice: result[:success]
       else
-        render json: { error: result[:error] }, status: :unprocessable_entity
+        redirect_to students_path, alert: result[:error]
       end
     rescue JWT::DecodeError => e
-      render json: { error: "Invalid token format" }, status: :unprocessable_entity
+      redirect_to students_path, alert: "The lecturer token provided is invalid. Please try again."
     end
   end
 

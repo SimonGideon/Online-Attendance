@@ -1,21 +1,24 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @lecturer %>
-
-<div>
-  <%= link_to "Edit this lecturer", edit_lecturer_path(@lecturer) %> |
-  <%= link_to "Back to lecturers", lecturers_path %>
-  <p>  <%= @lecturer.name %></p>
-<%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
-
-  <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
-</div>
-
-<% if lecturer_signed_in? %>
-<%= button_to "Logout", 
+<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: 'shared/lecturersidebar', locals: { lecturer_id: @lecturer.id } %>
+    </div>
+    <div class="col-lg-auto body-container">
+      <%= render @lecturer %>
+      <div>
+        <%= link_to "Edit this lecturer", edit_lecturer_path(@lecturer) %> |
+        <%= link_to "Back to lecturers", lecturers_path %>
+        <p>  <%= @lecturer.name %></p>
+        <%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
+        <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
+      </div>
+      <% if lecturer_signed_in? %>
+        <%= button_to "Logout", 
  destroy_lecturer_session_path, method: :delete, data: { turbo_method: :delete } %>
-<% end %>
-
-
-
-
+      <% end %>
+    </div>
+  </div>
+</div>

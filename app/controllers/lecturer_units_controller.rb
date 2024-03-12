@@ -5,6 +5,9 @@ class LecturerUnitsController < ApplicationController
   # GET /lecturer_units or /lecturer_units.json
   def index
     @lecturer_units = LecturerUnit.where(lecturer_id: current_lecturer.id)
+    @lecturer_unit = LecturerUnit.new
+    @available_courses = available_courses_for_current_lecturer
+    render :index
   end
 
   # GET /lecturer_units/1 or /lecturer_units/1.json

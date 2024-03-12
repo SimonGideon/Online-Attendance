@@ -1,0 +1,168 @@
+.dash-container {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.row {
+    flex-wrap: nowrap !important;
+}
+
+.qr-code-container {
+  text-align: center; /* Center the QR code horizontally */
+  padding: 20px; /* Add some padding around the QR code */
+  background-color: #fff;
+  height: fit-content;
+  width: fit-content;
+  img {
+    border: 3px solid #408CF9;
+    border-radius: 5px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #408CF9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #2e6ab3;
+    }
+  
+  }
+}
+
+.qr-code {
+  width: 200px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+// dashboard.scss
+.body-container {
+    margin-left: 3rem;
+  }
+  
+  .overview-body {
+    display: flex;
+    flex-direction: row;
+  
+    .card {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      width: 15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 12px;
+      box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
+      background-color: #fff;
+      color: #252422;
+      margin-bottom: 20px;
+      position: relative;
+      border: 0 none;
+      transition: transform .3s cubic-bezier(.34,2,.6,1),box-shadow .2s ease;
+      .card-description {
+        color: var(--text-link);
+        opacity: 0.5;
+      }
+    }
+  
+    .ic-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    i {
+      font-size: 3rem;
+    }
+  
+    .i-1 {
+      color: #FA7575;
+    }
+  
+    .i-2 {
+      color: #408CF9;
+    }
+  
+    .i-3 {
+      color: orange;
+    }
+  
+    .dash-item {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-link);
+    }
+  
+    .dash-more {
+      font-size: 1.25rem;
+      color: var(--text-link);
+      display: flex;
+      text-align: right;
+      flex-direction: column;
+    }
+  }
+  
+  .card-footer {
+    display: flex;
+    background-color: transparent;
+    color: var(--text-link);
+    gap: 0.5rem;
+    i {
+      font-size: 1.5rem;
+   
+      opacity: 0.5;
+    }
+    span{
+      opacity: 0.5;
+    }
+  
+  }
+  
+  .body-container {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    .table-span {
+      background-color: green;
+      opacity: 0.5;
+      border-radius: 5px;
+      padding: 5px 10px;
+      color: white;
+      width: 1.5rem;
+      height: 1rem;
+    }
+  }
+
+  .lec-dash .overview-body .card {
+    width: 15rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+      align-content: center;
+    }
+
+    .fa-tasks {
+      color: #FA7575;
+    }
+
+    .fa-university {
+      color: #ffc107;
+    }
+  }
+  

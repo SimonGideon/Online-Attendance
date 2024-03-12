@@ -1,22 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  resources :admins do
-    resources :courses
-    resources :lecturer_units
-    resources :students_courses
-    resources :lecturers
-    resources :students
-  end
   devise_for :lecturers
   devise_for :students
   root "home#index"
   resources :lecturers do
+    get '/dashboard', to: 'lecturers#dashboard', as: 'dashboard'
     post "generate_token", on: :member
     post "generate_qr_code", on: :member
     resources :lecturer_units
   end
 
+  
+
   resources :students do
+    # get 'dashboard', on: :member
+    get '/dashboard', to: 'students#dashboard', as: 'dashboard'
     resources :attendances do
       collection do
         get "scan"
@@ -27,8 +24,11 @@ Rails.application.routes.draw do
     end
     resources :students_courses
   end
+
+ 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+  # match "*path", to: "application#render_404", via: :all
 end

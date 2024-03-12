@@ -8,6 +8,52 @@ class LecturersController < ApplicationController
     @lecturers = Lecturer.all
   end
 
+
+  def dashboard
+    @lecturer = current_lecturer
+  
+    if @lecturer.nil?
+      redirect_to login_path, alert: "Please log in to access the dashboard."
+      return
+    end
+  
+    @lecturer_units = @lecturer.lecturer_units
+    @courses = @lecturer.courses
+  
+
+    puts("Attendance load started .......................................")
+
+    @attendance_data = {}
+
+    @lecturer_units.each do |lecturer_unit|
+      puts("Lecturer Unit============>: #{lecturer_unit}")
+      lecturer_unit.students_courses.each do |students_course|
+        puts("Students Course============>: #{students_course}")
+        Attendance.where(students_course_id: students_course.id).each do |attendance|
+          puts("Attendance============>: #{attendance}")
+          date = attendance.attendance_date.strftime("%Y-%m-%d")
+          @attendance_data[date] ||= 0
+          @attendance_data[date] += 1 if attendance.present?
+        end
+      end
+    end
+
+    puts("This are the attendance data====================>: #{@attendance_data}")
+  
+    authorize! :read, @lecturer
+  
+    if @lecturer.qr_code.attached?
+      puts "QR code attached"
+    else
+      puts "QR code not attached"
+    end
+    puts "This is the current: #{@lecturer}"
+
+    @allocated_units_count = LecturerUnit.where(lecturer_id: current_lecturer.id).count
+    @total_students_count = StudentsCourse.where(lecturer_unit_id: current_lecturer.lecturer_units.pluck(:id)).count
+  end
+  
+
   # GET /lecturers/1 or /lecturers/1.json
   def show
     authorize! :read, @lecturer

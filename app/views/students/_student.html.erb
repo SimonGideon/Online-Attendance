@@ -1,24 +1,23 @@
-<div id="<%= dom_id student %>">
-<%= image_tag student.avatar if student.avatar.attached? %> <br>
-  <p>
-    <strong>Name:</strong>
-    <%= student.name %>
-    <%= student.id %>
-  </p>
-
-  <p>
-    <strong>Registraion number:</strong>
-    <%= student.registraion_number %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= student.email %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= student.phone %>
-  </p>
-
+<%= stylesheet_link_tag 'student-account', media: 'all' %>
+<div class="show-container" id="<%= dom_id student %>">
+  <div>
+    <p>
+      <strong>Name:</strong><br>
+      <div  class="input-field"><%= student.name %></div>
+    </p>
+    <p>
+      <strong>Registraion number:</strong><br>
+      <div class="input-field"><%= student.registraion_number %></div>
+    </p>
+  </div>
+  <div>
+    <p>
+      <strong>Email:</strong><br>
+      <div class="input-field"><%= student.email %></div>
+    </p>
+    <p>
+      <strong>Phone:</strong><br>
+      <div class="input-field"><%= student.phone %></div>
+    </p>
+  </div>
 </div>

@@ -1,10 +1,16 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @students_course %>
-
-<div>
-  <%= link_to "Edit this students course", edit_students_course_path(@students_course) %> |
-  <%= link_to "Back to students courses", students_courses_path %>
-
-  <%= button_to "Destroy this students course", @students_course, method: :delete %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto">
+      <%= render 'shared/sidebar', student: @student %>
+    </div>
+    <div class="col-md-auto body-container">
+      <%= render @students_course %>
+      <div>
+        <%= link_to "Edit this students course", edit_students_course_path(@students_course) %> |
+        <%= link_to "Back to students courses", students_courses_path %>
+        <%= button_to "Destroy this students course", @students_course, method: :delete %>
+      </div>
+    </div>
+  </div>
 </div>
