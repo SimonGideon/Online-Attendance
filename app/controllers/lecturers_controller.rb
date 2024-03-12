@@ -48,6 +48,9 @@ class LecturersController < ApplicationController
       puts "QR code not attached"
     end
     puts "This is the current: #{@lecturer}"
+
+    @allocated_units_count = LecturerUnit.where(lecturer_id: current_lecturer.id).count
+    @total_students_count = StudentsCourse.where(lecturer_unit_id: current_lecturer.lecturer_units.pluck(:id)).count
   end
   
 

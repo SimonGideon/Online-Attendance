@@ -5,50 +5,69 @@
       <!-- Sidebar -->
       <%= render partial: 'shared/lecturersidebar', locals: { lecturer_id: @lecturer } %>
     </div>
-    <div class="col-lg-auto body-container">
+    <div class="col-lg-auto body-container lec-dash">
       <div class="container mt-5">
-        <div class="row">
-          <div class="col">
-            <%= image_tag current_lecturer.qr_code if current_lecturer.qr_code.attached? %> <br>
-          </div>
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-header">Profile</div>
-              <div class="card-body">
-                <ul class="list-group">
-                  <li class="list-group-item"><%= current_lecturer.name %></li>
-                  <li class="list-group-item"><%= current_lecturer.service_number %></li>
-                  <li class="list-group-item"><%= current_lecturer.work_email %></li>
-                </ul>
+        <div class="col">
+          <div class="row">
+            <div class="attendanceChart col">
+              <div style="position: relative; height: 0; width: 100%;">
+                <canvas id="myChart"></canvas>
               </div>
             </div>
+            <div class="col qr-code-container">
+              <%= image_tag current_lecturer.qr_code, class: "img-fluid" if current_lecturer.qr_code.attached? %> <br>
+              <%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
+            </div>
           </div>
-          <div class="col-md-9">
-            <div class="card">
-              <div class="card-header">Courses</div>
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Course Name</th>
-                      <th>Course Code</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% current_lecturer.courses.each do |course| %>
+          <div class="row">
+            <div class="col-md-6" style="max-height: 200px; overflow-y: auto; margin-top: 2rem">
+              <div class="card">
+                <div class="card-header">Courses</div>
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
                       <tr>
-                        <td><%= course.course_name %></td>
-                        <td><%= course.course_code %></td>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
                       </tr>
-                    <% end %>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      <% current_lecturer.courses.each do |course| %>
+                        <tr>
+                          <td><%= course.course_name %></td>
+                          <td><%= course.course_code %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row overview-body">
+              <div class="col-md-3">
+                <div class="card">
+                  <i class="fas fa-tasks"></i>
+                  <div class="card-content">
+                    <div class="">Allocated Units</div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= @allocated_units_count %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <i class="fas fa-university"></i>
+                  <div class="card-content">
+                    <div class="">Total Students</div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= @total_students_count %></h5>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="attendanceChart">
-          <canvas id="myChart" width="400" height="400"></canvas>
         </div>
       </div>
     </div>
@@ -74,8 +93,17 @@
       },
       options: {
         scales: {
+          x: {
+            type: 'category',
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+             max: 5,
+            min: 0,
+            ticks: {
+              stepSize: 1 // Set the step size to 1
+            }
           }
         }
       }
