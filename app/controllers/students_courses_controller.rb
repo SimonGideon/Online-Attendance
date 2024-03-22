@@ -15,6 +15,7 @@ class StudentsCoursesController < ApplicationController
   # GET /students_courses/new
   def new
     @available_courses = available_courses_for_current_student
+    puts "====================================started"
     puts "Available courses: #{@available_courses}"
     @students_course = StudentsCourse.new
   end
