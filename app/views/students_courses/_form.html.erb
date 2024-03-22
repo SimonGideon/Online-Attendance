@@ -2,7 +2,6 @@
   <% if students_course.errors.any? %>
     <div class="alert alert-danger">
       <h2><%= pluralize(students_course.errors.count, "error") %> prohibited this students_course from being saved:</h2>
-
       <ul>
         <% students_course.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,9 +11,12 @@
   <% end %>
   <div class="form-group">
     <%= form.label :lecturer_unit_id, class: "d-block" %>
-    <%= form.collection_select :lecturer_unit_id, @available_courses, :id, :course_name_from_lecturer_unit, { prompt: 'Select a Course' }, class: "form-control" %>
+    <% if @available_courses.present? %>
+      <%= form.collection_select :lecturer_unit_id, @available_courses, :id, :course_name_from_lecturer_unit, { prompt: 'Select a Course' }, class: "form-control" %>
+    <% else %>
+      No courses available.
+    <% end %>
   </div>
-
   <div class="form-group">
     <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
