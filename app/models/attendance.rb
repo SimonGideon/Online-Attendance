@@ -43,6 +43,7 @@ class Attendance < ApplicationRecord
 
   def self.decode_and_verify_token(token)
     secret_key = Rails.application.credentials.secret_key_base
+    puts "THis is the secrete key: #{secret_key}"
     payload = JWT.decode(token, secret_key, true, algorithm: "HS256")[0]
     return payload
   rescue JWT::DecodeError => e
