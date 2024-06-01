@@ -25,7 +25,6 @@ module QrCodeGeneration
         puts "QR code: #{qr_code}"
   
         # Create ActiveStorage attachment
-        puts "Attachment started==============================="
         self.qr_code.purge if self.qr_code.attached?
         self.qr_code.attach(io: StringIO.new(qr_code.to_s), filename: "qrcode.png", content_type: "image/png")
   

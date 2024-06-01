@@ -67,9 +67,9 @@ class AttendancesController < ApplicationController
         session[:students_attendance_courses] = @students_attendance_courses
         redirect_to multiple_student_attendances_path
       elsif result[:success]
-        redirect_to students_path, notice: result[:success]
+        redirect_to student_dashboard_path, notice: result[:success]
       else
-        redirect_to students_path, alert: result[:error]
+        redirect_to student_dashboard_path, alert: result[:error]
       end
     rescue JWT::DecodeError => e
       redirect_to students_path, alert: "The lecturer token provided is invalid. Please try again."
