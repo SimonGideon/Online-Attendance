@@ -74,6 +74,8 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 1. ### [Demo Video](https://)
+![image](https://github.com/SimonGideon/Online-Attendance/assets/61404403/2e4456c1-48a4-4aca-a5d7-d33a189c98b8)
+
 <!-- LIVE 
 > Add a link to your deployed project.
 
