@@ -104,36 +104,55 @@ Example command:
 
 Clone this repository to your desired folder:
 
-
-
-```sh
+  ```sh
   cd my-folder
   git clone git@github.com:SimonGideon/Online-Attendance.git
-```
+  ```
 
 ### Install
 
-Install this project with:
+1. Install this project with:
 
-
-```sh
+  ```sh
   cd Online-Attendance
   bundle install
-```
-Remove Existing Credentials File.
-```sh
-rm config/credentials.yml.enc
-rm config/master.key
-```
+  ```
+2. Remove Existing Credentials File.
+  ```sh
+  rm config/credentials.yml.enc
+  rm config/master.key
+  ```
 
-Generate a new secrete key.
-```
-rails secret
+3. Generate a new secrete key.
+  ```sh
+  rails secret
+  ```
+4. Remove Existing Credentials File.
+  ```sh
+  rm config/credentials.yml.enc
+  rm config/master.key
+  ```
 
-```
+5. Generate a new secrete key. `copy the key in the terminal you will use it in the next step`.
+  ```sh
+  rails secret
+  ```
+6. Open your credentials file and add the new secret key.
+  ```sh
+  EDITOR="nano" bin/rails credentials:edit
+  ```
+
+7. Add the `copied` generated secret key under `secret_key_base:`
+  ```sh
+  secret_key_base: your_generated_secret_key
+  ```
+
+8. After saving and closing the editor, verify that the credentials were correctly saved by running:
+  ```sh
+  rails credentials:show
+  ```
 
 ### Usage
-
 To run the project, execute the following command:
 
 
@@ -200,63 +219,6 @@ I would like to thank [Gregoire Vella](https://www.behance.net/gregoirevella) fo
 <p align="right">(<a h```
  
 
-### Setup
-
-Clone this repository to your desired folder:
-
-
-
-```sh
-  cd my-folder
-  git clone git@github.com:SimonGideon/Online-Attendance.git
-```
-
-### Install
-
-Install this project with:
-
-
-```sh
-  cd Online-Attendance
-  bundle install
-```
-Remove Existing Credentials File.
-```sh
-rm config/credentials.yml.enc
-rm config/master.key
-```
-
-Generate a new secrete key.
-```
-rails secret
-// copy the key in the terminal you will use it in the next step.
-```
-Open your credentials file and add the new secret key.
-```
-EDITOR="nano" bin/rails credentials:edit
-```
-
-Add the `copied` generated secret key under `secret_key_base:`
-```
-secret_key_base: your_generated_secret_key
-```
-
-### Usage
-
-To run the project, execute the following command:
-
-
-```sh
-  rails s
-```
-After saving and closing the editor, verify that the credentials were correctly saved by running:
-```
-rails credentials:show
-```
-
-### Run tests
-
-To run tests, run the following command:
 
 
 
