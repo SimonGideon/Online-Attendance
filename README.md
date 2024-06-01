@@ -120,9 +120,16 @@ Install this project with:
   cd Online-Attendance
   bundle install
 ```
-Run the followig comand to generate your own secrete key.
+Remove Existing Credentials File.
 ```sh
-rails credentials:edit
+rm config/credentials.yml.enc
+rm config/master.key
+```
+
+Generate a new secrete key.
+```
+rails secret
+
 ```
 
 ### Usage
@@ -160,7 +167,7 @@ To run tests, run the following command:
 
 > The following will be implemented on future updates.
 
--  **Attebdace Analytics**
+-  **Advance Attendance Analytics**
 -  **Report Mailings**
 - **Lecturer Performance tracking**
 
@@ -190,7 +197,102 @@ If you like this project feel free to star the projecta and request improve ment
 
 I would like to thank [Gregoire Vella](https://www.behance.net/gregoirevella) for the creative design that I have implemented.
 
+<p align="right">(<a h```
+ 
+
+### Setup
+
+Clone this repository to your desired folder:
+
+
+
+```sh
+  cd my-folder
+  git clone git@github.com:SimonGideon/Online-Attendance.git
+```
+
+### Install
+
+Install this project with:
+
+
+```sh
+  cd Online-Attendance
+  bundle install
+```
+Remove Existing Credentials File.
+```sh
+rm config/credentials.yml.enc
+rm config/master.key
+```
+
+Generate a new secrete key.
+```
+rails secret
+// copy the key in the terminal you will use it in the next step.
+```
+Open your credentials file and add the new secret key.
+```
+EDITOR="nano" bin/rails credentials:edit
+```
+
+Add the `copied` generated secret key under `secret_key_base:`
+```
+secret_key_base: your_generated_secret_key
+```
+
+### Usage
+
+To run the project, execute the following command:
+
+
+```sh
+  rails s
+```
+After saving and closing the editor, verify that the credentials were correctly saved by running:
+```
+rails credentials:show
+```
+
+### Run tests
+
+To run tests, run the following command:
+
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## 👥 Authors <a name="authors"></a>
+
+👤 **Simon Gideon**
+
+- GitHub: [@SimonGideon](https://github.com/SimonGideon)
+- Twitter: [@Simo_Giddy](https://twitter.com/Simo_Giddy)
+- LinkedIn: [mnayi-gideon](https://linkedin.com/in/mnayi-gideon)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+> The following will be implemented on future updates.
+
+-  **Advance Attendance Analytics**
+-  **Report Mailings**
+- **Lecturer Performance tracking**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).ref="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
