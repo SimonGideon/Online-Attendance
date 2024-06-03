@@ -4,9 +4,20 @@ Trestle.resource(:attendances) do
   end
 
   # Customize the table columns shown on the index view.
-  #
+  
   # table do
-  #   column :name
+  #   column :id
+  #   column :student do |attendance|
+  #     "#{attendance.students_courses.student.name} #{attendance.student.last_name}"
+  #   end
+  #   column :course do |attendance|
+  #     attendance.course.course_name
+  #   end
+  #   column :lecturer do |attendance|
+  #     attendance.lecturer.first_name
+  #   end
+  #   column :attendance_date
+  #   column :attendance_present
   #   column :created_at, align: :center
   #   actions
   # end
