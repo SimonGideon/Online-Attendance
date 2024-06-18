@@ -2,12 +2,13 @@ class Attendance < ApplicationRecord
   belongs_to :students_course
 
   private
+
   def self.mark_attendance(lecturer_id, current_student)
     lecturer = Lecturer.find_by(id: lecturer_id)
 
     if lecturer
       my_student_courses = lecturer.lecturer_units.flat_map(&:students_courses).uniq.select { |course| course.student_id == current_student.id }
-      
+
       if my_student_courses.empty?
         return { error: "You have not registered for any courses yet." }
       elsif my_student_courses.size > 1
@@ -19,7 +20,7 @@ class Attendance < ApplicationRecord
     else
       return { error: "Lecturer not found for the given lecturer_id" }
     end
-  end    
+  end
 
   def self.create_attendance(my_student_course_id)
     students_course = StudentsCourse.find_by(id: my_student_course_id)

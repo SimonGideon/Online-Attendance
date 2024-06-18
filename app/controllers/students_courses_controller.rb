@@ -15,8 +15,6 @@ class StudentsCoursesController < ApplicationController
   # GET /students_courses/new
   def new
     @available_courses = available_courses_for_current_student
-    puts "====================================started"
-    puts "Available courses: #{@available_courses}"
     @students_course = StudentsCourse.new
   end
 
@@ -55,7 +53,7 @@ class StudentsCoursesController < ApplicationController
   # DELETE /students_courses/1 or /students_courses/1.json
   def destroy
     @students_course.destroy
-  
+
     respond_to do |format|
       format.html { redirect_to students_courses_url, notice: "Students course was successfully destroyed." }
       format.json { head :no_content }
@@ -64,7 +62,6 @@ class StudentsCoursesController < ApplicationController
       format.json { render json: { error: "Cannot delete the students course because it is still referenced by attendances." }, status: :unprocessable_entity }
     end
   end
-  
 
   private
 
@@ -83,7 +80,6 @@ class StudentsCoursesController < ApplicationController
   def set_student
     @student = current_student
   end
-
 
   # Use callbacks to share common setup or constraints between actions.
   def set_students_course

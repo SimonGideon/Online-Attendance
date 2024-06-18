@@ -3,6 +3,6 @@ class Course < ApplicationRecord
 
   has_many :students_courses, dependent: :destroy # Adding dependent: :destroy here
   has_many :students, through: :students_courses, dependent: :destroy # Adding dependent: :destroy here
-  
+
   has_many :lecturer_units, dependent: :destroy # Adding dependent: :destroy here
 end

@@ -4,11 +4,11 @@ Trestle.resource(:students_courses) do
   end
 
   # Customize the table columns shown on the index view.
-  
+
   table do
     column :id
     column :student
-    column :lecturer_unit, ->(students_courses) {students_courses.lecturer_unit.course.course_name}
+    column :lecturer_unit, ->(students_courses) { students_courses.lecturer_unit.course.course_name }
     column :created_at, align: :center
     column :updated_at, align: :center
     actions

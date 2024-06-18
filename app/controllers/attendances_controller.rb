@@ -4,7 +4,7 @@ class AttendancesController < ApplicationController
   # GET /attendances or /attendances.json
   def index
     @student = current_student
-    @attendances = Attendance.all
+    @attendances = Attendance.joins(:students_course).where(students_courses: { student_id: @student.id })
   end
 
   # GET /attendances/1 or /attendances/1.json
