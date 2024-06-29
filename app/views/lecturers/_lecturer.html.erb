@@ -1,6 +1,6 @@
 <div id="<%= dom_id lecturer %>">
 <%= image_tag @lecturer.avatar if @lecturer.avatar.attached? %> <br>
-
+<div class="card-body">
   <p>
     <strong>Name:</strong>
     <%= lecturer.name %>
@@ -10,7 +10,7 @@
     <strong>Service number:</strong>
     <%= lecturer.service_number %>
   </p>
-
+<p class="card-text">Additional details about the lecturer can go here.</p>
   <p>
     <strong>Phone:</strong>
     <%= lecturer.phone %>
@@ -21,4 +21,5 @@
     <%= lecturer.work_email %>
   </p>
 
+</div>
 </div>
