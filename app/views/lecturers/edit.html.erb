@@ -2,9 +2,9 @@
 <%= stylesheet_link_tag "dashboard", media: "all" %>
 <%= stylesheet_link_tag "lecturers", media: "all" %>
 
-<div class="container-fluid mt-4">
+<div class="main-container">
   <div class="row">
-    <div class="col-md-3 col-lg-2 bg-light p-3 nav-container">
+    <div class="col-md-auto nav-container">
       <!-- Sidebar -->
       <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: @lecturer.id } %>
     </div>

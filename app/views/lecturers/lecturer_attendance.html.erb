@@ -1,0 +1,22 @@
+<h1>Attendances for <%= current_lecturer.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Student Name</th>
+      <th>Attendance Date</th>
+      <th>Present</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
+        <td><%= attendance.students_course.student.name %></td>
+        <td><%= attendance.attendance_date %></td>
+        <td><%= attendance.present ? "Yes" : "No" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

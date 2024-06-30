@@ -8,29 +8,22 @@ class LecturersController < ApplicationController
     @lecturers = Lecturer.all
   end
 
-
   def dashboard
     @lecturer = current_lecturer
-  
+
     if @lecturer.nil?
       redirect_to login_path, alert: "Please log in to access the dashboard."
       return
     end
-  
+
     @lecturer_units = @lecturer.lecturer_units
     @courses = @lecturer.courses
-  
-
-    puts("Attendance load started .......................................")
 
     @attendance_data = {}
 
     @lecturer_units.each do |lecturer_unit|
-      puts("Lecturer Unit============>: #{lecturer_unit}")
       lecturer_unit.students_courses.each do |students_course|
-        puts("Students Course============>: #{students_course}")
         Attendance.where(students_course_id: students_course.id).each do |attendance|
-          puts("Attendance============>: #{attendance}")
           date = attendance.attendance_date.strftime("%Y-%m-%d")
           @attendance_data[date] ||= 0
           @attendance_data[date] += 1 if attendance.present?
@@ -38,10 +31,8 @@ class LecturersController < ApplicationController
       end
     end
 
-    puts("This are the attendance data====================>: #{@attendance_data}")
-  
     authorize! :read, @lecturer
-  
+
     if @lecturer.qr_code.attached?
       puts "QR code attached"
     else
@@ -52,18 +43,10 @@ class LecturersController < ApplicationController
     @allocated_units_count = LecturerUnit.where(lecturer_id: current_lecturer.id).count
     @total_students_count = StudentsCourse.where(lecturer_unit_id: current_lecturer.lecturer_units.pluck(:id)).count
   end
-  
 
   # GET /lecturers/1 or /lecturers/1.json
   def show
     authorize! :read, @lecturer
-    if @lecturer.qr_code.attached?
-      puts "QR code attached"
-    else
-      # Handle the case where qr_code is not attached
-      puts "QR code not attached"
-    end
-    puts "This is the current: #{current_lecturer.id}"
   end
 
   # GET /lecturers/new
@@ -116,8 +99,6 @@ class LecturersController < ApplicationController
   def generate_token
     secret_key = Rails.application.credentials.secret_key_base
     token = JWT.encode({ lecturer_id: current_lecturer.id }, secret_key, "HS256")
-    puts "THis is ====================", token
-    puts "Current User:", current_lecturer.id
     return token
   end
 
@@ -132,12 +113,33 @@ class LecturersController < ApplicationController
     end
   end
 
+  # individual lecturer attendance
+  def lecturer_attendance
+    # (lecturer + course) lecturer_units -> (students+ lecturer_units)students_courses -> attendances
+    @attendances = Attendance.joins(students_course: { lecturer_unit: :lecturer }).where(lecturers: { id: current_lecturer.id })
+
+    # puts all items in the attendances
+    @attendances.each do |attendance|
+      puts "Course Name: #{attendance.students_course.lecturer_unit.course.course_name}"
+      puts "Student Name: #{attendance.students_course.student.name}"
+      puts "Attendance Date: #{attendance.attendance_date}"
+      puts "Present: #{attendance.present ? "Yes" : "No"}"
+      puts "-------------------------"
+    end
+    # Render or respond with the attendances, e.g., render a view or respond with JSON
+    respond_to do |format|
+      format.html # render a view
+      format.json { render json: @attendances }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lecturer
     @lecturer = Lecturer.find(params[:id])
   end
+
   def lecturer_params
     params.require(:lecturer).permit(:name, :service_number, :phone, :work_email, :avatar)
   end
