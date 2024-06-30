@@ -1,15 +1,21 @@
 <div id="<%= dom_id lecturer %>">
 <%= image_tag @lecturer.avatar if @lecturer.avatar.attached? %> <br>
 <div class="card-body">
-  <p>
-    <strong>Name:</strong>
-    <%= lecturer.name %>
-  </p>
+<div class="d-flex flex-column flex-md-row flex-lg-row gap-md-5">
+  <div class="flex-fill">
+    <p>Name:</p>
+    <div class="border p-2">
+        <%= lecturer.name %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Service number:</strong>
-    <%= lecturer.service_number %>
-  </p>
+  <div class="flex-fill">
+    <p>Service number:</p>
+    <div class="border p-2">
+        <%= lecturer.service_number %>
+    </div>
+    </div>
+</div>
 <p class="card-text">Additional details about the lecturer can go here.</p>
   <p>
     <strong>Phone:</strong>
