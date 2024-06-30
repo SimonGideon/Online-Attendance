@@ -1,8 +1,7 @@
-<%= form_with(model: lecturer,  local: true) do |form| %>
+<%= form_with(model: lecturer, local: true, html: { class: "needs-validation", novalidate: true }) do |form| %>
   <% if lecturer.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(lecturer.errors.count, "error") %> prohibited this lecturer from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(lecturer.errors.count, "error") %> prohibited this lecturer from being saved:</h4>
       <ul>
         <% lecturer.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,32 +10,55 @@
     </div>
   <% end %>
 
-   <div class="field">
-    <%= form.label :avatar, "Attach File" %>
-    <%= form.file_field :avatar, class: "file-input" %>
+  <div class="form-group">
+    <%= form.label :avatar, "Attach File", class: "form-label" %>
+    <div class="custom-file">
+      <%= form.file_field :avatar, class: "custom-file-input" %>
+      <label class="custom-file-label" for="lecturer_avatar"><i class="fas fa-paperclip"></i> Choose file</label>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: "form-label" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+      </div>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :service_number, style: "display: block" %>
-    <%= form.text_field :service_number %>
+  <div class="form-group">
+    <%= form.label :service_number, class: "form-label" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
+      </div>
+      <%= form.text_field :service_number, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
+  <div class="form-group">
+    <%= form.label :phone, class: "form-label" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+      </div>
+      <%= form.text_field :phone, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :work_email, style: "display: block" %>
-    <%= form.text_field :work_email %>
+  <div class="form-group">
+    <%= form.label :work_email, class: "form-label" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+      </div>
+      <%= form.text_field :work_email, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
