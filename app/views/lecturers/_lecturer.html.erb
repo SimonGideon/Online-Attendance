@@ -1,6 +1,5 @@
 <div id="<%= dom_id lecturer %>">
-<%= image_tag @lecturer.avatar if @lecturer.avatar.attached? %> <br>
-<div class="card-body">
+<div class="card-body d-flex flex-column gap-3">
 <div class="d-flex flex-column flex-md-row flex-lg-row gap-md-5">
   <div class="flex-fill">
     <p>Name:</p>
@@ -16,16 +15,20 @@
     </div>
     </div>
 </div>
-<p class="card-text">Additional details about the lecturer can go here.</p>
-  <p>
-    <strong>Phone:</strong>
-    <%= lecturer.phone %>
-  </p>
+<div class="d-flex flex-column flex-md-row flex-lg-row gap-md-5">
+  <div class="flex-fill">
+    <p>Phone:</p>
+    <div class="border p-2">
+        <%= lecturer.phone %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Work email:</strong>
-    <%= lecturer.work_email %>
-  </p>
-
+  <div class="flex-fill">
+    <p>Email</p>
+    <div class="border p-2">
+        <%= lecturer.work_email %>
+    </div>
+    </div>
+</div>
 </div>
 </div>
