@@ -1,10 +1,10 @@
 <p style="color: green"><%= notice %></p>
-<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<%= stylesheet_link_tag "dashboard", media: "all" %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto nav-container">
       <!-- Sidebar -->
-      <%= render partial: 'shared/studentsidebar', locals: { lecturer_id: params[:lecturer_id] } %>
+      <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: params[:lecturer_id] } %>
     </div>
     <div class="col-lg-auto body-container">
       <h1>Lecturers</h1>

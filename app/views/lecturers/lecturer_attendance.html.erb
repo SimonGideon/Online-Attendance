@@ -1,9 +1,17 @@
-<h1>Attendances for <%= current_lecturer.name %></h1>
-
+<p style="color: green"><%= notice %></p>
+<%= stylesheet_link_tag "dashboard", media: "all" %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+     <!-- Sidebar -->
+      <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: params[:lecturer_id] } %>
+    </div>
+    <div class="col-lg-auto body-container">
 <table>
   <thead>
     <tr>
-      <th>Course Name</th>
+    <th>Course Code</th>
+      <th>Course</th>
       <th>Student Name</th>
       <th>Attendance Date</th>
       <th>Present</th>
@@ -12,6 +20,7 @@
   <tbody>
     <% @attendances.each do |attendance| %>
       <tr>
+      <td><%= attendance.students_course.lecturer_unit.course.course_code %></td>
         <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
         <td><%= attendance.students_course.student.name %></td>
         <td><%= attendance.attendance_date %></td>
@@ -20,3 +29,6 @@
     <% end %>
   </tbody>
 </table>
+ </div>
+  </div>
+</div>
