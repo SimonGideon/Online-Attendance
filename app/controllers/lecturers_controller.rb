@@ -115,20 +115,33 @@ class LecturersController < ApplicationController
 
   # individual lecturer attendance
   def lecturer_attendance
-    # (lecturer + course) lecturer_units -> (students+ lecturer_units)students_courses -> attendances
-    @attendances = Attendance.joins(students_course: { lecturer_unit: :lecturer }).where(lecturers: { id: current_lecturer.id })
+    @attendances = Attendance.joins(students_course: { lecturer_unit: :lecturer })
+                             .where(lecturers: { id: current_lecturer.id })
 
-    # puts all items in the attendances
-    @attendances.each do |attendance|
-      puts "Course Name: #{attendance.students_course.lecturer_unit.course.course_name}"
-      puts "Student Name: #{attendance.students_course.student.name}"
-      puts "Attendance Date: #{attendance.attendance_date}"
-      puts "Present: #{attendance.present ? "Yes" : "No"}"
-      puts "-------------------------"
+    if params[:course].present?
+      @attendances = @attendances.joins(students_course: { lecturer_unit: :course })
+                                 .where(courses: { course_name: params[:course] })
     end
-    # Render or respond with the attendances, e.g., render a view or respond with JSON
+
+    if params[:student].present?
+      @attendances = @attendances.joins(students_course: :student)
+                                 .where(students: { name: params[:student] })
+    end
+
+    if params[:sort].present?
+      case params[:sort]
+      when "course_name"
+        @attendances = @attendances.joins(students_course: { lecturer_unit: :course })
+                                   .order("courses.course_name")
+      when "student_name"
+        @attendances = @attendances.joins(students_course: :student)
+                                   .order("students.name")
+      when "attendance_date"
+        @attendances = @attendances.order("attendance_date")
+      end
+    end
     respond_to do |format|
-      format.html # render a view
+      format.html
       format.json { render json: @attendances }
     end
   end

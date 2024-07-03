@@ -7,24 +7,38 @@
       <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: params[:lecturer_id] } %>
     </div>
     <div class="col-lg-auto body-container">
-<table>
-  <thead>
+<%= form_with(url: lecturer_attendances_path, method: :get, local: true, class: "form-inline my-2 my-lg-0") do %>
+  <div class="input-group mb-3">
+    <input type="text" name="course" class="form-control" placeholder="Search by Course" value="<%= params[:course] %>">
+    <input type="text" name="student" class="form-control" placeholder="Search by Student" value="<%= params[:student] %>">
+    <div class="input-group-append">
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </div>
+  </div>
+<% end %>
+
+<table class="table table-hover table-striped">
+  <thead class="thead-dark">
     <tr>
-    <th>Course Code</th>
-      <th>Course</th>
-      <th>Student Name</th>
-      <th>Attendance Date</th>
-      <th>Present</th>
+      <th scope="col"><%= link_to "Course Name", { sort: "course_name" }, class: "sortable" %></th>
+      <th scope="col"><%= link_to "Student Name", { sort: "student_name" }, class: "sortable" %></th>
+      <th scope="col"><%= link_to "Attendance Date", { sort: "attendance_date" }, class: "sortable" %></th>
+      <th scope="col">Present</th>
     </tr>
   </thead>
   <tbody>
     <% @attendances.each do |attendance| %>
       <tr>
-      <td><%= attendance.students_course.lecturer_unit.course.course_code %></td>
         <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
         <td><%= attendance.students_course.student.name %></td>
-        <td><%= attendance.attendance_date %></td>
-        <td><%= attendance.present ? "Yes" : "No" %></td>
+        <td><%= attendance.attendance_date.strftime("%B %d, %Y") %></td>
+        <td>
+          <% if attendance.present %>
+            <span class="text-success"><i class="fas fa-check-circle"></i> Yes</span>
+          <% else %>
+            <span class="text-danger"><i class="fas fa-times-circle"></i> No</span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

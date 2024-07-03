@@ -68,3 +68,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 });
+
+document.addEventListener("turbolinks:load", function () {
+  document.querySelectorAll(".sortable").forEach(function (element) {
+    element.addEventListener("mouseover", function () {
+      element.style.transition = "all 0.3s ease";
+      element.style.color = "#007bff";
+    });
+    element.addEventListener("mouseout", function () {
+      element.style.color = "";
+    });
+  });
+});
