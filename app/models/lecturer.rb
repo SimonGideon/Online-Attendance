@@ -9,7 +9,7 @@ class Lecturer < ApplicationRecord
 
   # Devise configuration
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
 
   # Includes
   include TokenGeneration

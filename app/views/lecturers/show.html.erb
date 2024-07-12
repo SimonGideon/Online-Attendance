@@ -1,24 +1,28 @@
-<p style="color: green"><%= notice %></p>
-<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<%= stylesheet_link_tag "dashboard", media: "all" %>
+<%= stylesheet_link_tag "lecturers", media: "all" %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto nav-container">
       <!-- Sidebar -->
-      <%= render partial: 'shared/lecturersidebar', locals: { lecturer_id: @lecturer.id } %>
+      <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: @lecturer.id } %>
     </div>
-    <div class="col-lg-auto body-container">
-      <%= render @lecturer %>
-      <div>
-        <%= link_to "Edit this lecturer", edit_lecturer_path(@lecturer) %> |
-        <%= link_to "Back to lecturers", lecturers_path %>
-        <p>  <%= @lecturer.name %></p>
-        <%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
-        <%= button_to "Destroy this lecturer", @lecturer, method: :delete %>
+    <div class="col-lg-auto body-container body-container2  col-sm-12">
+      <div class="card shadow-sm">
+        <div class=" card-header d-flex justify-content-between align-items-center mb-4">
+        <h5 class="">Personal Details</h5>
+        <%= link_to edit_lecturer_path(@lecturer), class: "btn btn-outline-primary" do %>
+          <i class="fas fa-edit"></i> Edit
+        <% end %>
       </div>
-      <% if lecturer_signed_in? %>
-        <%= button_to "Logout", 
- destroy_lecturer_session_path, method: :delete, data: { turbo_method: :delete } %>
-      <% end %>
+        <div class="card-body">
+                <%= render @lecturer %>
+          <% if lecturer_signed_in? %>
+            <%= button_to destroy_lecturer_session_path, method: :delete, class: "btn btn-danger", data: { turbo_method: :delete } do %>
+              <i class="fas fa-sign-out-alt"></i> Logout
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

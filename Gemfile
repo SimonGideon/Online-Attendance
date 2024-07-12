@@ -12,7 +12,6 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -25,10 +24,10 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
-gem 'trestle'
+gem "trestle"
 
 # auth
-gem 'trestle-auth'
+gem "trestle-auth"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -58,6 +57,9 @@ gem "dartsass-sprockets"
 # add jquery
 gem "jquery-rails"
 
+# faker
+gem "faker"
+
 # popover
 gem "popper_js", "~> 2.11.8"
 
@@ -71,7 +73,6 @@ gem "rqrcode"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", ">= 1.2"
-
 
 # cancan for authorization
 gem "cancancan"

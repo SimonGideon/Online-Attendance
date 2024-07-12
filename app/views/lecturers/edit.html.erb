@@ -1,10 +1,27 @@
-<h1>Editing lecturer</h1>
+<%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" %>
+<%= stylesheet_link_tag "dashboard", media: "all" %>
+<%= stylesheet_link_tag "lecturers", media: "all" %>
 
-<%= render "form", lecturer: @lecturer %>
-
-<br>
-
-<div>
-  <%= link_to "Show this lecturer", @lecturer %> |
-  <%= link_to "Back to lecturers", lecturers_path %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: @lecturer.id } %>
+    </div>
+    <div class="col-md-9 col-lg-10 body-container body-container2 col-sm-12">
+      <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center mb-4">
+          <h5 class="mb-0 p-1"> Edit Details</h5>
+        </div>
+        <div class="card-body">
+          <%= render "form", lecturer: @lecturer %>
+          <div class="mt-4">
+            <%= link_to @lecturer, class: "btn btn-outline-secondary" do %>
+              <i class="fas fa-eye"></i> Show this lecturer
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
