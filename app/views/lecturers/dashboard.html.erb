@@ -88,25 +88,109 @@
           data: data,
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+          cubicInterpolationMode: "monotone",
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           x: {
             type: 'category',
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            ticks: {
+              font: {
+                size: 14,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            },
+            grid: {
+              color: 'rgba(200, 200, 200, 0.2)',
+            },
+            title: {
+              display: true,
+              text: 'Months',
+              font: {
+                size: 16,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            }
           },
           y: {
             beginAtZero: true,
-             max: 5,
+            max: 10,
             min: 0,
             ticks: {
-              stepSize: 1 // Set the step size to 1
+              stepSize: 1, // Set the step size to 1
+              font: {
+                size: 14,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            },
+            grid: {
+              color: 'rgba(200, 200, 200, 0.2)',
+            },
+            title: {
+              display: true,
+              text: 'Attendance Count',
+              font: {
+                size: 16,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
             }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 16,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            },
+            position: 'top',
+            align: 'center'
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            titleFont: {
+              size: 14,
+              family: 'Arial, sans-serif',
+              weight: 'bold',
+            },
+            bodyFont: {
+              size: 12,
+              family: 'Arial, sans-serif',
+            },
+            footerFont: {
+              size: 10,
+              family: 'Arial, sans-serif',
+            },
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            footerColor: '#fff',
+            cornerRadius: 4,
           }
         }
       }
     });
-  });
+});
+
+
 </script>

@@ -1,9 +1,9 @@
-<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<%= stylesheet_link_tag "dashboard", media: "all" %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto nav-container">
       <!-- Sidebar -->
-      <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
+      <%= render partial: "shared/studentsidebar", locals: { student_id: params[:student_id] } %>
     </div>
     <div class="col-lg-auto body-container">
       <!-- Course Overview -->
@@ -43,7 +43,7 @@
                 <% if @students_courses.any? %>
                   <% students_course = @students_courses.first %>
                   <p class="dash-item">
-                    <%= calculate_attendance_percentage_in_three_months(students_course) %>
+                    1.1
                     <span>%</span>
                   </p>
                 <% end %>
@@ -85,7 +85,7 @@
                   <tr>
                     <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
                     <td class="sieze"><%= attendance.attendance_date %></td>
-                    <td> <span class="table-span"><%= attendance.present ? 'Yes' : 'No' %></span> </td>
+                    <td> <span class="table-span"><%= attendance.present ? "Yes" : "No" %></span> </td>
                   </tr>
                 <% end %>
               </tbody>
