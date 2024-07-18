@@ -73,7 +73,7 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-1. ### [Demo Video](https://)
+1. ### [Demo Video](https://youtu.be/zM5oGfSjVrk)
 ![image](https://github.com/SimonGideon/Online-Attendance/assets/61404403/2e4456c1-48a4-4aca-a5d7-d33a189c98b8)
 
 <!-- LIVE 
