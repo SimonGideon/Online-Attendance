@@ -10,7 +10,7 @@
         <div class="col">
           <div class="row">
             <div class="attendanceChart col">
-              <div style="position: relative; height: 0; width: 100%;">
+              <div class="mb-8" style="position: relative; height: 0; width: 100%;">
                 <canvas id="myChart"></canvas>
               </div>
             </div>
@@ -19,7 +19,7 @@
               <%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
             </div>
           </div>
-          <div class="row">
+          <div class="row epic-container">
             <div class="col-md-6" style="max-height: 200px; overflow-y: auto; margin-top: 2rem">
               <div class="card">
                 <div class="card-header">Courses</div>
