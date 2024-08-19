@@ -1,0 +1,39 @@
+<%= stylesheet_link_tag 'page-auth', media: 'all' %>
+
+<div class="app-brand justify-content-center form-container">
+<div class="form-header">
+    <%= image_tag "logo.png", class: "logo" %>
+    <h4 class="mb-2">Forgot Password? 🔒</h4>
+  </div>
+<p class="m-1">Enter your email and we'll send you instructions to reset your password</p>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Send me reset password instructions" %>
+  </div>
+<% end %>
+
+<div class="form-footer">
+<%= render "devise/shared/links" %>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var alreadyHaveAccount = document.querySelector('.form-footer span');
+  if (alreadyHaveAccount.textContent === "Already have an account?") {
+    alreadyHaveAccount.textContent = "Back to ";
+  }
+
+  document.querySelector('.new').style.display = "none";
+
+});
+
+</script>

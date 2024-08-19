@@ -1,0 +1,196 @@
+<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: 'shared/lecturersidebar', locals: { lecturer_id: @lecturer } %>
+    </div>
+    <div class="col-lg-auto body-container lec-dash">
+      <div class="container mt-5">
+        <div class="col">
+          <div class="row">
+            <div class="attendanceChart col">
+              <div class="mb-8" style="position: relative; height: 0; width: 100%;">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div class="col qr-code-container">
+              <%= image_tag current_lecturer.qr_code, class: "img-fluid" if current_lecturer.qr_code.attached? %> <br>
+              <%= button_to "Generate QR Code", generate_qr_code_lecturer_path(@lecturer), method: :post %>
+            </div>
+          </div>
+          <div class="row epic-container">
+            <div class="col-md-6" style="max-height: 200px; overflow-y: auto; margin-top: 2rem">
+              <div class="card">
+                <div class="card-header">Courses</div>
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% current_lecturer.courses.each do |course| %>
+                        <tr>
+                          <td><%= course.course_name %></td>
+                          <td><%= course.course_code %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="row overview-body">
+              <div class="col-md-3">
+                <div class="card">
+                  <i class="fas fa-tasks"></i>
+                  <div class="card-content">
+                    <div class="">Allocated Units</div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= @allocated_units_count %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <i class="fas fa-university"></i>
+                  <div class="card-content">
+                    <div class="">Total Students</div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= @total_students_count %></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var labels = <%= raw @attendance_data.keys.to_json %>;
+    var data = <%= raw @attendance_data.values.to_json %>;
+
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Attendance',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+          cubicInterpolationMode: "monotone",
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            type: 'category',
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            ticks: {
+              font: {
+                size: 14,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            },
+            grid: {
+              color: 'rgba(200, 200, 200, 0.2)',
+            },
+            title: {
+              display: true,
+              text: 'Months',
+              font: {
+                size: 16,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            }
+          },
+          y: {
+            beginAtZero: true,
+            max: 10,
+            min: 0,
+            ticks: {
+              stepSize: 1, // Set the step size to 1
+              font: {
+                size: 14,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            },
+            grid: {
+              color: 'rgba(200, 200, 200, 0.2)',
+            },
+            title: {
+              display: true,
+              text: 'Attendance Count',
+              font: {
+                size: 16,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 16,
+                family: 'Arial, sans-serif',
+                weight: 'bold',
+              },
+              color: '#333',
+            },
+            position: 'top',
+            align: 'center'
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            titleFont: {
+              size: 14,
+              family: 'Arial, sans-serif',
+              weight: 'bold',
+            },
+            bodyFont: {
+              size: 12,
+              family: 'Arial, sans-serif',
+            },
+            footerFont: {
+              size: 10,
+              family: 'Arial, sans-serif',
+            },
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            footerColor: '#fff',
+            cornerRadius: 4,
+          }
+        }
+      }
+    });
+});
+
+
+</script>

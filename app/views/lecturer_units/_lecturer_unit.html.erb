@@ -1,0 +1,13 @@
+<div id="<%= dom_id lecturer_unit %>">
+  <p>
+    <strong>Lecturer:</strong>
+    <%= image_tag lecturer_unit.qr_code if lecturer_unit.qr_code.attached? %>
+    <%= lecturer_unit.lecturer_id %>
+  </p>
+
+  <p>
+    <strong>Course:</strong>
+    <%= lecturer_unit.course_id %>
+  </p>
+
+</div>

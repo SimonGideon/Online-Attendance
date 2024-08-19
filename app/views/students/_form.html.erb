@@ -1,0 +1,45 @@
+<%= form_with(model: student, local: true, html: { class: "needs-validation", novalidate: true }) do |form| %>
+  <% if student.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+      <ul>
+        <% student.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group mt-3">
+  <%= form.label :avatar, "Attach File", class: "btn-primary font-weight-bold" %>
+  <div class="custom-file">
+    <%= form.file_field :avatar, class: "custom-file-input", id: "customFile" %>
+    <%= form.label :avatar, "Choose file...", class: "custom-file-label", for: "customFile" %>
+  </div>
+</div>
+
+  <div class="show-form">
+    <div>
+      <div class="form-group">
+        <%= form.label :name, "Name", class: "d-block" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :registration_number, "Registration Number", class: "d-block" %>
+        <%= form.text_field :registration_number, class: "form-control" %>
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <%= form.label :email, "Email", class: "d-block" %>
+        <%= form.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :phone, "Phone", class: "d-block" %>
+        <%= form.number_field :phone, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.submit "Save", class: "save-btn btn btn-primary" %>
+  </div>
+<% end %>

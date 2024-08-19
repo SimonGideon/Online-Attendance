@@ -1,0 +1,98 @@
+<%= stylesheet_link_tag "dashboard", media: "all" %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-auto nav-container">
+      <!-- Sidebar -->
+      <%= render partial: "shared/studentsidebar", locals: { student_id: params[:student_id] } %>
+    </div>
+    <div class="col-lg-auto body-container">
+      <!-- Course Overview -->
+      <div class=" mb-4">
+        <div class="overview-body">
+          <div class="card">
+            <div class="ic-content">
+              <i class="fas fa-user-graduate i-1"></i>
+              <div class="dash-more">
+                <p class="card-description">Total Courses</p>
+                <p class="dash-item"><%= @students_courses.size %></p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <i class="far fa-clock"></i>
+              <span>update now</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ic-content">
+              <i class="fas fa-book-reader i-2"></i>
+              <div class="dash-more">
+                <p class="card-description">Registered Units</p>
+                <p class="dash-item"><%= @students_courses.map(&:lecturer_unit).uniq.size %></p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <i class="far fa-calendar"></i>
+              <span>Updated now</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ic-content">
+              <i class="fas fa-chalkboard-teacher i-3"></i>
+              <div class="dash-more">
+                <p class="card-description">Attendance</p>
+                <% if @students_courses.any? %>
+                  <% students_course = @students_courses.first %>
+                  <p class="dash-item">
+                    1.1
+                    <span>%</span>
+                  </p>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-footer">
+              <i class="fas fa-sync-alt"></i>
+              <span>Refresh now</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Your Courses -->
+      <div class="card mb-4 course-sam">
+        <div class="card-body">
+          <h2 class="card-title">Your Courses</h2>
+          <ul class="list-unstyled">
+            <% @students_courses.each do |students_course| %>
+              <li><%= students_course.lecturer_unit.course.course_name %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <!-- Attendance Summary -->
+      <div class="card mb-4 course-sam">
+        <div class="card-body">
+          <h2 class="card-title">Attendance Summary</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th class="sieze">Attendance Date</th>
+                  <th>Present</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @attendances.each do |attendance| %>
+                  <tr>
+                    <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
+                    <td class="sieze"><%= attendance.attendance_date %></td>
+                    <td> <span class="table-span"><%= attendance.present ? "Yes" : "No" %></span> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<%= form_with(url: admin_courses_path, model: course) do |form| %>
+  <% if course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :course_name, style: "display: block" %>
+    <%= form.text_field :course_name %>
+  </div>
+
+  <div>
+    <%= form.label :course_code, style: "display: block" %>
+    <%= form.text_field :course_code %>
+  </div>
+
+ <div class="field">
+    <%= form.label :lecturer_id %>
+    <%= form.collection_select :lecturer_id, Lecturer.all, :id, :name, { prompt: 'Select a lecturer' } %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

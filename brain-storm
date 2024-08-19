@@ -1,0 +1,43 @@
+This is an online mark attendace online app.
+- Lecturer provides a QR code that can scanned by students
+- The QR contains a unique token to the lecturer
+- The lecture can regenerate the QR anytime from his dashboard.
+On the scan of the QR code it creates an attendace for the respective lecturer class and students.
++ Lecturer can see the list of all attendance for the unit.
++ Student can only see the the lesson attendance details.
++ Admin can see all of the details about lesson attendance.
++ Generate printable reports.
+
+
+Tools:
+Athentication
+	- Devise
+Authorization
+	- CanCan
+QR Code
+	- RQRcode gem - generate [https://www.youtube.com/watch?v=xhWGY_JCUOs]
+	- ZXing-js JS library - [https://github.com/zxing-js/library]
+	- Active Storage
+	
+Persons: Lecturer
+	 Student
+	 Admin
+	 Courses
+Lecturer Details
+	- School/orgnization email
+	- Name
+	- Service/Work Number
+	- Topics teaching
+	- phone
+	- Session QRCODE - img(use active storage)
+Student Details
+	- Name 
+	- Email
+	- Phone
+	- Service Number/ Registration Number
+	- Units taking/topics enroll
+	- 
+Course Details
+	course_name
+	course_code
+	

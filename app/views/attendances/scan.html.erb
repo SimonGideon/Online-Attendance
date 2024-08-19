@@ -1,0 +1,19 @@
+<div class="main-container">
+  <p class=""><%= notice %></p>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render partial: "shared/studentsidebar", locals: { student_id: params[:student_id] } %>
+    </div>
+    <div class="col-md-9 scan">
+      <div id="scanQrCodeModal">
+        <h1 class="mb-4">Scan QR Codes</h1>
+        <div class="card">
+          <div class="card-body scan-container" style="height: 100%;">
+          <div class="z-0" id="my-qr-reader" style="width: 100%; height: 100%;"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

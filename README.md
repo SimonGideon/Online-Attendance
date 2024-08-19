@@ -1,6 +1,5 @@
 <a name="readme-top"></a>
 
-
 <div align="center">
   <br/>
 
@@ -41,6 +40,7 @@
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
+
 <details>
   <summary>Client</summary>
   <ul>
@@ -85,6 +85,7 @@
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
+
 To get a local copy up and running, follow these steps.
 
 ### Prerequisites
@@ -209,7 +210,6 @@ If you like this project...
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-
 I would like to thank...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -217,7 +217,6 @@ I would like to thank...
 <!-- FAQ (optional) -->
 
 ## ❓ FAQ (OPTIONAL) <a name="faq"></a>
-
 
 - **[Question_1]**
 
