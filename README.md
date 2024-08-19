@@ -1,8 +1,12 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h2><b>Online Mark Attendance   </b></h2>
+  <br/>
+
+  <h3><b>PROJECT README</b></h3>
+
 </div>
+
 <!-- TABLE OF CONTENTS -->
 
 # 📗 Table of Contents
@@ -13,40 +17,41 @@
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
+  - [Deployment](#deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
+- [❓ FAQ (OPTIONAL)](#faq)
 - [📝 License](#license)
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 ONLINE ATTENDANCE <a name="about-project"></a>
+# 📖 [your_project_name] <a name="about-project"></a>
 
-> The Online Attendance System with QR Code Integration is designed to streamline the process of marking attendance for learners in educational settings. This system leverages QR codes to provide a quick and efficient method for both lecturers and learners to manage attendance records.
+**[your_project__name]** is a...
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
-> This project was built with the following technologies
+
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://javascript.org/">Javascript</a></li>
+    <li><a href="https://reactjs.org/">React.js</a></li>
   </ul>
 </details>
 
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://ruby.com/">Ruby on Rails</a></li>
+    <li><a href="https://expressjs.com/">Express.js</a></li>
   </ul>
 </details>
 
@@ -58,31 +63,24 @@
 </details>
 
 <!-- Features -->
-<!-- Features -->
 
 ### Key Features <a name="key-features"></a>
 
-> The project has the following features.
-
-- **Lecturer Performance rating**
-- **Attendance Analytics**
-- **QR code to mark attendance**
-- **Lesson sessions for lecturer**
-- **Admin Privilege to create courses and manage lecturers**
+- **[key_feature_1]**
+- **[key_feature_2]**
+- **[key_feature_3]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Live Demo <a name="live-demo"></a>
-1. ### [Demo Video](https://youtu.be/zM5oGfSjVrk)
-![image](https://github.com/SimonGideon/Online-Attendance/assets/61404403/2e4456c1-48a4-4aca-a5d7-d33a189c98b8)
+<!-- LIVE DEMO -->
 
-<!-- LIVE 
+## 🚀 Live Demo <a name="live-demo"></a>
+
 > Add a link to your deployed project.
 
-- [Live Demo Link](https://yourdeployedapplicationlink.com)
--[Live view](https://money-order-app.onrender.com)
+- [Live Demo Link](https://google.com)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
@@ -92,87 +90,85 @@ To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-To run this project you need:
+In order to run this project you need:
 
 <!--
 Example command:
---->
+
 ```sh
  gem install rails
 ```
- 
+ -->
 
 ### Setup
 
 Clone this repository to your desired folder:
 
-  ```sh
+<!--
+Example commands:
+
+```sh
   cd my-folder
-  git clone git@github.com:SimonGideon/Online-Attendance.git
-  ```
+  git clone git@github.com:myaccount/my-project.git
+```
+--->
 
 ### Install
 
-1. Install this project with:
+Install this project with:
 
-  ```sh
-  cd Online-Attendance
-  bundle install
-  ```
-2. Remove Existing Credentials File.
-  ```sh
-  rm config/credentials.yml.enc
-  rm config/master.key
-  ```
-
-3. Generate a new secrete key.
-  ```sh
-  rails secret
-  ```
-4. Remove Existing Credentials File.
-  ```sh
-  rm config/credentials.yml.enc
-  rm config/master.key
-  ```
-
-5. Generate a new secrete key. `copy the key in the terminal you will use it in the next step`.
-  ```sh
-  rails secret
-  ```
-6. Open your credentials file and add the new secret key.
-  ```sh
-  EDITOR="nano" bin/rails credentials:edit
-  ```
-
-7. Add the `copied` generated secret key under `secret_key_base:`
-  ```sh
-  secret_key_base: your_generated_secret_key
-  ```
-
-8. After saving and closing the editor, verify that the credentials were correctly saved by running:
-  ```sh
-  rails credentials:show
-  ```
-
-### Usage
-To run the project, execute the following command:
-
+<!--
+Example command:
 
 ```sh
-  rails s
+  cd my-project
+  gem install
 ```
+--->
+
+### Usage
+
+To run the project, execute the following command:
+
+<!--
+Example command:
+
+```sh
+  rails server
+```
+--->
 
 ### Run tests
 
 To run tests, run the following command:
 
+<!--
+Example command:
 
+```sh
+  bin/rails test test/models/article_test.rb
+```
+--->
+
+### Deployment
+
+You can deploy this project using:
+
+<!--
+Example:
+
+```sh
+
+```
+ -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
 
 ## 👥 Authors <a name="authors"></a>
+
+> Mention all of the collaborators of this project.
 
 👤 **Simon Gideon**
 
@@ -186,11 +182,9 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> The following will be implemented on future updates.
-
--  **Advance Attendance Analytics**
--  **Report Mailings**
-- **Lecturer Performance tracking**
+- [ ] **[new_feature_1]**
+- [ ] **[new_feature_2]**
+- [ ] **[new_feature_3]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,7 +202,7 @@ Feel free to check the [issues page](../../issues/).
 
 ## ⭐️ Show your support <a name="support"></a>
 
-If you like this project feel free to star the projecta and request improve ment through the issues section
+If you like this project...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -216,47 +210,23 @@ If you like this project feel free to star the projecta and request improve ment
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank [Gregoire Vella](https://www.behance.net/gregoirevella) for the creative design that I have implemented.
-
-<p align="right">(<a h```
- 
-
-
-
+I would like to thank...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- AUTHORS -->
+<!-- FAQ (optional) -->
 
-## 👥 Authors <a name="authors"></a>
+## ❓ FAQ (OPTIONAL) <a name="faq"></a>
 
-👤 **Simon Gideon**
+- **[Question_1]**
 
-- GitHub: [@SimonGideon](https://github.com/SimonGideon)
-- Twitter: [@Simo_Giddy](https://twitter.com/Simo_Giddy)
-- LinkedIn: [mnayi-gideon](https://linkedin.com/in/mnayi-gideon)
+  - [Answer_1]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- **[Question_2]**
 
-<!-- FUTURE FEATURES -->
-
-## 🔭 Future Features <a name="future-features"></a>
-
-> The following will be implemented on future updates.
-
--  **Advance Attendance Analytics**
--  **Report Mailings**
-- **Lecturer Performance tracking**
+  - [Answer_2]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## 🤝 Contributing <a name="contributing"></a>
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](../../issues/).ref="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
