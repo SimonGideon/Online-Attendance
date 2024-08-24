@@ -134,6 +134,11 @@ To run the project, execute the following command:
   rails s
 ```
 
+### Regenerated Data
+```sh
+bin/rails db:seed
+```
+
 ### Run tests
 
 To run tests, run the following command:
