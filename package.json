@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo 'No build command specified' && exit 1" 
+    "build": "babel app/javascript --out-dir app/assets/builds",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,9 @@
     "qrcode-decoder": "^0.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
     "html5-qrcode": "^2.3.8"
   }
 }

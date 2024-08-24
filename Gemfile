@@ -12,6 +12,13 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+# s3 sdk
+gem "aws-sdk-s3", require: false
+
+# env
+# Gemfile
+gem "dotenv-rails", groups: [:development, :test]
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 

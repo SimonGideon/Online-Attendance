@@ -1,8 +1,8 @@
  
-<%= stylesheet_link_tag 'nav_bar', media: 'all' %>
+<%= stylesheet_link_tag "nav_bar", media: "all" %>
 <div class=" z-3 mobile-nav">
-  <%=image_tag "fried_chips", class: "menu-control-btn open-menu" %>
-  <%=image_tag "close", class: "menu-control-btn close-menu"%>
+  <i class="fas fa-bars menu-control-btn open-menu"></i>
+<i class="fas fa-times menu-control-btn close-menu"></i>
 </div>
 
  <nav class="sidebar z-3">
@@ -123,7 +123,7 @@
     <div class="sidebar__profile">
       <div class="avatar__wrapper">
       <% if current_student.avatar.attached? %>
-  <%= image_tag current_student.avatar, class: "personal-img"  %>
+  <%= image_tag current_student.avatar, class: "personal-img" %>
 <% else %>
   <%= image_tag "user.png", class: "avatar", alt: "Joe Doe Picture" %>
 <% end %>
@@ -168,4 +168,4 @@
 
     </div>
   </nav>
-  <%= javascript_include_tag 'sidebar' %>
+  <%= javascript_include_tag "sidebar" %>

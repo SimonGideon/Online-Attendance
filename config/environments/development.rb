@@ -46,7 +46,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :letter_opener
-config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -65,6 +65,8 @@ config.action_mailer.perform_deliveries = true
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  # Store files on Amazon S3.
+  config.active_storage.service = :amazon
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
