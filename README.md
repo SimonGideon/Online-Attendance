@@ -74,6 +74,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 1. ### [Demo Video](https://youtu.be/zM5oGfSjVrk)
+2. ### [🔥 Live Link](https://online-attendance-a64d6c1ccc2d.herokuapp.com/)
 <!-- LIVE 
 > Add a link to your deployed project.
 
