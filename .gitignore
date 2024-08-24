@@ -13,6 +13,8 @@
 !/log/.keep
 !/tmp/.keep
 
+.env
+
 # config/master.key
 config/master.key
 
