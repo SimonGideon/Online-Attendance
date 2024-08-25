@@ -1,8 +1,4 @@
 class Lecturer < ApplicationRecord
-  # Includes
-  include TokenGeneration
-  include QrCodeGeneration
-
   # Associations
   has_many :courses, dependent: :destroy
   has_many :lecturer_units, dependent: :destroy
@@ -14,6 +10,10 @@ class Lecturer < ApplicationRecord
   # Devise configuration
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  # Includes
+  include TokenGeneration
+  include QrCodeGeneration
 
   # Other methods...
 
