@@ -107,10 +107,12 @@ class LecturersController < ApplicationController
     result = current_lecturer.generate_qr_code
 
     if result[:error]
+      Rails.logger.error "QR Code Generation Error: #{result[:error]}"
       flash[:error] = result[:error]
     else
       flash[:notice] = result[:success]
     end
+    redirect_to lecturer_path(current_lecturer)
   end
 
   # individual lecturer attendance
