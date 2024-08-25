@@ -36,24 +36,28 @@
             </div>
           </div>
           <div class="card">
-            <div class="ic-content">
-              <i class="fas fa-chalkboard-teacher i-3"></i>
-              <div class="dash-more">
-                <p class="card-description">Attendance</p>
-                <% if @students_courses.any? %>
-                  <% students_course = @students_courses.first %>
-                  <p class="dash-item">
-                    1.1
-                    <span>%</span>
-                  </p>
-                <% end %>
-              </div>
-            </div>
-            <div class="card-footer">
-              <i class="fas fa-sync-alt"></i>
-              <span>Refresh now</span>
-            </div>
-          </div>
+  <div class="ic-content">
+    <i class="fas fa-chalkboard-teacher i-3"></i>
+    <div class="dash-more">
+      <p class="card-description">Attendance</p>
+      <% if @attendance_percentage %>
+        <p class="dash-item">
+          <%= @attendance_percentage %>
+          <span>%</span>
+        </p>
+      <% else %>
+        <p class="dash-item">
+          No attendance data available
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <i class="fas fa-sync-alt"></i>
+    <span>Refresh now</span>
+  </div>
+</div>
+
         </div>
       </div>
       <!-- Your Courses -->

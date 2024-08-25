@@ -1,47 +1,60 @@
-<%= stylesheet_link_tag 'page-auth', media: 'all' %>
+<%= stylesheet_link_tag "page-auth", media: "all" %>
 <div class="form-container login">
   <div class="form-header">
     <%= image_tag "logo.png", class: "logo" %>
     <h2>Log In</h2>
   </div>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", :required=>true, placeholder: "Enter email" %>
-  </div>
 
-  <div class="field password-field">
-  <%= f.label :password %><br />
-  <%= f.password_field :password, autocomplete: "current-password", :required=>true, placeholder: "................" %>
-  <span class="toggle-password"><i class="fas fa-eye"></i></span>
-</div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, placeholder: "Enter email", id: "user_email" %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field checkbox">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="field password-field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password", required: true, placeholder: "................", id: "user_password" %>
+      <span class="toggle-password"><i class="fas fa-eye"></i></span>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field checkbox">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Log in" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="form-footer">
+    <%= render "devise/shared/links" %>
   </div>
-<% end %>
-<div class="form-footer">
-<%= render "devise/shared/links" %>
 </div>
 
-</div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const passwordField = document.querySelector('.field input[type="password"]');
+  const emailField = document.getElementById('user_email');
+  const passwordField = document.getElementById('user_password');
   const togglePassword = document.querySelector('.toggle-password');
+  const currentPath = window.location.pathname;
 
-  togglePassword.addEventListener('click', function() {
-    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordField.setAttribute('type', type);
-    togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-  });
+  if (currentPath.includes('/students/')) {
+    emailField.value = "emily.brown@university.edu"; 
+    passwordField.value = "StudentPass2024";
+  } else if (currentPath.includes('/lecturers/')) {
+    emailField.value = "maria.johnson@university.edu";
+    passwordField.value = "Password1!";
+  }
+
+  if (togglePassword) {
+    togglePassword.addEventListener('click', function() {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+  }
 });
 </script>
-
