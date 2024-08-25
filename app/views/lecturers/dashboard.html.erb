@@ -1,9 +1,9 @@
-<%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<%= stylesheet_link_tag "dashboard", media: "all" %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-auto nav-container">
       <!-- Sidebar -->
-      <%= render partial: 'shared/lecturersidebar', locals: { lecturer_id: @lecturer } %>
+      <%= render partial: "shared/lecturersidebar", locals: { lecturer_id: @lecturer } %>
     </div>
     <div class="col-lg-auto body-container lec-dash">
       <div class="container mt-5">
@@ -79,117 +79,128 @@
     var labels = <%= raw @attendance_data.keys.to_json %>;
     var data = <%= raw @attendance_data.values.to_json %>;
 
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Attendance',
-          data: data,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 2,
-          pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
-          cubicInterpolationMode: "monotone",
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            type: 'category',
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            ticks: {
-              font: {
-                size: 14,
-                family: 'Arial, sans-serif',
-                weight: 'bold',
-              },
-              color: '#333',
-            },
-            grid: {
-              color: 'rgba(200, 200, 200, 0.2)',
-            },
-            title: {
-              display: true,
-              text: 'Months',
-              font: {
-                size: 16,
-                family: 'Arial, sans-serif',
-                weight: 'bold',
-              },
-              color: '#333',
-            }
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels, // Dynamic labels
+    datasets: [{
+      label: 'Attendance',
+      data: data, // Dynamic data
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 2,
+      pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+      pointBorderColor: 'rgba(75, 192, 192, 1)',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+      pointRadius: 6, // Size of the dots
+      pointHoverRadius: 8, // Size of the dots on hover
+      pointBorderWidth: 2, // Border width of the dots
+      borderCapStyle: 'round', // Rounded ends on the line
+      borderJoinStyle: 'round', // Rounded corners of the lines
+      borderDash: [], // Solid line (no dashes)
+      cubicInterpolationMode: 'monotone', // Smooth curve
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        type: 'category',
+        labels: labels, // Dynamic labels
+        ticks: {
+          font: {
+            size: 12, // Adjusted font size for better readability
+            family: 'Arial, sans-serif',
+            weight: 'bold',
           },
-          y: {
-            beginAtZero: true,
-            max: 10,
-            min: 0,
-            ticks: {
-              stepSize: 1, // Set the step size to 1
-              font: {
-                size: 14,
-                family: 'Arial, sans-serif',
-                weight: 'bold',
-              },
-              color: '#333',
-            },
-            grid: {
-              color: 'rgba(200, 200, 200, 0.2)',
-            },
-            title: {
-              display: true,
-              text: 'Attendance Count',
-              font: {
-                size: 16,
-                family: 'Arial, sans-serif',
-                weight: 'bold',
-              },
-              color: '#333',
-            }
-          }
+          color: '#333',
+          autoSkip: true,
+          maxRotation: 90,
+          minRotation: 45,
         },
-        plugins: {
-          legend: {
-            display: true,
-            labels: {
-              font: {
-                size: 16,
-                family: 'Arial, sans-serif',
-                weight: 'bold',
-              },
-              color: '#333',
-            },
-            position: 'top',
-            align: 'center'
+        grid: {
+          color: 'rgba(200, 200, 200, 0.2)',
+        },
+        title: {
+          display: true,
+          text: 'Time Period',
+          font: {
+            size: 16,
+            family: 'Arial, sans-serif',
+            weight: 'bold',
           },
-          tooltip: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            titleFont: {
-              size: 14,
-              family: 'Arial, sans-serif',
-              weight: 'bold',
-            },
-            bodyFont: {
-              size: 12,
-              family: 'Arial, sans-serif',
-            },
-            footerFont: {
-              size: 10,
-              family: 'Arial, sans-serif',
-            },
-            titleColor: '#fff',
-            bodyColor: '#fff',
-            footerColor: '#fff',
-            cornerRadius: 4,
-          }
+          color: '#333',
+        }
+      },
+      y: {
+        beginAtZero: true,
+        suggestedMax: Math.max(...data) * 1.1,
+        ticks: {
+          stepSize: Math.ceil(Math.max(...data) / 10),
+          font: {
+            size: 14,
+            family: 'Arial, sans-serif',
+            weight: 'bold',
+          },
+          color: '#333',
+        },
+        grid: {
+          color: 'rgba(200, 200, 200, 0.2)',
+        },
+        title: {
+          display: true,
+          text: 'Attendance Count',
+          font: {
+            size: 16,
+            family: 'Arial, sans-serif',
+            weight: 'bold',
+          },
+          color: '#333',
         }
       }
-    });
+    },
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          font: {
+            size: 16,
+            family: 'Arial, sans-serif',
+            weight: 'bold',
+          },
+          color: '#333',
+        },
+        position: 'top',
+        align: 'center'
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        titleFont: {
+          size: 14,
+          family: 'Arial, sans-serif',
+          weight: 'bold',
+        },
+        bodyFont: {
+          size: 12,
+          family: 'Arial, sans-serif',
+        },
+        footerFont: {
+          size: 10,
+          family: 'Arial, sans-serif',
+        },
+        titleColor: '#fff',
+        bodyColor: '#fff',
+        footerColor: '#fff',
+        cornerRadius: 4,
+      }
+    }
+  }
+});
+
 });
 
 
