@@ -112,7 +112,7 @@
                     <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
                     <td class="sieze"><%= attendance.attendance_date %></td>
                     <td>
-  <span class="table-span <%= attendance.present ? 'text-success' : 'text-danger' %>">
+  <span class="table-span <%= attendance.present ? 'bg-success' : 'bg-danger' %>">
     <%= attendance.present ? "Yes" : "No" %>
   </span>
 </td>
