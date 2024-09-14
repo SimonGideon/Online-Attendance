@@ -62,41 +62,54 @@
       </div>
       <!-- Your Courses -->
       <div class="card mb-4 course-sam">
-        <div class="card-body">
-          <h2 class="card-title">Your Courses</h2>
-          <ul class="list-unstyled">
-            <% @students_courses.each do |students_course| %>
-              <li><%= students_course.lecturer_unit.course.course_name %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
+  <div class="card-body">
+    <h2 class="card-title mb-4">Your Courses</h2>
+    <ul class="list-group">
+      <% @students_courses.each do |students_course| %>
+        <li class="list-group-item">
+          <h5 class="mb-1"><%= students_course.lecturer_unit.course.course_name %></h5>
+          <small class="text-muted">Instructor: <%= students_course.lecturer_unit.lecturer.name %></small>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
       <!-- Attendance Summary -->
       <div class="card mb-4 course-sam">
-        <div class="card-body">
-          <h2 class="card-title">Attendance Summary</h2>
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
+    <div class="card-body">
+        <h2 class="card-title">Attendance Summary</h2>
+        <div class="table-responsive bg-white p-3">
+    <table class="table table-bordered bg-light " id="attendanceTable" >
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th class="sieze">Attendance Date</th>
+                <th>Present</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @attendances.each do |attendance| %>
                 <tr>
-                  <th>Course</th>
-                  <th class="sieze">Attendance Date</th>
-                  <th>Present</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @attendances.each do |attendance| %>
-                  <tr>
                     <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
                     <td class="sieze"><%= attendance.attendance_date %></td>
                     <td> <span class="table-span"><%= attendance.present ? "Yes" : "No" %></span> </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+    </div>
+</div>
+</style>
+
+<script>
+    $(document).ready(function() {
+        $('#attendanceTable').DataTable();
+    });
+</script>
+
     </div>
   </div>
 </div>
