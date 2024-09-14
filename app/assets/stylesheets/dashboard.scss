@@ -166,4 +166,16 @@
     }
   }
 
-  
+
+.nav-container {
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Full height */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Main content area is scrollable */
+.body-container {
+  overflow-y: auto;
+  height: 100vh; /* Full height */
+}

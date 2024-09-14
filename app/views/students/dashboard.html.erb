@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "dashboard", media: "all" %>
-<div class="main-container">
+<div class="main-container container-fluid"">
   <div class="row">
     <div class="col-md-auto nav-container">
       <!-- Sidebar -->
@@ -111,7 +111,12 @@
                 <tr>
                     <td><%= attendance.students_course.lecturer_unit.course.course_name %></td>
                     <td class="sieze"><%= attendance.attendance_date %></td>
-                    <td> <span class="table-span"><%= attendance.present ? "Yes" : "No" %></span> </td>
+                    <td>
+  <span class="table-span <%= attendance.present ? 'text-success' : 'text-danger' %>">
+    <%= attendance.present ? "Yes" : "No" %>
+  </span>
+</td>
+
                 </tr>
             <% end %>
         </tbody>
