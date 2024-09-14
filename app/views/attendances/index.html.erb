@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'attendace', media: 'all' %>
-<div class="main-container container-fluid"">
+<div class="main-container">
   <div class="row">
-    <div class="col-md-auto nav-container">
+    <div class="col-md-auto">
       <%= render partial: 'shared/studentsidebar', locals: { student_id: params[:student_id] } %>
     </div>
     <div class="col-md body-container body-fix">
@@ -38,10 +38,13 @@
 <script>
   $(document).ready(function() {
     $('#attendanceTable').DataTable({
+      "paging": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
         lengthChange: true,
         lengthMenu: [5, 10, 25, 50, 100],
         "bDestroy": true
-        });
     });
   });
 </script>
